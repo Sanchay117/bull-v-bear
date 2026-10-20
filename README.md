@@ -1,0 +1,241 @@
+# Bull v. Bear — The Court of Market Opinion
+
+> AI counsel argue the market from evidence. An AI judge rules. Fixed sentencing guidelines size the
+> practice trade. A Chainlink CRE workflow files the signed record on-chain, where anyone can check
+> that not one word was changed.
+
+Most trading agents are a black box that turns data into a buy button. Bull v. Bear runs every
+trade decision as a **trial**, so the reasoning trail is the product:
+
+1. **Discovery.** Live market data (CoinGecko price, range, 7-day hourly closes, volume; the
+   Crypto Fear & Greed Index) is entered into the record as lettered **exhibits A–F**. Each exhibit
+   has a plain-language statement and the numbers behind it.
+2. **Argument.** *Counsel for the Bull* and *Counsel for the Bear* (Claude) each deliver an
+   opening and a rebuttal. Every factual claim must cite an exhibit, like `[Ex. C]`, and must show
+   cause and effect: the evidence, then the mechanism, then the expected price consequence.
+3. **Ruling.** The *Presiding Judge* (Claude, structured JSON output) weighs the exhibits, not the
+   rhetoric. It returns **LONG**, **SHORT** or **DISMISSED**, a conviction from 0–100, findings of
+   fact per exhibit, an opinion and a dissent.
+4. **Sentencing.** Deterministic *Sentencing Guidelines for Practice Positions* turn the ruling
+   into a paper trade:
+   - stop distance = vol multiple × realized daily volatility
+   - risk scales with conviction
+   - size = risk ÷ stop distance, capped
+   - target = reward:risk × stop distance
+
+   Every step is printed with its formula. No AI is involved in sizing.
+5. **Filing.** The whole transcript is canonicalized and hashed with keccak256. The hash and the
+   order (asset, verdict, conviction, size, entry/stop/target) go on-chain to `CourtRecord`. The
+   next ruling for the same asset **settles** the open position at the new mark, honoring a stop or
+   target that was crossed. The docket keeps a public win/loss record and an equity curve.
+
+The courtroom UI shows all of it live:
+
+- arguments stream onto pleading paper with line numbers
+- counsel's notes (summarized thinking) arrive under seal
+- exhibits light up as they're cited
+- the scales of justice tremble while the court is in chambers, then tip toward the winner by
+  conviction
+- a rubber-stamped verdict, a sentencing order with a price ladder, a wax-sealed certificate of
+  filing, and a ledger of every case
+
+Two themes: **Courtroom** (day) and **Chambers** (night).
+
+The **Certificate of Filing** recomputes the transcript hash in your browser and compares it with
+the hash on-chain (*Verify certified copy*). *Tamper test: alter one word* changes a single word of
+the opinion, and verification fails.
+
+> Practice positions only. No funds move, and nothing here is investment advice.
+
+---
+
+## Architecture
+
+```
+                         ┌──────────────── core/ (shared, pure TypeScript) ────────────────┐
+                         │ evidence → exhibits · prompts (rules of court) · ruling schema   │
+                         │ sentencing guidelines · canonical JSON + keccak · report ABI     │
+                         └───────────────┬───────────────────────────────┬─────────────────┘
+                                         │                               │
+     Live courtroom (interactive)        │                               │   Autonomous docket (Chainlink CRE)
+ ┌──────────────┐   SSE   ┌──────────────┴──────┐                ┌───────┴──────────────────────────┐
+ │  web/ React  │◀───────▶│ server/ the Clerk   │                │ cre/bull-v-bear  (WASM in a DON) │
+ │  courtroom   │         │ Claude SDK stream   │                │ Cron → HTTP: CoinGecko, F&G      │
+ └──────────────┘         │ market fetch, store │◀── transcript ─│ HTTP: Claude ×5 (consensus)      │
+                          └──────────┬──────────┘   POST /api/   │ sentencing → runtime.report()    │
+                                     │ local: files      records │ EVMClient.writeReport()          │
+                                     ▼ directly                  └───────────────┬──────────────────┘
+                          ┌────────────────────────────────────┐                 │ signed report
+                          │ contracts/ CourtRecord.sol          │◀── Keystone ───┘
+                          │ onReport → enter ruling, settle     │    Forwarder
+                          │ prior position, equity, docket      │
+                          └────────────────────────────────────┘
+```
+
+The clerk and the CRE workflow import the **same** `core` module. The prompts, exhibit wording,
+sentencing math and report encoding are byte-for-byte the same in both, so a ruling made in the DON
+hashes, verifies and renders exactly like one made in the courtroom.
+
+| Path | What it is |
+| --- | --- |
+| `contracts/` | `CourtRecord.sol` (a Keystone receiver), `ReceiverTemplate.sol`, Foundry tests, deploy script |
+| `core/` | Evidence builder, rules of court and prompts, ruling normalizer, sentencing guidelines, canonical hashing, report ABI |
+| `server/` | The Clerk: runs trials, streams them over SSE, uses Claude (or demo counsel), files to a local chain, stores transcripts |
+| `web/` | The courtroom (React + Vite) |
+| `cre/bull-v-bear/` | The Chainlink CRE workflow, with a unit test that runs a full trial in the CRE test runtime |
+
+---
+
+## Run the courtroom locally
+
+Requires Node 24, [Foundry](https://getfoundry.sh) (anvil) and, for the workflow, [Bun](https://bun.sh).
+
+```bash
+npm install
+```
+
+```bash
+anvil
+```
+
+```bash
+npm run dev
+```
+
+Open http://localhost:5173, pick an asset, optionally adjust your standing orders (risk limits),
+and press **Call the Court to Order**.
+
+- The clerk auto-deploys `CourtRecord` to anvil on first start and files every ruling there.
+- **Claude counsel:** put `ANTHROPIC_API_KEY=...` in `server/.env` (see `server/.env.example`).
+  Counsel stream their arguments and summarized thinking from `claude-opus-5-5`. Without a key, the
+  court runs **demo counsel**: deterministic arguments built from the same exhibits, so the whole
+  procedure can be shown offline.
+
+Tests (core, CRE workflow, contracts):
+
+```bash
+npm test
+```
+
+---
+
+## Chainlink CRE workflow
+
+`cre/bull-v-bear/workflow.ts` uses CRE as the orchestration layer for the whole decision:
+
+| Step | CRE capability |
+| --- | --- |
+| Trial on a schedule; the asset rotates hourly | `CronCapability` trigger |
+| Discovery: CoinGecko markets + Fear & Greed | `HTTPClient` with identical consensus and response caching |
+| Two openings, two rebuttals, the ruling (Claude Messages API, JSON-schema output for the judge) | `HTTPClient` with identical consensus (one node calls, others read the cached response) |
+| Anthropic key | `runtime.getSecret("ANTHROPIC_API_KEY")` |
+| Sentencing, canonical transcript hash, ABI report | `core` (deterministic, in WASM) |
+| Sign the report | `runtime.report()` (ECDSA, keccak256) |
+| File to Sepolia | `EVMClient.writeReport()` → Keystone forwarder → `CourtRecord.onReport` |
+| Publish the transcript behind the hash | `HTTPClient` POST to the clerk's `/api/records` (optional) |
+
+Eight HTTP calls per run (the limit is 15). Logs stay under 1 kB per line. Consensus observations
+are compact parsed snapshots and texts rather than raw pages.
+
+### Prove it without an account
+
+```bash
+npm run test:cre
+```
+
+This runs the full trial inside the SDK's test runtime with mocked HTTP and EVM capabilities. It
+checks:
+
+- the five Claude requests (headers, model, adaptive thinking, JSON schema for the judge)
+- the citations extracted from each argument
+- that the ABI report the DON signs decodes to the keccak256 of the transcript lodged with the
+  clerk
+
+It also compiles to WASM:
+
+```bash
+cd cre/bull-v-bear && bunx cre-compile main.ts /tmp/bull-v-bear.wasm
+```
+
+### Simulate with the CRE CLI
+
+1. Install the [CRE CLI](https://docs.chain.link/cre), then sign in to it:
+
+   ```bash
+   cre login
+   ```
+
+2. Run `cd cre/bull-v-bear && bun install`.
+3. `cp cre/.env.example cre/.env` and set `ANTHROPIC_API_KEY_ENV` (plus `CRE_ETH_PRIVATE_KEY` for
+   step 5).
+4. Dry-run simulation (no transaction):
+
+   ```bash
+   npm run cre:simulate
+   ```
+
+5. **On-chain filing on Sepolia.**
+   - Deploy `CourtRecord` with the simulation forwarder:
+
+     ```bash
+     cd contracts && FORWARDER=0x15fC6ae953E024d975e77382eEeC56A9101f9F88 forge script script/Deploy.s.sol --rpc-url https://ethereum-sepolia-rpc.publicnode.com --private-key $SEPOLIA_KEY --broadcast
+     ```
+
+   - Put the deployed address in `cre/bull-v-bear/config.staging.json` as `courtAddress`.
+   - Run the simulation with broadcasting:
+
+     ```bash
+     cd cre && cre workflow simulate bull-v-bear --target staging-settings --broadcast
+     ```
+
+6. Watch the docket in the courtroom. Start the clerk against Sepolia:
+
+   ```bash
+   CHAIN_MODE=sepolia COURT_ADDRESS=0x... npm run dev:server
+   ```
+
+   The clerk then reads the docket from Sepolia and serves the transcripts the workflow lodged. If
+   the clerk is reachable at `recordsUrl` while you simulate, you can verify each transcript in the
+   browser.
+
+For a deployed workflow, construct `CourtRecord` with the production `KeystoneForwarder`
+(`0xF8344CFd5c43616a4366C34E3EEE75af79a74482` on Sepolia), or switch it with
+`setForwarderAddress`. Optionally lock the receiver to your workflow with `setExpectedWorkflowId`
+and `setExpectedAuthor`.
+
+---
+
+## How this maps to the bounties
+
+**Chainlink: Best workflow with CRE.** The CRE workflow is the orchestration layer. It connects a
+blockchain (Sepolia `CourtRecord`, via a signed report through the Keystone forwarder) to external
+APIs (CoinGecko, alternative.me) and an LLM (Claude), with consensus on every off-chain answer.
+The full trial runs in a CRE test runtime and compiles to WASM. A CLI simulation is one
+`cre login` away.
+
+**RYO-CHAN: Autonomous Agents.** Agents interpret live market evidence and record practice trades
+on a public ledger:
+
+- **Bull/Bear debate**: adversarial counsel, a judge, and a written dissent.
+- **Cause and effect**: every claim cites an exhibit and states its mechanism, and the judge's
+  findings tie each exhibit to a side and a weight.
+- **Repeatable reasoning trail**: the exhibits, arguments, ruling and sentencing worksheet are one
+  canonical transcript whose hash is on-chain. Anyone can re-verify it in the browser, and the next
+  ruling settles the last trade, so the agent keeps a scored track record.
+
+---
+
+## On-chain record format
+
+`CourtRecord.onReport(metadata, report)` accepts:
+
+```
+(bytes32 asset, uint8 verdict, uint8 conviction, uint16 sizeBps,
+ uint64 entryPrice, uint64 stopPrice, uint64 targetPrice, uint64 trialTime,
+ bytes32 transcriptHash, bytes32 evidenceHash, string holding)
+```
+
+Prices use 8 decimals; verdict is `0 DISMISSED · 1 LONG · 2 SHORT`. Each ruling settles the asset's
+previous open position at the new entry price (a stop or target that was crossed in between is
+honored), updates `equityIndex` and the win/loss count, and emits `RulingEntered` and
+`PositionSettled`.
