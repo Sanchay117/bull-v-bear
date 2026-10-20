@@ -83,6 +83,7 @@ hashes, verifies and renders exactly like one made in the courtroom.
 | `server/` | The Clerk: runs trials, streams them over SSE, uses Claude (or demo counsel), files to a local chain, stores transcripts |
 | `web/` | The courtroom (React + Vite) |
 | `cre/bull-v-bear/` | The Chainlink CRE workflow, with a unit test that runs a full trial in the CRE test runtime |
+| `video/` | The demo film (Remotion): motion graphics built from a real trial, footage of the live courtroom, Deepgram narration |
 
 ---
 
@@ -212,6 +213,30 @@ For a deployed workflow, construct `CourtRecord` with the production `KeystoneFo
 (`0xF8344CFd5c43616a4366C34E3EEE75af79a74482` on Sepolia), or switch it with
 `setForwarderAddress`. Optionally lock the receiver to your workflow with `setExpectedWorkflowId`
 and `setExpectedAuthor`.
+
+---
+
+## The demo film
+
+`video/` renders the submission video with [Remotion](https://www.remotion.dev). Every number on
+screen comes from a real trial (`video/src/case.json`), and the courtroom footage is a screen
+capture of that trial running live.
+
+```bash
+cd video && npm install
+```
+
+| Step | Command | Needs |
+| --- | --- | --- |
+| Sound effects and music bed (synthesized) | `node scripts/sfx.ts` | — |
+| Narration, one take per scene, word-timed captions | `node scripts/voice.ts` | `DEEPGRAM_KEY` in `server/.env` |
+| Film a live trial in the courtroom | `node scripts/capture.ts` | `npm run dev` and anvil running |
+| Record the CRE CLI simulation | `node scripts/simulate.ts` | `cre login` |
+| Preview | `npm run studio` | |
+| Render | `npm run render` | |
+
+The narration lives in `video/src/script.ts`. Each scene is sized to its voice line, and the
+motion cues land on the words the narrator says.
 
 ---
 

@@ -1,0 +1,1832 @@
+{
+  "voice": "aura-2-draco-en",
+  "lines": {
+    "open": {
+      "file": "vo/open.wav",
+      "seconds": 8.8,
+      "words": [
+        {
+          "text": "Most",
+          "start": 0,
+          "end": 0.4
+        },
+        {
+          "text": "trading",
+          "start": 0.4,
+          "end": 0.88
+        },
+        {
+          "text": "agents",
+          "start": 0.88,
+          "end": 1.36
+        },
+        {
+          "text": "are",
+          "start": 1.36,
+          "end": 1.6
+        },
+        {
+          "text": "a",
+          "start": 1.6,
+          "end": 1.76
+        },
+        {
+          "text": "black",
+          "start": 1.76,
+          "end": 2.08
+        },
+        {
+          "text": "box.",
+          "start": 2.08,
+          "end": 2.8
+        },
+        {
+          "text": "Market",
+          "start": 3.2,
+          "end": 3.6
+        },
+        {
+          "text": "data",
+          "start": 3.6,
+          "end": 3.92
+        },
+        {
+          "text": "goes",
+          "start": 3.92,
+          "end": 4.32
+        },
+        {
+          "text": "in,",
+          "start": 4.32,
+          "end": 4.96
+        },
+        {
+          "text": "a",
+          "start": 5.04,
+          "end": 5.28
+        },
+        {
+          "text": "buy",
+          "start": 5.28,
+          "end": 5.52
+        },
+        {
+          "text": "button",
+          "start": 5.52,
+          "end": 5.92
+        },
+        {
+          "text": "comes",
+          "start": 5.92,
+          "end": 6.32
+        },
+        {
+          "text": "out,",
+          "start": 6.32,
+          "end": 6.88
+        },
+        {
+          "text": "and",
+          "start": 6.96,
+          "end": 7.28
+        },
+        {
+          "text": "nobody",
+          "start": 7.28,
+          "end": 7.76
+        },
+        {
+          "text": "can",
+          "start": 7.76,
+          "end": 8.08
+        },
+        {
+          "text": "tell",
+          "start": 8.08,
+          "end": 8.24
+        },
+        {
+          "text": "you",
+          "start": 8.24,
+          "end": 8.4
+        },
+        {
+          "text": "why.",
+          "start": 8.4,
+          "end": 8.72
+        }
+      ]
+    },
+    "title": {
+      "file": "vo/title.wav",
+      "seconds": 7.24,
+      "words": [
+        {
+          "text": "Bull",
+          "start": 0,
+          "end": 0.88
+        },
+        {
+          "text": "v.",
+          "start": 0.88,
+          "end": 1.28
+        },
+        {
+          "text": "Bear",
+          "start": 1.28,
+          "end": 1.84
+        },
+        {
+          "text": "puts",
+          "start": 1.84,
+          "end": 2.32
+        },
+        {
+          "text": "every",
+          "start": 2.32,
+          "end": 2.72
+        },
+        {
+          "text": "trade",
+          "start": 2.72,
+          "end": 3.12
+        },
+        {
+          "text": "on",
+          "start": 3.12,
+          "end": 3.36
+        },
+        {
+          "text": "trial.",
+          "start": 3.36,
+          "end": 4.08
+        },
+        {
+          "text": "Here,",
+          "start": 4.4,
+          "end": 5.2
+        },
+        {
+          "text": "the",
+          "start": 5.28,
+          "end": 5.44
+        },
+        {
+          "text": "reasoning",
+          "start": 5.44,
+          "end": 5.84
+        },
+        {
+          "text": "trail",
+          "start": 5.84,
+          "end": 6.32
+        },
+        {
+          "text": "is",
+          "start": 6.32,
+          "end": 6.56
+        },
+        {
+          "text": "the",
+          "start": 6.56,
+          "end": 6.8
+        },
+        {
+          "text": "product.",
+          "start": 6.8,
+          "end": 7.2
+        }
+      ]
+    },
+    "discovery": {
+      "file": "vo/discovery.wav",
+      "seconds": 15.52,
+      "words": [
+        {
+          "text": "First,",
+          "start": 0.08,
+          "end": 0.56
+        },
+        {
+          "text": "discovery.",
+          "start": 0.56,
+          "end": 1.68
+        },
+        {
+          "text": "Live",
+          "start": 1.84,
+          "end": 2.24
+        },
+        {
+          "text": "market",
+          "start": 2.24,
+          "end": 2.64
+        },
+        {
+          "text": "data",
+          "start": 2.64,
+          "end": 3.04
+        },
+        {
+          "text": "from",
+          "start": 3.04,
+          "end": 3.36
+        },
+        {
+          "text": "CoinGecko",
+          "start": 3.36,
+          "end": 4.16
+        },
+        {
+          "text": "and",
+          "start": 4.16,
+          "end": 4.32
+        },
+        {
+          "text": "the",
+          "start": 4.32,
+          "end": 4.48
+        },
+        {
+          "text": "Fear",
+          "start": 4.48,
+          "end": 4.72
+        },
+        {
+          "text": "&",
+          "start": 4.72,
+          "end": 4.88
+        },
+        {
+          "text": "Greed",
+          "start": 4.88,
+          "end": 5.2
+        },
+        {
+          "text": "Index",
+          "start": 5.2,
+          "end": 6
+        },
+        {
+          "text": "is",
+          "start": 6,
+          "end": 6.32
+        },
+        {
+          "text": "entered",
+          "start": 6.32,
+          "end": 6.64
+        },
+        {
+          "text": "into",
+          "start": 6.64,
+          "end": 6.88
+        },
+        {
+          "text": "the",
+          "start": 6.88,
+          "end": 7.04
+        },
+        {
+          "text": "record",
+          "start": 7.04,
+          "end": 7.44
+        },
+        {
+          "text": "as",
+          "start": 7.44,
+          "end": 7.68
+        },
+        {
+          "text": "six",
+          "start": 7.68,
+          "end": 8.24
+        },
+        {
+          "text": "lettered",
+          "start": 8.24,
+          "end": 8.72
+        },
+        {
+          "text": "exhibits:",
+          "start": 8.72,
+          "end": 9.6
+        },
+        {
+          "text": "price,",
+          "start": 9.76,
+          "end": 10.64
+        },
+        {
+          "text": "range,",
+          "start": 10.72,
+          "end": 11.52
+        },
+        {
+          "text": "trend,",
+          "start": 11.52,
+          "end": 12.32
+        },
+        {
+          "text": "volatility,",
+          "start": 12.4,
+          "end": 13.44
+        },
+        {
+          "text": "liquidity",
+          "start": 13.68,
+          "end": 14.64
+        },
+        {
+          "text": "and",
+          "start": 14.72,
+          "end": 14.88
+        },
+        {
+          "text": "sentiment.",
+          "start": 14.88,
+          "end": 15.44
+        }
+      ]
+    },
+    "argument": {
+      "file": "vo/argument.wav",
+      "seconds": 21.84,
+      "words": [
+        {
+          "text": "Then,",
+          "start": 0.08,
+          "end": 0.72
+        },
+        {
+          "text": "argument.",
+          "start": 0.72,
+          "end": 1.76
+        },
+        {
+          "text": "Two",
+          "start": 2.24,
+          "end": 2.56
+        },
+        {
+          "text": "AI",
+          "start": 2.56,
+          "end": 3.12
+        },
+        {
+          "text": "agents,",
+          "start": 3.12,
+          "end": 4
+        },
+        {
+          "text": "counsel",
+          "start": 4.24,
+          "end": 4.72
+        },
+        {
+          "text": "for",
+          "start": 4.72,
+          "end": 4.96
+        },
+        {
+          "text": "the",
+          "start": 4.96,
+          "end": 5.12
+        },
+        {
+          "text": "Bull",
+          "start": 5.12,
+          "end": 5.68
+        },
+        {
+          "text": "and",
+          "start": 5.68,
+          "end": 6.08
+        },
+        {
+          "text": "counsel",
+          "start": 6.08,
+          "end": 6.56
+        },
+        {
+          "text": "for",
+          "start": 6.56,
+          "end": 6.88
+        },
+        {
+          "text": "the",
+          "start": 6.88,
+          "end": 6.96
+        },
+        {
+          "text": "Bear,",
+          "start": 6.96,
+          "end": 7.68
+        },
+        {
+          "text": "argue",
+          "start": 7.92,
+          "end": 8.24
+        },
+        {
+          "text": "from",
+          "start": 8.24,
+          "end": 8.64
+        },
+        {
+          "text": "the",
+          "start": 8.64,
+          "end": 8.8
+        },
+        {
+          "text": "same",
+          "start": 8.8,
+          "end": 9.04
+        },
+        {
+          "text": "evidence.",
+          "start": 9.04,
+          "end": 9.84
+        },
+        {
+          "text": "Every",
+          "start": 10.08,
+          "end": 10.48
+        },
+        {
+          "text": "claim",
+          "start": 10.48,
+          "end": 10.88
+        },
+        {
+          "text": "must",
+          "start": 10.88,
+          "end": 11.2
+        },
+        {
+          "text": "cite",
+          "start": 11.2,
+          "end": 11.52
+        },
+        {
+          "text": "an",
+          "start": 11.52,
+          "end": 11.68
+        },
+        {
+          "text": "exhibit",
+          "start": 11.68,
+          "end": 12.16
+        },
+        {
+          "text": "and",
+          "start": 12.495,
+          "end": 12.735
+        },
+        {
+          "text": "spell",
+          "start": 12.735,
+          "end": 13.135
+        },
+        {
+          "text": "out",
+          "start": 13.135,
+          "end": 13.375
+        },
+        {
+          "text": "cause",
+          "start": 13.375,
+          "end": 13.935
+        },
+        {
+          "text": "and",
+          "start": 13.935,
+          "end": 14.255
+        },
+        {
+          "text": "effect:",
+          "start": 14.255,
+          "end": 15.055
+        },
+        {
+          "text": "the",
+          "start": 15.295,
+          "end": 15.455
+        },
+        {
+          "text": "evidence,",
+          "start": 15.455,
+          "end": 16.255
+        },
+        {
+          "text": "the",
+          "start": 16.575,
+          "end": 16.735
+        },
+        {
+          "text": "mechanism,",
+          "start": 16.735,
+          "end": 17.615
+        },
+        {
+          "text": "the",
+          "start": 17.855,
+          "end": 18.015
+        },
+        {
+          "text": "expected",
+          "start": 18.015,
+          "end": 18.655
+        },
+        {
+          "text": "move.",
+          "start": 18.655,
+          "end": 19.375
+        },
+        {
+          "text": "Then",
+          "start": 19.695,
+          "end": 19.855
+        },
+        {
+          "text": "each",
+          "start": 19.855,
+          "end": 20.175
+        },
+        {
+          "text": "side",
+          "start": 20.175,
+          "end": 20.895
+        },
+        {
+          "text": "rebuts",
+          "start": 20.895,
+          "end": 21.295
+        },
+        {
+          "text": "the",
+          "start": 21.295,
+          "end": 21.535
+        },
+        {
+          "text": "other.",
+          "start": 21.535,
+          "end": 21.775
+        }
+      ]
+    },
+    "ruling": {
+      "file": "vo/ruling.wav",
+      "seconds": 12.48,
+      "words": [
+        {
+          "text": "A",
+          "start": 0.16,
+          "end": 0.48
+        },
+        {
+          "text": "third",
+          "start": 0.48,
+          "end": 0.64
+        },
+        {
+          "text": "agent,",
+          "start": 0.64,
+          "end": 1.12
+        },
+        {
+          "text": "the",
+          "start": 1.12,
+          "end": 1.28
+        },
+        {
+          "text": "judge,",
+          "start": 1.28,
+          "end": 1.6
+        },
+        {
+          "text": "weighs",
+          "start": 1.6,
+          "end": 1.84
+        },
+        {
+          "text": "the",
+          "start": 1.84,
+          "end": 2.08
+        },
+        {
+          "text": "exhibits,",
+          "start": 2.08,
+          "end": 2.96
+        },
+        {
+          "text": "not",
+          "start": 2.96,
+          "end": 3.28
+        },
+        {
+          "text": "the",
+          "start": 3.28,
+          "end": 3.44
+        },
+        {
+          "text": "rhetoric.",
+          "start": 3.44,
+          "end": 4.24
+        },
+        {
+          "text": "It",
+          "start": 4.48,
+          "end": 4.72
+        },
+        {
+          "text": "returns",
+          "start": 4.72,
+          "end": 5.2
+        },
+        {
+          "text": "findings",
+          "start": 5.2,
+          "end": 5.68
+        },
+        {
+          "text": "of",
+          "start": 5.68,
+          "end": 6
+        },
+        {
+          "text": "fact",
+          "start": 6,
+          "end": 6.32
+        },
+        {
+          "text": "for",
+          "start": 6.32,
+          "end": 6.72
+        },
+        {
+          "text": "each",
+          "start": 6.72,
+          "end": 7.04
+        },
+        {
+          "text": "exhibit,",
+          "start": 7.04,
+          "end": 7.84
+        },
+        {
+          "text": "a",
+          "start": 7.92,
+          "end": 8.16
+        },
+        {
+          "text": "verdict,",
+          "start": 8.16,
+          "end": 8.96
+        },
+        {
+          "text": "a",
+          "start": 8.96,
+          "end": 9.12
+        },
+        {
+          "text": "conviction",
+          "start": 9.12,
+          "end": 9.6
+        },
+        {
+          "text": "score,",
+          "start": 9.6,
+          "end": 10.4
+        },
+        {
+          "text": "a",
+          "start": 10.48,
+          "end": 10.64
+        },
+        {
+          "text": "written",
+          "start": 10.64,
+          "end": 10.96
+        },
+        {
+          "text": "opinion",
+          "start": 10.96,
+          "end": 11.6
+        },
+        {
+          "text": "and",
+          "start": 11.6,
+          "end": 11.76
+        },
+        {
+          "text": "a",
+          "start": 11.76,
+          "end": 11.92
+        },
+        {
+          "text": "dissent.",
+          "start": 11.92,
+          "end": 12.4
+        }
+      ]
+    },
+    "sentencing": {
+      "file": "vo/sentencing.wav",
+      "seconds": 15.88,
+      "words": [
+        {
+          "text": "Sentencing",
+          "start": 0,
+          "end": 0.8
+        },
+        {
+          "text": "is",
+          "start": 0.8,
+          "end": 1.12
+        },
+        {
+          "text": "plain",
+          "start": 1.12,
+          "end": 1.52
+        },
+        {
+          "text": "arithmetic,",
+          "start": 1.52,
+          "end": 2.56
+        },
+        {
+          "text": "with",
+          "start": 2.56,
+          "end": 2.88
+        },
+        {
+          "text": "no",
+          "start": 2.88,
+          "end": 3.2
+        },
+        {
+          "text": "AI",
+          "start": 3.2,
+          "end": 3.76
+        },
+        {
+          "text": "involved.",
+          "start": 3.76,
+          "end": 4.56
+        },
+        {
+          "text": "Fixed",
+          "start": 4.96,
+          "end": 5.28
+        },
+        {
+          "text": "guidelines",
+          "start": 5.28,
+          "end": 6.08
+        },
+        {
+          "text": "turn",
+          "start": 6.08,
+          "end": 6.48
+        },
+        {
+          "text": "conviction",
+          "start": 6.48,
+          "end": 7.36
+        },
+        {
+          "text": "and",
+          "start": 7.36,
+          "end": 7.68
+        },
+        {
+          "text": "realized",
+          "start": 7.68,
+          "end": 8.24
+        },
+        {
+          "text": "volatility",
+          "start": 8.24,
+          "end": 9.12
+        },
+        {
+          "text": "into",
+          "start": 9.12,
+          "end": 9.52
+        },
+        {
+          "text": "a",
+          "start": 9.52,
+          "end": 9.76
+        },
+        {
+          "text": "stop,",
+          "start": 9.76,
+          "end": 10.4
+        },
+        {
+          "text": "a",
+          "start": 10.56,
+          "end": 10.72
+        },
+        {
+          "text": "target",
+          "start": 10.72,
+          "end": 11.44
+        },
+        {
+          "text": "and",
+          "start": 11.52,
+          "end": 11.68
+        },
+        {
+          "text": "a",
+          "start": 11.68,
+          "end": 11.84
+        },
+        {
+          "text": "position",
+          "start": 11.84,
+          "end": 12.24
+        },
+        {
+          "text": "size,",
+          "start": 12.24,
+          "end": 13.12
+        },
+        {
+          "text": "and",
+          "start": 13.28,
+          "end": 13.44
+        },
+        {
+          "text": "every",
+          "start": 13.44,
+          "end": 13.92
+        },
+        {
+          "text": "step",
+          "start": 13.92,
+          "end": 14.56
+        },
+        {
+          "text": "shows",
+          "start": 14.56,
+          "end": 15.04
+        },
+        {
+          "text": "its",
+          "start": 15.04,
+          "end": 15.36
+        },
+        {
+          "text": "formula.",
+          "start": 15.36,
+          "end": 15.84
+        }
+      ]
+    },
+    "filing": {
+      "file": "vo/filing.wav",
+      "seconds": 18.16,
+      "words": [
+        {
+          "text": "Finally,",
+          "start": 0,
+          "end": 0.96
+        },
+        {
+          "text": "filing.",
+          "start": 1.12,
+          "end": 2
+        },
+        {
+          "text": "The",
+          "start": 2.32,
+          "end": 2.56
+        },
+        {
+          "text": "whole",
+          "start": 2.56,
+          "end": 2.88
+        },
+        {
+          "text": "transcript",
+          "start": 2.88,
+          "end": 3.52
+        },
+        {
+          "text": "is",
+          "start": 3.52,
+          "end": 3.76
+        },
+        {
+          "text": "canonicalized",
+          "start": 3.76,
+          "end": 4.8
+        },
+        {
+          "text": "and",
+          "start": 4.8,
+          "end": 5.12
+        },
+        {
+          "text": "hashed",
+          "start": 5.12,
+          "end": 5.6
+        },
+        {
+          "text": "with",
+          "start": 5.6,
+          "end": 5.76
+        },
+        {
+          "text": "keccak256.",
+          "start": 5.76,
+          "end": 8.105
+        },
+        {
+          "text": "The",
+          "start": 8.105,
+          "end": 8.425
+        },
+        {
+          "text": "hash",
+          "start": 8.425,
+          "end": 8.745
+        },
+        {
+          "text": "and",
+          "start": 8.745,
+          "end": 9.065
+        },
+        {
+          "text": "the",
+          "start": 9.065,
+          "end": 9.225
+        },
+        {
+          "text": "order",
+          "start": 9.225,
+          "end": 9.625
+        },
+        {
+          "text": "go",
+          "start": 9.625,
+          "end": 9.945
+        },
+        {
+          "text": "on-chain",
+          "start": 9.945,
+          "end": 10.585
+        },
+        {
+          "text": "to",
+          "start": 10.585,
+          "end": 10.825
+        },
+        {
+          "text": "the",
+          "start": 10.825,
+          "end": 10.985
+        },
+        {
+          "text": "CourtRecord",
+          "start": 10.985,
+          "end": 11.705
+        },
+        {
+          "text": "contract,",
+          "start": 11.705,
+          "end": 12.665
+        },
+        {
+          "text": "and",
+          "start": 12.985,
+          "end": 13.145
+        },
+        {
+          "text": "the",
+          "start": 13.145,
+          "end": 13.305
+        },
+        {
+          "text": "next",
+          "start": 13.305,
+          "end": 13.545
+        },
+        {
+          "text": "ruling",
+          "start": 13.545,
+          "end": 14.025
+        },
+        {
+          "text": "settles",
+          "start": 14.025,
+          "end": 14.425
+        },
+        {
+          "text": "the",
+          "start": 14.425,
+          "end": 14.745
+        },
+        {
+          "text": "trade,",
+          "start": 14.745,
+          "end": 15.385
+        },
+        {
+          "text": "so",
+          "start": 15.545,
+          "end": 15.705
+        },
+        {
+          "text": "the",
+          "start": 15.705,
+          "end": 15.865
+        },
+        {
+          "text": "court",
+          "start": 15.865,
+          "end": 16.185
+        },
+        {
+          "text": "keeps",
+          "start": 16.185,
+          "end": 16.505
+        },
+        {
+          "text": "a",
+          "start": 16.505,
+          "end": 16.745
+        },
+        {
+          "text": "public",
+          "start": 16.745,
+          "end": 16.985
+        },
+        {
+          "text": "win-loss",
+          "start": 16.985,
+          "end": 17.625
+        },
+        {
+          "text": "record.",
+          "start": 17.625,
+          "end": 18.105
+        }
+      ]
+    },
+    "cre": {
+      "file": "vo/cre.wav",
+      "seconds": 22.64,
+      "words": [
+        {
+          "text": "And",
+          "start": 0.16,
+          "end": 0.4
+        },
+        {
+          "text": "the",
+          "start": 0.4,
+          "end": 0.56
+        },
+        {
+          "text": "court",
+          "start": 0.56,
+          "end": 0.8
+        },
+        {
+          "text": "runs",
+          "start": 0.8,
+          "end": 1.2
+        },
+        {
+          "text": "itself,",
+          "start": 1.2,
+          "end": 1.76
+        },
+        {
+          "text": "as",
+          "start": 1.76,
+          "end": 2.08
+        },
+        {
+          "text": "a",
+          "start": 2.08,
+          "end": 2.24
+        },
+        {
+          "text": "Chainlink",
+          "start": 2.24,
+          "end": 2.8
+        },
+        {
+          "text": "CRE",
+          "start": 2.8,
+          "end": 3.2
+        },
+        {
+          "text": "workflow.",
+          "start": 3.2,
+          "end": 4.16
+        },
+        {
+          "text": "A",
+          "start": 4.56,
+          "end": 4.8
+        },
+        {
+          "text": "cron",
+          "start": 4.8,
+          "end": 5.04
+        },
+        {
+          "text": "trigger",
+          "start": 5.04,
+          "end": 5.44
+        },
+        {
+          "text": "convenes",
+          "start": 5.44,
+          "end": 6
+        },
+        {
+          "text": "the",
+          "start": 6,
+          "end": 6.16
+        },
+        {
+          "text": "court.",
+          "start": 6.16,
+          "end": 6.72
+        },
+        {
+          "text": "HTTP",
+          "start": 6.96,
+          "end": 7.84
+        },
+        {
+          "text": "capabilities",
+          "start": 7.84,
+          "end": 8.56
+        },
+        {
+          "text": "gather",
+          "start": 8.56,
+          "end": 8.96
+        },
+        {
+          "text": "the",
+          "start": 8.96,
+          "end": 9.12
+        },
+        {
+          "text": "evidence",
+          "start": 9.12,
+          "end": 9.76
+        },
+        {
+          "text": "and",
+          "start": 9.76,
+          "end": 10.08
+        },
+        {
+          "text": "call",
+          "start": 10.08,
+          "end": 10.32
+        },
+        {
+          "text": "the",
+          "start": 10.32,
+          "end": 10.56
+        },
+        {
+          "text": "model,",
+          "start": 10.56,
+          "end": 10.96
+        },
+        {
+          "text": "with",
+          "start": 10.96,
+          "end": 11.28
+        },
+        {
+          "text": "consensus",
+          "start": 11.28,
+          "end": 11.76
+        },
+        {
+          "text": "across",
+          "start": 11.76,
+          "end": 12.16
+        },
+        {
+          "text": "the",
+          "start": 12.16,
+          "end": 12.4
+        },
+        {
+          "text": "oracle",
+          "start": 12.4,
+          "end": 12.72
+        },
+        {
+          "text": "network.",
+          "start": 12.72,
+          "end": 13.2
+        },
+        {
+          "text": "Sentencing",
+          "start": 13.845,
+          "end": 14.485
+        },
+        {
+          "text": "runs",
+          "start": 14.485,
+          "end": 14.885
+        },
+        {
+          "text": "deterministically",
+          "start": 14.885,
+          "end": 15.685
+        },
+        {
+          "text": "in",
+          "start": 15.685,
+          "end": 15.925
+        },
+        {
+          "text": "WebAssembly,",
+          "start": 15.925,
+          "end": 16.965
+        },
+        {
+          "text": "the",
+          "start": 17.125,
+          "end": 17.285
+        },
+        {
+          "text": "report",
+          "start": 17.285,
+          "end": 17.685
+        },
+        {
+          "text": "is",
+          "start": 17.685,
+          "end": 17.925
+        },
+        {
+          "text": "signed,",
+          "start": 17.925,
+          "end": 18.565
+        },
+        {
+          "text": "and",
+          "start": 18.965,
+          "end": 19.125
+        },
+        {
+          "text": "the",
+          "start": 19.125,
+          "end": 19.205
+        },
+        {
+          "text": "EVM",
+          "start": 19.205,
+          "end": 19.765
+        },
+        {
+          "text": "capability",
+          "start": 19.765,
+          "end": 20.485
+        },
+        {
+          "text": "files",
+          "start": 20.485,
+          "end": 20.885
+        },
+        {
+          "text": "it",
+          "start": 20.885,
+          "end": 21.045
+        },
+        {
+          "text": "through",
+          "start": 21.045,
+          "end": 21.285
+        },
+        {
+          "text": "the",
+          "start": 21.285,
+          "end": 21.445
+        },
+        {
+          "text": "Keystone",
+          "start": 21.445,
+          "end": 22.005
+        },
+        {
+          "text": "forwarder.",
+          "start": 22.005,
+          "end": 22.565
+        }
+      ]
+    },
+    "simulate": {
+      "file": "vo/simulate.wav",
+      "seconds": 9.12,
+      "words": [
+        {
+          "text": "Here",
+          "start": 0.08,
+          "end": 0.48
+        },
+        {
+          "text": "is",
+          "start": 0.48,
+          "end": 0.64
+        },
+        {
+          "text": "the",
+          "start": 0.64,
+          "end": 0.8
+        },
+        {
+          "text": "workflow",
+          "start": 0.8,
+          "end": 1.36
+        },
+        {
+          "text": "in",
+          "start": 1.36,
+          "end": 1.68
+        },
+        {
+          "text": "the",
+          "start": 1.68,
+          "end": 1.92
+        },
+        {
+          "text": "CRE",
+          "start": 1.92,
+          "end": 2.72
+        },
+        {
+          "text": "simulator:",
+          "start": 2.72,
+          "end": 3.84
+        },
+        {
+          "text": "live",
+          "start": 4.16,
+          "end": 4.48
+        },
+        {
+          "text": "evidence,",
+          "start": 4.48,
+          "end": 5.36
+        },
+        {
+          "text": "five",
+          "start": 5.68,
+          "end": 6.16
+        },
+        {
+          "text": "model",
+          "start": 6.16,
+          "end": 6.48
+        },
+        {
+          "text": "calls,",
+          "start": 6.48,
+          "end": 7.28
+        },
+        {
+          "text": "one",
+          "start": 7.44,
+          "end": 8.08
+        },
+        {
+          "text": "signed",
+          "start": 8.08,
+          "end": 8.48
+        },
+        {
+          "text": "report.",
+          "start": 8.48,
+          "end": 8.96
+        }
+      ]
+    },
+    "live": {
+      "file": "vo/live.wav",
+      "seconds": 15.84,
+      "words": [
+        {
+          "text": "And",
+          "start": 0.24,
+          "end": 0.48
+        },
+        {
+          "text": "this",
+          "start": 0.48,
+          "end": 0.72
+        },
+        {
+          "text": "is",
+          "start": 0.72,
+          "end": 0.8
+        },
+        {
+          "text": "the",
+          "start": 0.8,
+          "end": 0.96
+        },
+        {
+          "text": "live",
+          "start": 0.96,
+          "end": 1.28
+        },
+        {
+          "text": "courtroom,",
+          "start": 1.28,
+          "end": 2.16
+        },
+        {
+          "text": "on",
+          "start": 2.16,
+          "end": 2.4
+        },
+        {
+          "text": "Groq's",
+          "start": 2.4,
+          "end": 2.96
+        },
+        {
+          "text": "free",
+          "start": 2.96,
+          "end": 3.28
+        },
+        {
+          "text": "tier.",
+          "start": 3.28,
+          "end": 4
+        },
+        {
+          "text": "A",
+          "start": 4.48,
+          "end": 4.72
+        },
+        {
+          "text": "full",
+          "start": 4.72,
+          "end": 4.96
+        },
+        {
+          "text": "trial",
+          "start": 4.96,
+          "end": 5.44
+        },
+        {
+          "text": "takes",
+          "start": 5.44,
+          "end": 5.76
+        },
+        {
+          "text": "under",
+          "start": 5.76,
+          "end": 6.08
+        },
+        {
+          "text": "twenty",
+          "start": 6.08,
+          "end": 6.4
+        },
+        {
+          "text": "seconds.",
+          "start": 6.4,
+          "end": 7.2
+        },
+        {
+          "text": "Arguments",
+          "start": 7.68,
+          "end": 8.24
+        },
+        {
+          "text": "stream",
+          "start": 8.24,
+          "end": 8.64
+        },
+        {
+          "text": "onto",
+          "start": 8.64,
+          "end": 8.96
+        },
+        {
+          "text": "pleading",
+          "start": 8.96,
+          "end": 9.36
+        },
+        {
+          "text": "paper,",
+          "start": 9.36,
+          "end": 10.08
+        },
+        {
+          "text": "counsel's",
+          "start": 10.16,
+          "end": 10.72
+        },
+        {
+          "text": "private",
+          "start": 10.72,
+          "end": 11.12
+        },
+        {
+          "text": "notes",
+          "start": 11.12,
+          "end": 11.44
+        },
+        {
+          "text": "stay",
+          "start": 11.44,
+          "end": 11.76
+        },
+        {
+          "text": "under",
+          "start": 11.76,
+          "end": 12
+        },
+        {
+          "text": "seal,",
+          "start": 12,
+          "end": 12.72
+        },
+        {
+          "text": "the",
+          "start": 12.8,
+          "end": 13.04
+        },
+        {
+          "text": "scales",
+          "start": 13.04,
+          "end": 13.52
+        },
+        {
+          "text": "tip,",
+          "start": 13.52,
+          "end": 14.24
+        },
+        {
+          "text": "and",
+          "start": 14.4,
+          "end": 14.56
+        },
+        {
+          "text": "the",
+          "start": 14.56,
+          "end": 14.72
+        },
+        {
+          "text": "verdict",
+          "start": 14.72,
+          "end": 15.12
+        },
+        {
+          "text": "is",
+          "start": 15.12,
+          "end": 15.36
+        },
+        {
+          "text": "stamped.",
+          "start": 15.36,
+          "end": 15.84
+        }
+      ]
+    },
+    "verify": {
+      "file": "vo/verify.wav",
+      "seconds": 11.64,
+      "words": [
+        {
+          "text": "Anyone",
+          "start": 0.32,
+          "end": 0.72
+        },
+        {
+          "text": "can",
+          "start": 0.72,
+          "end": 1.04
+        },
+        {
+          "text": "check",
+          "start": 1.04,
+          "end": 1.2
+        },
+        {
+          "text": "the",
+          "start": 1.2,
+          "end": 1.44
+        },
+        {
+          "text": "record.",
+          "start": 1.44,
+          "end": 2.16
+        },
+        {
+          "text": "Your",
+          "start": 2.4,
+          "end": 2.64
+        },
+        {
+          "text": "browser",
+          "start": 2.64,
+          "end": 3.12
+        },
+        {
+          "text": "recomputes",
+          "start": 3.12,
+          "end": 3.92
+        },
+        {
+          "text": "the",
+          "start": 3.92,
+          "end": 4.08
+        },
+        {
+          "text": "hash",
+          "start": 4.08,
+          "end": 4.8
+        },
+        {
+          "text": "and",
+          "start": 4.8,
+          "end": 5.04
+        },
+        {
+          "text": "compares",
+          "start": 5.04,
+          "end": 5.6
+        },
+        {
+          "text": "it",
+          "start": 5.6,
+          "end": 5.76
+        },
+        {
+          "text": "with",
+          "start": 5.76,
+          "end": 6
+        },
+        {
+          "text": "the",
+          "start": 6,
+          "end": 6.16
+        },
+        {
+          "text": "one",
+          "start": 6.16,
+          "end": 6.48
+        },
+        {
+          "text": "on-chain.",
+          "start": 6.48,
+          "end": 7.76
+        },
+        {
+          "text": "Change",
+          "start": 7.76,
+          "end": 8.24
+        },
+        {
+          "text": "a",
+          "start": 8.24,
+          "end": 8.4
+        },
+        {
+          "text": "single",
+          "start": 8.4,
+          "end": 8.72
+        },
+        {
+          "text": "word,",
+          "start": 8.72,
+          "end": 9.44
+        },
+        {
+          "text": "and",
+          "start": 9.52,
+          "end": 9.84
+        },
+        {
+          "text": "verification",
+          "start": 9.84,
+          "end": 10.88
+        },
+        {
+          "text": "fails.",
+          "start": 10.88,
+          "end": 11.52
+        }
+      ]
+    },
+    "close": {
+      "file": "vo/close.wav",
+      "seconds": 8.32,
+      "words": [
+        {
+          "text": "Bull",
+          "start": 0.24,
+          "end": 0.8
+        },
+        {
+          "text": "v.",
+          "start": 0.8,
+          "end": 1.36
+        },
+        {
+          "text": "Bear.",
+          "start": 1.36,
+          "end": 2.08
+        },
+        {
+          "text": "Agents",
+          "start": 2.56,
+          "end": 2.96
+        },
+        {
+          "text": "that",
+          "start": 2.96,
+          "end": 3.28
+        },
+        {
+          "text": "show",
+          "start": 3.28,
+          "end": 3.52
+        },
+        {
+          "text": "their",
+          "start": 3.52,
+          "end": 3.84
+        },
+        {
+          "text": "work,",
+          "start": 3.84,
+          "end": 4.32
+        },
+        {
+          "text": "and",
+          "start": 4.32,
+          "end": 4.64
+        },
+        {
+          "text": "a",
+          "start": 4.64,
+          "end": 4.8
+        },
+        {
+          "text": "record",
+          "start": 4.8,
+          "end": 5.2
+        },
+        {
+          "text": "that",
+          "start": 5.2,
+          "end": 5.44
+        },
+        {
+          "text": "proves",
+          "start": 5.44,
+          "end": 5.84
+        },
+        {
+          "text": "it.",
+          "start": 5.84,
+          "end": 6.4
+        },
+        {
+          "text": "The",
+          "start": 6.72,
+          "end": 7.04
+        },
+        {
+          "text": "court",
+          "start": 7.04,
+          "end": 7.36
+        },
+        {
+          "text": "is",
+          "start": 7.36,
+          "end": 7.68
+        },
+        {
+          "text": "adjourned.",
+          "start": 7.68,
+          "end": 8.32
+        }
+      ]
+    }
+  }
+}

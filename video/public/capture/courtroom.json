@@ -1,0 +1,25 @@
+{
+  "fps": 30,
+  "width": 2160,
+  "height": 1215,
+  "seconds": 62.1,
+  "marks": {
+    "masthead": 0.38,
+    "desk": 4.6,
+    "call": 8.59,
+    "evidence": 11.58,
+    "argument": 14.1,
+    "speaker-1": 14.1,
+    "speaker-3": 14.36,
+    "verdict": 18.32,
+    "opinion": 23.03,
+    "sentence": 30.97,
+    "certificate": 36.08,
+    "verify": 39.01,
+    "tamper": 45.55,
+    "top": 52.08,
+    "chambers": 53.71,
+    "ledger": 58.71,
+    "end": 62.12
+  }
+}

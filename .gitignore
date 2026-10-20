@@ -17,3 +17,9 @@ cre/**/*.wasm
 
 # local court records
 server/data/
+
+# demo film: renders and regenerable media (scripts/voice.ts, capture.ts, sfx.ts)
+video/out/
+video/public/capture/*.mp4
+video/public/vo/**/*.wav
+video/public/sfx/*.wav
