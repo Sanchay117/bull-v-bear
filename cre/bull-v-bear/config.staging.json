@@ -1,8 +1,9 @@
 {
   "schedule": "0 0 */2 * * *",
   "assets": ["ETH", "BTC", "SOL", "LINK"],
-  "provider": "anthropic",
-  "model": "claude-opus-5-5",
+  "provider": "openai",
+  "baseUrl": "https://generativelanguage.googleapis.com/v1beta/openai",
+  "model": "gemini-3.5-flash",
   "counselEffort": "low",
   "judgeEffort": "medium",
   "llmTimeout": "90s",
