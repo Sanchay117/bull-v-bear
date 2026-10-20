@@ -12,7 +12,9 @@
     "dev:server": "npm run dev --workspace server",
     "dev:web": "npm run dev --workspace web",
     "chain": "anvil --silent",
-    "test": "npm test --workspace core && cd contracts && forge test",
+    "test": "npm test --workspace core && npm run test:cre && cd contracts && forge test",
+    "test:cre": "cd cre/bull-v-bear && bun test",
+    "cre:simulate": "cd cre && cre workflow simulate bull-v-bear --target staging-settings",
     "typecheck": "npm run typecheck --workspaces --if-present",
     "build": "npm run build --workspace web"
   }

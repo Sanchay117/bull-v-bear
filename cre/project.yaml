@@ -1,0 +1,13 @@
+# CRE project settings for Bull v. Bear.
+# Run CLI commands from this folder, e.g.
+#   cre workflow simulate bull-v-bear --target staging-settings
+
+staging-settings:
+  rpcs:
+    - chain-name: ethereum-testnet-sepolia
+      url: https://ethereum-sepolia-rpc.publicnode.com
+
+production-settings:
+  rpcs:
+    - chain-name: ethereum-testnet-sepolia
+      url: https://ethereum-sepolia-rpc.publicnode.com

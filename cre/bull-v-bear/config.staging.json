@@ -1,0 +1,12 @@
+{
+  "schedule": "0 0 */2 * * *",
+  "assets": ["ETH", "BTC", "SOL", "LINK"],
+  "model": "claude-opus-5-5",
+  "counselEffort": "low",
+  "judgeEffort": "medium",
+  "claudeTimeout": "90s",
+  "chainSelectorName": "ethereum-testnet-sepolia",
+  "courtAddress": "0x0000000000000000000000000000000000000000",
+  "gasLimit": "1000000",
+  "recordsUrl": "http://localhost:8787/api/records"
+}
