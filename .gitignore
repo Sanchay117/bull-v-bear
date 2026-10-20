@@ -1,0 +1,19 @@
+node_modules/
+dist/
+.env
+.env.local
+*.log
+.DS_Store
+
+# foundry
+contracts/out/
+contracts/cache/
+contracts/broadcast/*/31337/
+
+# cre
+cre/.env
+cre/**/.cre_build_tmp.js
+cre/**/*.wasm
+
+# local court records
+server/data/

@@ -1,0 +1,22 @@
+{
+  "name": "@court/core",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Rules of the Court: exhibits, counsel prompts, judge schema, sentencing guidelines and the canonical record. Shared by the clerk server and the Chainlink CRE workflow.",
+  "main": "src/index.ts",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "test": "node --test src/*.test.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "viem": "2.34.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "typescript": "5.9.3"
+  }
+}

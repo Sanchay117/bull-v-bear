@@ -1,0 +1,19 @@
+{
+  "name": "bull-v-bear",
+  "private": true,
+  "description": "Bull v. Bear — the Court of Market Opinion. AI counsel argue, an AI judge rules, Chainlink CRE files the record.",
+  "workspaces": [
+    "core",
+    "server",
+    "web"
+  ],
+  "scripts": {
+    "dev": "npm run dev --workspace server & npm run dev --workspace web",
+    "dev:server": "npm run dev --workspace server",
+    "dev:web": "npm run dev --workspace web",
+    "chain": "anvil --silent",
+    "test": "npm test --workspace core && cd contracts && forge test",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "build": "npm run build --workspace web"
+  }
+}
