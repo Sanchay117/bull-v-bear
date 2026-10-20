@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import type { StandingOrders } from "@court/core";
+import { counselName, type StandingOrders } from "@court/core";
 import { api, type Docket, type Status } from "./api.ts";
 import { Certificate } from "./components/Certificate.tsx";
 import { ExhibitFocus } from "./components/Citations.tsx";
@@ -117,7 +117,7 @@ export default function App() {
     trialTop.current?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
-  const judge = status?.counsel.mode === "claude" ? "the Hon. Claude" : "the Hon. Demo Counsel";
+  const judge = `the Hon. ${status ? counselName(status.counsel) : "Demo Counsel"}`;
   const caseNumber = state.filed?.caseNumber;
 
   return (

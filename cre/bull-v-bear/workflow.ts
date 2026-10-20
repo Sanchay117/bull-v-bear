@@ -1,8 +1,9 @@
 // Bull v. Bear, convened inside a Chainlink DON.
 //
 // Cron trigger → discovery (CoinGecko + Fear & Greed over the HTTP capability, identical consensus)
-// → two openings, two rebuttals and a ruling from Claude (HTTP capability, identical consensus)
-// → sentencing guidelines → signed report → CourtRecord.onReport via the Keystone forwarder.
+// → two openings, two rebuttals and a ruling from the LLM (Claude, or any OpenAI-compatible API;
+// HTTP capability, identical consensus) → sentencing guidelines → signed report →
+// CourtRecord.onReport via the Keystone forwarder.
 //
 // The procedure, prompts, exhibits, sentencing math and report encoding are imported from
 // ../../core, the same module the clerk server runs, so a ruling filed here hashes and renders
@@ -36,6 +37,7 @@ import {
   counselSystem,
   extractCitations,
   extractJson,
+  judgeJsonInstruction,
   judgePrompt,
   normalizeRuling,
   openingPrompt,
@@ -61,11 +63,15 @@ export const configSchema = z.object({
   schedule: z.string(),
   /** Docket rotation: the asset tried is assets[hourOfEpoch % assets.length]. */
   assets: z.array(z.string()).min(1),
+  /** anthropic: Claude Messages API · openai: any OpenAI-compatible chat completions API at baseUrl. */
+  provider: z.enum(["anthropic", "openai"]).default("anthropic"),
+  baseUrl: z.string().optional(),
   model: z.string(),
+  /** Claude only: output effort for counsel and the bench. */
   counselEffort: effort,
   judgeEffort: effort,
-  /** Per-call HTTP timeout for Claude, as a protobuf Duration string, e.g. "60s". */
-  claudeTimeout: z.string(),
+  /** Per-call HTTP timeout for the LLM, as a protobuf Duration string, e.g. "60s". */
+  llmTimeout: z.string(),
   chainSelectorName: z.string(),
   courtAddress: z.string().regex(/^0x[0-9a-fA-F]{40}$/),
   gasLimit: z.string(),
@@ -106,23 +112,37 @@ const fetchSentiment = (sr: HTTPSendRequester, url: string): string => {
   return JSON.stringify(parseFearGreed(JSON.parse(text(resp))));
 };
 
-interface ClaudeCall {
+interface LlmCall {
   model: string;
   maxTokens: number;
   system: string;
   prompt: string;
   effort: string;
   timeout: string;
+  /** Set for the bench: the ruling must match this JSON schema. */
   schema?: Record<string, unknown>;
+  /** OpenAI-compatible provider only. */
+  baseUrl?: string;
 }
 
-interface ClaudeAnswer {
+interface LlmAnswer {
   text: string;
   model: string;
 }
 
+function apiError(provider: string, status: number, raw: string): Error {
+  let detail = raw.slice(0, 240);
+  try {
+    const parsed = JSON.parse(raw) as { error?: { message?: string } | string };
+    detail = (typeof parsed.error === "string" ? parsed.error : parsed.error?.message) ?? detail;
+  } catch {
+    // keep the raw prefix
+  }
+  return new Error(`${provider} ${status}: ${detail}`);
+}
+
 /** One Messages API call. The WASM runtime cannot load the Anthropic SDK, so this is raw HTTP. */
-const askClaude = (sr: HTTPSendRequester, apiKey: string, call: ClaudeCall): string => {
+const askClaude = (sr: HTTPSendRequester, apiKey: string, call: LlmCall): string => {
   const request = {
     model: call.model,
     max_tokens: call.maxTokens,
@@ -154,24 +174,56 @@ const askClaude = (sr: HTTPSendRequester, apiKey: string, call: ClaudeCall): str
     .result();
 
   const raw = text(resp);
-  if (!ok(resp)) {
-    let detail = raw.slice(0, 240);
-    try {
-      detail = (JSON.parse(raw) as { error?: { message?: string } }).error?.message ?? detail;
-    } catch {
-      // keep the raw prefix
-    }
-    throw new Error(`Claude API ${resp.statusCode}: ${detail}`);
-  }
+  if (!ok(resp)) throw apiError("Claude API", resp.statusCode, raw);
   const msg = JSON.parse(raw) as { model: string; stop_reason: string; content: Array<{ type: string; text?: string }> };
   if (msg.stop_reason === "refusal") throw new Error("Claude declined this request");
-  const answer: ClaudeAnswer = {
+  const answer: LlmAnswer = {
     text: msg.content
       .flatMap((b) => (b.type === "text" && b.text ? [b.text] : []))
       .join("")
       .trim(),
     model: msg.model,
   };
+  return JSON.stringify(answer);
+};
+
+/** One chat completions call to an OpenAI-compatible provider (DeepSeek, OpenRouter, Gemini, Groq, …). */
+const askCompat = (sr: HTTPSendRequester, apiKey: string, call: LlmCall): string => {
+  const send = (jsonMode: boolean) =>
+    sr
+      .sendRequest({
+        url: `${call.baseUrl}/chat/completions`,
+        method: "POST",
+        headers: { "content-type": "application/json", authorization: `Bearer ${apiKey}` },
+        body: body64(
+          JSON.stringify({
+            model: call.model,
+            max_tokens: call.maxTokens,
+            messages: [
+              { role: "system", content: call.system },
+              { role: "user", content: call.schema ? `${call.prompt}\n\n${judgeJsonInstruction()}` : call.prompt },
+            ],
+            ...(jsonMode ? { response_format: { type: "json_object" } } : {}),
+          }),
+        ),
+        timeout: call.timeout,
+        cacheSettings: { store: true, maxAge: "300s" },
+      })
+      .result();
+
+  let resp = send(Boolean(call.schema));
+  // A few providers reject JSON mode; the schema in the prompt is enough for them.
+  if (call.schema && resp.statusCode === 400) resp = send(false);
+  const raw = text(resp);
+  if (!ok(resp)) throw apiError(call.model, resp.statusCode, raw);
+  const msg = JSON.parse(raw) as { model?: string; choices?: Array<{ message?: { content?: string | null } }> };
+  const content = msg.choices?.[0]?.message?.content ?? "";
+  const answer: LlmAnswer = {
+    // Some open models think inline before answering; only the answer goes on the record.
+    text: content.replace(/<think>[\s\S]*?<\/think>/g, "").trim(),
+    model: msg.model ?? call.model,
+  };
+  if (!answer.text) throw new Error(`${call.model} returned an empty answer`);
   return JSON.stringify(answer);
 };
 
@@ -216,11 +268,20 @@ export const convene = (runtime: Runtime<Config>): string => {
   runtime.log(`Discovery closed: ${ids.length} exhibits, spot ${market.price}, as of ${evidence.asOf}`);
 
   // Argument
-  const apiKey = runtime.getSecret({ id: "ANTHROPIC_API_KEY" }).result().value;
-  const ask = (call: Omit<ClaudeCall, "model" | "timeout">): ClaudeAnswer =>
+  const apiKey = runtime.getSecret({ id: "LLM_API_KEY" }).result().value;
+  const compat = cfg.provider === "openai";
+  if (compat && !cfg.baseUrl) throw new Error('provider "openai" needs baseUrl in the workflow config');
+  const ask = (call: Omit<LlmCall, "model" | "timeout" | "baseUrl">): LlmAnswer =>
     JSON.parse(
-      http.sendRequest(runtime, askClaude, consensus)(apiKey, { ...call, model: cfg.model, timeout: cfg.claudeTimeout }).result(),
-    ) as ClaudeAnswer;
+      http
+        .sendRequest(runtime, compat ? askCompat : askClaude, consensus)(apiKey, {
+          ...call,
+          model: cfg.model,
+          timeout: cfg.llmTimeout,
+          baseUrl: cfg.baseUrl?.replace(/\/+$/, ""),
+        })
+        .result(),
+    ) as LlmAnswer;
 
   const argue = (side: Side, round: Round, opponent: Argument | null): Argument => {
     const prompt = round === "opening" || !opponent ? openingPrompt(evidence, side) : rebuttalPrompt(evidence, side, opponent);
@@ -265,7 +326,7 @@ export const convene = (runtime: Runtime<Config>): string => {
     ruling,
     sentence,
     standingOrders: orders,
-    counsel: { mode: "claude", model: cfg.model, venue: "cre" },
+    counsel: { mode: compat ? "llm" : "claude", model: cfg.model, venue: "cre" },
   };
 
   // Filing: the DON signs the report and the forwarder delivers it to CourtRecord.onReport.

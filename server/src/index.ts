@@ -2,7 +2,7 @@ import { createReadStream, existsSync, statSync } from "node:fs";
 import { createServer, type IncomingMessage, type ServerResponse } from "node:http";
 import { extname, join, normalize } from "node:path";
 import { fileURLToPath } from "node:url";
-import { ASSETS, DEFAULT_ORDERS, assetBySymbol, transcriptHash, type StandingOrders, type Transcript } from "@court/core";
+import { ASSETS, DEFAULT_ORDERS, assetBySymbol, counselName, transcriptHash, type StandingOrders, type Transcript } from "@court/core";
 import { chainStatus, initChain, readDocket, rulingByTranscript } from "./chain.ts";
 import { config } from "./config.ts";
 import { makeCounsel } from "./counsel.ts";
@@ -132,7 +132,9 @@ const chain = await initChain();
 server.listen(config.port, () => {
   console.log(`\n  ⚖  BULL v. BEAR — the Court of Market Opinion is in session`);
   console.log(`     clerk      http://localhost:${config.port}`);
-  console.log(`     counsel    ${counsel.info.mode === "claude" ? `Claude (${counsel.info.model})` : "demo counsel (set ANTHROPIC_API_KEY for Claude)"}`);
+  console.log(
+    `     counsel    ${counsel.info.mode === "demo" ? "demo counsel (set ANTHROPIC_API_KEY or LLM_API_KEY for live counsel)" : `${counselName(counsel.info)} (${counsel.info.model})`}`,
+  );
   console.log(
     `     record     ${chain.online ? `${chain.mode} chain ${chain.chainId} · CourtRecord ${chain.address}${chain.canFile ? " · clerk may file" : ""}` : `offline (${chain.error})`}\n`,
   );

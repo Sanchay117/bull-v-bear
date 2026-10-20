@@ -106,10 +106,14 @@ Open http://localhost:5173, pick an asset, optionally adjust your standing order
 and press **Call the Court to Order**.
 
 - The clerk auto-deploys `CourtRecord` to anvil on first start and files every ruling there.
-- **Claude counsel:** put `ANTHROPIC_API_KEY=...` in `server/.env` (see `server/.env.example`).
-  Counsel stream their arguments and summarized thinking from `claude-opus-5-5`. Without a key, the
-  court runs **demo counsel**: deterministic arguments built from the same exhibits, so the whole
-  procedure can be shown offline.
+- **Counsel.** Set one of these in `server/.env` (see `server/.env.example`):
+  - **Claude:** `ANTHROPIC_API_KEY=...`. Counsel stream their arguments and summarized thinking from
+    `claude-opus-5-5`.
+  - **Any OpenAI-compatible API** (DeepSeek, OpenRouter, Gemini, Groq, …): `LLM_API_KEY`,
+    `LLM_BASE_URL` and `LLM_MODEL`. Reasoning text (`reasoning_content`, or inline `<think>`) goes
+    to the sealed notes. The judge uses JSON mode with the ruling schema in the prompt.
+  - **Neither:** the court runs **demo counsel**, deterministic arguments built from the same
+    exhibits, so the whole procedure can be shown offline.
 
 Tests (core, CRE workflow, contracts):
 
@@ -127,8 +131,8 @@ npm test
 | --- | --- |
 | Trial on a schedule; the asset rotates hourly | `CronCapability` trigger |
 | Discovery: CoinGecko markets + Fear & Greed | `HTTPClient` with identical consensus and response caching |
-| Two openings, two rebuttals, the ruling (Claude Messages API, JSON-schema output for the judge) | `HTTPClient` with identical consensus (one node calls, others read the cached response) |
-| Anthropic key | `runtime.getSecret("ANTHROPIC_API_KEY")` |
+| Two openings, two rebuttals, the ruling (Claude Messages API with JSON-schema output, or any OpenAI-compatible API with `"provider": "openai"` and `baseUrl`) | `HTTPClient` with identical consensus (one node calls, others read the cached response) |
+| LLM key | `runtime.getSecret("LLM_API_KEY")` |
 | Sentencing, canonical transcript hash, ABI report | `core` (deterministic, in WASM) |
 | Sign the report | `runtime.report()` (ECDSA, keccak256) |
 | File to Sepolia | `EVMClient.writeReport()` → Keystone forwarder → `CourtRecord.onReport` |
@@ -143,10 +147,11 @@ are compact parsed snapshots and texts rather than raw pages.
 npm run test:cre
 ```
 
-This runs the full trial inside the SDK's test runtime with mocked HTTP and EVM capabilities. It
-checks:
+This runs the full trial inside the SDK's test runtime with mocked HTTP and EVM capabilities, once
+with Claude and once with an OpenAI-compatible provider. It checks:
 
-- the five Claude requests (headers, model, adaptive thinking, JSON schema for the judge)
+- the LLM requests (headers, model, adaptive thinking and JSON schema for Claude; JSON mode with a
+  plain retry for OpenAI-compatible providers)
 - the citations extracted from each argument
 - that the ABI report the DON signs decodes to the keccak256 of the transcript lodged with the
   clerk
@@ -166,8 +171,9 @@ cd cre/bull-v-bear && bunx cre-compile main.ts /tmp/bull-v-bear.wasm
    ```
 
 2. Run `cd cre/bull-v-bear && bun install`.
-3. `cp cre/.env.example cre/.env` and set `ANTHROPIC_API_KEY_ENV` (plus `CRE_ETH_PRIVATE_KEY` for
-   step 5).
+3. `cp cre/.env.example cre/.env` and set `LLM_API_KEY_ENV` (plus `CRE_ETH_PRIVATE_KEY` for
+   step 5). For a non-Anthropic model, set `"provider": "openai"`, `baseUrl` and `model` in
+   `config.staging.json`.
 4. Dry-run simulation (no transaction):
 
    ```bash

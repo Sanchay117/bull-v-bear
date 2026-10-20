@@ -1,3 +1,4 @@
+import { counselName } from "@court/core";
 import type { Docket, Status } from "../api.ts";
 import { CourtSeal } from "./Emblems.tsx";
 
@@ -49,9 +50,9 @@ export function Masthead({
           <p className="mt-tagline">AI counsel argue the evidence. An AI judge rules. Chainlink CRE files the verdict on-chain.</p>
         </div>
         <dl className="masthead-certs">
-          <div className={`cert-chip ${counsel?.mode === "claude" ? "ok" : "warn"}`}>
+          <div className={`cert-chip ${counsel && counsel.mode !== "demo" ? "ok" : "warn"}`}>
             <dt>Counsel</dt>
-            <dd>{!counsel ? "…" : counsel.mode === "claude" ? `Claude · ${counsel.model}` : "Demo counsel"}</dd>
+            <dd>{!counsel ? "…" : counsel.mode === "demo" ? "Demo counsel" : `${counselName(counsel)} · ${counsel.model}`}</dd>
           </div>
           <div className={`cert-chip ${chain?.online ? "ok" : "warn"}`}>
             <dt>Record</dt>

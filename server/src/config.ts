@@ -14,9 +14,19 @@ export const config = {
   port: Number(process.env.PORT ?? 8787),
   dataDir: process.env.DATA_DIR ?? join(here, "..", "data"),
 
-  /** Claude counsel is used when credentials exist; otherwise demo counsel. COUNSEL=demo forces demo. */
-  counsel: (process.env.COUNSEL ?? "auto") as "auto" | "claude" | "demo",
+  /**
+   * auto: Claude if Anthropic credentials exist, else an OpenAI-compatible provider if LLM_API_KEY is set,
+   * else demo counsel. COUNSEL=claude|llm|demo forces one.
+   */
+  counsel: (process.env.COUNSEL ?? "auto") as "auto" | "claude" | "llm" | "demo",
   model: process.env.CLAUDE_MODEL ?? "claude-opus-5-5",
+
+  /** Any OpenAI-compatible chat completions API (DeepSeek, OpenRouter, Gemini, Groq, …). */
+  llm: {
+    baseUrl: (process.env.LLM_BASE_URL ?? "https://api.deepseek.com/v1").replace(/\/+$/, ""),
+    apiKey: process.env.LLM_API_KEY,
+    model: process.env.LLM_MODEL ?? "deepseek-chat",
+  },
 
   chain: {
     mode: chainMode,

@@ -162,9 +162,24 @@ export interface Sentence {
 }
 
 export interface CounselInfo {
-  mode: "claude" | "demo";
+  /** claude: Anthropic Messages API · llm: any OpenAI-compatible chat API · demo: scripted counsel. */
+  mode: "claude" | "llm" | "demo";
   model: string;
   venue: "clerk" | "cre";
+}
+
+const NAME_PARTS: Record<string, string> = { deepseek: "DeepSeek", gpt: "GPT", glm: "GLM", oss: "OSS", ai: "AI" };
+
+/** The name the bench sits under, e.g. "Claude" or "DeepSeek V4 Flash" for "deepseek/deepseek-v4-flash:free". */
+export function counselName(info: CounselInfo): string {
+  if (info.mode === "claude") return "Claude";
+  if (info.mode === "demo") return "Demo Counsel";
+  const id = info.model.split("/").pop()!.replace(/:.*$/, "");
+  return id
+    .split(/[-_\s]+/)
+    .filter(Boolean)
+    .map((w) => NAME_PARTS[w.toLowerCase()] ?? (/^v?\d/.test(w) ? w.toUpperCase() : w[0].toUpperCase() + w.slice(1)))
+    .join(" ");
 }
 
 /** The complete, canonical record of one trial. Its keccak256 is filed on-chain. */

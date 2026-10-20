@@ -77,6 +77,12 @@ ${transcript}
 Render the Court's ruling.`;
 }
 
+/** Appended to the judge's prompt for chat APIs that only offer JSON mode (no schema enforcement). */
+export function judgeJsonInstruction(): string {
+  return `Respond with only a JSON object, no prose and no code fences, matching this JSON Schema:
+${JSON.stringify(RULING_SCHEMA)}`;
+}
+
 /** JSON schema for the judge's structured output (Claude `output_config.format`). */
 export const RULING_SCHEMA = {
   type: "object",

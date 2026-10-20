@@ -15,6 +15,7 @@ import {
   type Round,
   type Side,
 } from "@court/core";
+import { CompatCounsel, CompatError } from "./compat.ts";
 import { config } from "./config.ts";
 import { DemoCounsel } from "./demo.ts";
 
@@ -84,10 +85,17 @@ class ClaudeCounsel implements Counsel {
 export function makeCounsel(): Counsel {
   const hasKey = Boolean(process.env.ANTHROPIC_API_KEY || process.env.ANTHROPIC_AUTH_TOKEN || process.env.ANTHROPIC_PROFILE);
   if (config.counsel === "claude" || (config.counsel === "auto" && hasKey)) return new ClaudeCounsel();
+  if (config.counsel === "llm" || (config.counsel === "auto" && config.llm.apiKey)) return new CompatCounsel();
   return new DemoCounsel();
 }
 
 export function describeError(err: unknown): string {
+  if (err instanceof CompatError) {
+    if (err.status === 401 || err.status === 403) return `The provider rejected LLM_API_KEY (${err.status}). ${err.message}`;
+    if (err.status === 429) return "The provider's rate limit was reached — wait a moment and call the case again.";
+    return err.message;
+  }
+  if (err instanceof Error && err.name === "TimeoutError") return "Counsel took too long to answer (3 minutes) — call the case again.";
   if (err instanceof Anthropic.AuthenticationError) return "Claude rejected the API key (401). Check ANTHROPIC_API_KEY.";
   if (err instanceof Anthropic.RateLimitError) return "Claude rate limit reached — wait a moment and call the case again.";
   if (err instanceof Anthropic.APIError) return `Claude API error ${err.status ?? ""}: ${err.message}`;

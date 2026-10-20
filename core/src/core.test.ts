@@ -8,6 +8,7 @@ import {
   buildEvidence,
   buildFiling,
   canonicalize,
+  counselName,
   extractCitations,
   fmtUsd,
   normalizeRuling,
@@ -77,6 +78,16 @@ test("fmtUsd groups thousands without Intl", () => {
   assert.equal(fmtUsd(1234567.891), "$1,234,567.89");
   assert.equal(fmtUsd(0.123456), "$0.123456");
   assert.equal(fmtUsd(12.5), "$12.5000");
+});
+
+test("the bench is named after its model", () => {
+  const llm = (model: string) => counselName({ mode: "llm", model, venue: "clerk" });
+  assert.equal(counselName({ mode: "claude", model: "claude-opus-5-5", venue: "cre" }), "Claude");
+  assert.equal(counselName({ mode: "demo", model: "demo", venue: "clerk" }), "Demo Counsel");
+  assert.equal(llm("deepseek-v4-flash"), "DeepSeek V4 Flash");
+  assert.equal(llm("deepseek/deepseek-chat-v3.1:free"), "DeepSeek Chat V3.1");
+  assert.equal(llm("gemini-2.5-flash"), "Gemini 2.5 Flash");
+  assert.equal(llm("openai/gpt-oss-120b"), "GPT OSS 120B");
 });
 
 test("citations are extracted from counsel's text", () => {

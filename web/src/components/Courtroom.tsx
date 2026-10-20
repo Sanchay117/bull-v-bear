@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
-import type { JudgeRuling, Side } from "@court/core";
+import { counselName, type JudgeRuling, type Side } from "@court/core";
 import type { Speech, TrialState } from "../useTrial.ts";
 import { WithCitations } from "./Citations.tsx";
 import { BearMark, BullMark } from "./Emblems.tsx";
@@ -107,7 +107,7 @@ function CounselColumn({ side, state, ruling }: { side: Side; state: TrialState;
 export function Courtroom({ state }: { state: TrialState }) {
   const r = state.ruling;
   const tilt = !r ? 0 : r.verdict === "DISMISSED" ? 0 : (r.verdict === "LONG" ? -1 : 1) * Math.max(0.25, (r.conviction - 40) / 60);
-  const judge = state.counsel?.mode === "claude" ? "The Hon. Claude" : "The Hon. Demo Counsel";
+  const judge = `The Hon. ${state.counsel ? counselName(state.counsel) : "Demo Counsel"}`;
   return (
     <section className="courtroom">
       <header className="section-head">
