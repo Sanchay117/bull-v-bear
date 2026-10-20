@@ -113,8 +113,9 @@ and press **Call the Court to Order**.
     `LLM_BASE_URL` and `LLM_MODEL`. Reasoning text (`reasoning_content`, or inline
     `<think>`/`<thought>`) goes to the sealed notes. The judge uses JSON mode with the ruling schema
     in the prompt. Overloaded (503) and rate-limited (429) calls are retried for about 45 seconds,
-    and an empty answer is asked again once. Tested live with Gemma 4 31B on the Gemini API free
-    tier, where each trial takes about 4–5 minutes.
+    and an empty answer is asked again once. Tested live on Groq's free tier with
+    `openai/gpt-oss-120b`, where a full trial takes under 20 seconds, and with Gemma 4 31B on
+    the Gemini API, where a trial takes about 5 minutes.
   - **Neither:** the court runs **demo counsel**, deterministic arguments built from the same
     exhibits, so the whole procedure can be shown offline.
 
