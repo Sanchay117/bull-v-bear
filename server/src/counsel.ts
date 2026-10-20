@@ -92,7 +92,8 @@ export function makeCounsel(): Counsel {
 export function describeError(err: unknown): string {
   if (err instanceof CompatError) {
     if (err.status === 401 || err.status === 403) return `The provider rejected LLM_API_KEY (${err.status}). ${err.message}`;
-    if (err.status === 429) return "The provider's rate limit was reached — wait a moment and call the case again.";
+    if (err.status === 429) return `${err.message} — the rate limit held for 45 seconds; wait a minute and call the case again.`;
+    if (err.status === 503) return `${err.message} — still overloaded after 45 seconds; call the case again shortly, or set LLM_MODEL to a less busy model.`;
     return err.message;
   }
   if (err instanceof Error && err.name === "TimeoutError") return "Counsel took too long to answer (3 minutes) — call the case again.";

@@ -174,7 +174,12 @@ const NAME_PARTS: Record<string, string> = { deepseek: "DeepSeek", gpt: "GPT", g
 export function counselName(info: CounselInfo): string {
   if (info.mode === "claude") return "Claude";
   if (info.mode === "demo") return "Demo Counsel";
-  const id = info.model.split("/").pop()!.replace(/:.*$/, "");
+  // Drop the provider prefix, any ":free"-style tag, and the instruction-tuned suffix ("-it", "-instruct").
+  const id = info.model
+    .split("/")
+    .pop()!
+    .replace(/:.*$/, "")
+    .replace(/[-_](it|instruct)$/i, "");
   return id
     .split(/[-_\s]+/)
     .filter(Boolean)

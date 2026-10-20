@@ -88,6 +88,7 @@ test("the bench is named after its model", () => {
   assert.equal(llm("deepseek/deepseek-chat-v3.1:free"), "DeepSeek Chat V3.1");
   assert.equal(llm("gemini-2.5-flash"), "Gemini 2.5 Flash");
   assert.equal(llm("openai/gpt-oss-120b"), "GPT OSS 120B");
+  assert.equal(llm("gemma-4-31b-it"), "Gemma 4 31B");
 });
 
 test("citations are extracted from counsel's text", () => {

@@ -179,7 +179,7 @@ describe("Bull v. Bear workflow", () => {
       if (body.response_format) return { statusCode: 400, body: JSON.stringify({ error: { message: "response_format unsupported" } }) };
       const [system, user] = body.messages;
       const content = user.content.includes("TRANSCRIPT OF ARGUMENT")
-        ? `<think>weighing C against D</think>${JSON.stringify(RULING)}`
+        ? `<thought>weighing C against D</thought>${JSON.stringify(RULING)}`
         : `<think>plan the argument</think>${speechFor(system.content, user.content)}`;
       return { statusCode: 200, body: JSON.stringify({ model: "deepseek-v4-flash", choices: [{ message: { content } }] }) };
     });

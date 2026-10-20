@@ -211,20 +211,32 @@ const askCompat = (sr: HTTPSendRequester, apiKey: string, call: LlmCall): string
       })
       .result();
 
-  let resp = send(Boolean(call.schema));
-  // A few providers reject JSON mode; the schema in the prompt is enough for them.
-  if (call.schema && resp.statusCode === 400) resp = send(false);
-  const raw = text(resp);
-  if (!ok(resp)) throw apiError(call.model, resp.statusCode, raw);
-  const msg = JSON.parse(raw) as { model?: string; choices?: Array<{ message?: { content?: string | null } }> };
-  const content = msg.choices?.[0]?.message?.content ?? "";
-  const answer: LlmAnswer = {
-    // Some open models think inline before answering; only the answer goes on the record.
-    text: content.replace(/<think>[\s\S]*?<\/think>/g, "").trim(),
-    model: msg.model ?? call.model,
-  };
-  if (!answer.text) throw new Error(`${call.model} returned an empty answer`);
-  return JSON.stringify(answer);
+  let jsonMode = Boolean(call.schema);
+  // Worst case 3 requests per call (JSON mode rejected, then one empty answer), so a trial stays
+  // within the 15-request HTTP budget: 2 discovery + 4 × 2 counsel + 3 bench + 1 records = 14.
+  for (let attempt = 0; attempt < 2; attempt++) {
+    let resp = send(jsonMode);
+    // A few providers reject JSON mode; the schema in the prompt is enough for them.
+    if (jsonMode && resp.statusCode === 400) {
+      jsonMode = false;
+      resp = send(false);
+    }
+    const raw = text(resp);
+    if (!ok(resp)) throw apiError(call.model, resp.statusCode, raw);
+    const msg = JSON.parse(raw) as { model?: string; choices?: Array<{ message?: { content?: string | null } }> };
+    const content = msg.choices?.[0]?.message?.content ?? "";
+    const answer: LlmAnswer = {
+      // Some open models think inline before answering (<think>, or Gemma's <thought>), occasionally
+      // never closing it. Only the answer goes on the record; an answer lost in thought is asked again.
+      text: content
+        .replace(/<(think|thought)>[\s\S]*?<\/\1>/g, "")
+        .replace(/<(think|thought)>[\s\S]*$/, "")
+        .trim(),
+      model: msg.model ?? call.model,
+    };
+    if (answer.text) return JSON.stringify(answer);
+  }
+  throw new Error(`${call.model} returned an empty answer twice`);
 };
 
 const postRecord = (sr: HTTPSendRequester, url: string, transcriptJson: string): string => {

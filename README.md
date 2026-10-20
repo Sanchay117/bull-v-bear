@@ -110,8 +110,11 @@ and press **Call the Court to Order**.
   - **Claude:** `ANTHROPIC_API_KEY=...`. Counsel stream their arguments and summarized thinking from
     `claude-opus-5-5`.
   - **Any OpenAI-compatible API** (DeepSeek, OpenRouter, Gemini, Groq, …): `LLM_API_KEY`,
-    `LLM_BASE_URL` and `LLM_MODEL`. Reasoning text (`reasoning_content`, or inline `<think>`) goes
-    to the sealed notes. The judge uses JSON mode with the ruling schema in the prompt.
+    `LLM_BASE_URL` and `LLM_MODEL`. Reasoning text (`reasoning_content`, or inline
+    `<think>`/`<thought>`) goes to the sealed notes. The judge uses JSON mode with the ruling schema
+    in the prompt. Overloaded (503) and rate-limited (429) calls are retried for about 45 seconds,
+    and an empty answer is asked again once. Tested live with Gemma 4 31B on the Gemini API free
+    tier, where each trial takes about 4–5 minutes.
   - **Neither:** the court runs **demo counsel**, deterministic arguments built from the same
     exhibits, so the whole procedure can be shown offline.
 
