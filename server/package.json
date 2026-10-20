@@ -1,0 +1,22 @@
+{
+  "name": "@court/server",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "The Clerk: runs live trials with Claude counsel, files rulings, serves the docket and receives transcripts from the CRE workflow.",
+  "scripts": {
+    "dev": "tsx watch --env-file-if-exists=.env src/index.ts",
+    "start": "tsx --env-file-if-exists=.env src/index.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.135.0",
+    "@court/core": "*",
+    "viem": "2.34.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "tsx": "^4.20.0",
+    "typescript": "5.9.3"
+  }
+}
