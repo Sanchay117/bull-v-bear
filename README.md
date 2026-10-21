@@ -234,6 +234,8 @@ cd video && npm install
 | Record the CRE CLI simulation | `node scripts/simulate.ts` | `cre login` |
 | Preview | `npm run studio` | |
 | Render | `npm run render` | |
+| Master the audio to YouTube loudness (−14 LUFS) | `npm run master` | ffmpeg |
+| Thumbnail (1280 × 720) and BUIDL logo (800 × 800) | `npm run stills` | |
 
 The narration lives in `video/src/script.ts`. Each scene is sized to its voice line, and the
 motion cues land on the words the narrator says.

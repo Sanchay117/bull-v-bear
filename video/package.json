@@ -8,6 +8,8 @@
     "capture": "node scripts/capture.ts",
     "voice": "node scripts/voice.ts",
     "render": "remotion render BullVBear out/bull-v-bear.mp4",
+    "master": "ffmpeg -y -i out/bull-v-bear.mp4 -c:v copy -af loudnorm=I=-14:TP=-1.5:LRA=11 -c:a aac -b:a 192k out/bull-v-bear-master.mp4",
+    "stills": "remotion still Thumbnail out/thumbnail.png && remotion still Logo out/logo.png",
     "still": "remotion still BullVBear out/still.png",
     "typecheck": "tsc --noEmit"
   },

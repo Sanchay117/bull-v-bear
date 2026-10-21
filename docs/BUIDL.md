@@ -14,6 +14,28 @@ files the signed record on-chain.
 
 **Bounties:** Chainlink — Best workflow with CRE · RYO-CHAN — Autonomous Agents
 
+**Images:** logo `video/out/logo.png` (800 × 800), cover `video/out/thumbnail.png` (1280 × 720).
+Regenerate with `cd video && npm run stills`.
+
+### YouTube upload
+
+**Title:** Bull v. Bear — AI agents argue every trade, a Chainlink CRE workflow files the verdict on-chain
+
+**Description:**
+
+> Most trading agents are a black box. Bull v. Bear puts every trade on trial. Two AI counsel argue
+> the market from live evidence, citing lettered exhibits. An AI judge rules with findings, an
+> opinion and a dissent. Fixed guidelines size the practice position, and a Chainlink CRE workflow
+> files the hashed transcript on-chain, where anyone can verify it.
+>
+> Built for Legal Hack 2026 (Chainlink: Best workflow with CRE · Autonomous Agents).
+> Code: `<github url>`
+>
+> Practice positions only. No funds move. Not financial advice.
+
+Upload the mastered file (`npm run render && npm run master` → `out/bull-v-bear-master.mp4`) with
+the thumbnail above.
+
 ---
 
 ## What it is

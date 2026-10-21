@@ -57,6 +57,9 @@ export function Filing({ shot }: SceneProps) {
     .map((c, i) => (i < 2 || i < reveal ? c : "0123456789abcdef"[Math.floor(random(`h${i}-${Math.floor(frame / 2)}`) * 16)]))
     .join("");
   const hashIn = ramp(frame, tHashed + 4, 12);
+  // The left column plays centre stage until the chain arrives, then makes room for it.
+  const home = ramp(frame, tChain - 26, 26, easeInOut);
+  const hero = 1 - home;
 
   // Right: the chain and the docket.
   const chain = ramp(frame, tChain - 14, 22, easeInOut);
@@ -96,6 +99,7 @@ export function Filing({ shot }: SceneProps) {
     <Paper>
       <SectionHead roman="V." title="Filing" at={2} note="Certificate of filing" />
 
+      <div style={{ position: "absolute", inset: 0, transform: `translateX(${hero * 450}px)` }}>
       {/* Documents of the case, stacking into one transcript */}
       <div style={{ position: "absolute", left: 110, top: 190, width: 800, height: 700, opacity: 1 - json }}>
         {DOCS.map((d, i) => {
@@ -149,14 +153,27 @@ export function Filing({ shot }: SceneProps) {
         }}
       >
         <div style={{ fontFamily: fonts.body, fontWeight: 600, fontSize: 16, letterSpacing: 4, color: ink.brassHi }}>CANONICAL JSON · SORTED KEYS</div>
-        <div style={{ marginTop: 12, fontFamily: fonts.mono, fontSize: 17, lineHeight: 1.45, wordBreak: "break-all", transform: `translateY(${-Math.max(0, frame - tCanon) * 2.2}px)`, opacity: 1 - squeeze }}>
-          {CANON.slice(0, 2600)}
+        <div style={{ marginTop: 12, height: 440, overflow: "hidden" }}>
+          <div style={{ fontFamily: fonts.mono, fontSize: 17, lineHeight: 1.45, wordBreak: "break-all", transform: `translateY(${-Math.max(0, frame - tCanon) * 2.2}px)`, opacity: 1 - squeeze }}>
+            {CANON.slice(0, 2600)}
+          </div>
         </div>
       </div>
-      <div style={{ position: "absolute", left: 110, top: interpolate(hashIn, [0, 1], [300, 240]), width: 800, opacity: hashIn }}>
+      <div
+        style={{
+          position: "absolute",
+          left: 110,
+          top: interpolate(hashIn, [0, 1], [300, 240]) + hero * 90,
+          width: 800,
+          opacity: hashIn,
+          transform: `scale(${1 + hero * 0.3})`,
+          transformOrigin: "center top",
+        }}
+      >
         <div style={{ fontFamily: fonts.body, fontWeight: 600, fontSize: 20, letterSpacing: 4, color: ink.soft }}>keccak256( transcript )</div>
         <div style={{ marginTop: 10, fontFamily: fonts.mono, fontWeight: 700, fontSize: 31, lineHeight: 1.35, color: ink.bear, wordBreak: "break-all" }}>{digest}</div>
         <div style={{ marginTop: 18, fontFamily: fonts.body, fontStyle: "italic", fontSize: 24, color: ink.ink2 }}>Change one word of the transcript and every character changes.</div>
+      </div>
       </div>
 
       {/* The order that goes on-chain */}
@@ -256,7 +273,7 @@ export function Filing({ shot }: SceneProps) {
         </div>
       </div>
 
-      <div style={{ position: "absolute", left: 640, top: 600, opacity: Math.min(1, seal * 1.5), transform: `scale(${2.2 - 1.2 * seal}) rotate(${-12 + 4 * seal}deg)` }}>
+      <div style={{ position: "absolute", left: 730, top: 600, opacity: Math.min(1, seal * 1.5), transform: `scale(${2.2 - 1.2 * seal}) rotate(${-12 + 4 * seal}deg)` }}>
         <WaxSeal size={200} label="ON-CHAIN" />
       </div>
       {frame >= tWinLoss + 4 && (
