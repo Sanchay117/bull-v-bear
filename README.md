@@ -192,8 +192,11 @@ cd cre/bull-v-bear && bunx cre-compile main.ts /tmp/bull-v-bear.wasm
    - Deploy `CourtRecord` with the simulation forwarder:
 
      ```bash
-     cd contracts && FORWARDER=0x15fC6ae953E024d975e77382eEeC56A9101f9F88 forge script script/Deploy.s.sol --rpc-url https://ethereum-sepolia-rpc.publicnode.com --private-key $SEPOLIA_KEY --broadcast
+     cd contracts && FORWARDER=0x15fC6ae953E024d975e77382eEeC56A9101f9F88 forge script script/Deploy.s.sol --rpc-url https://ethereum-sepolia-rpc.publicnode.com --private-key $SEPOLIA_KEY --gas-estimate-multiplier 800 --broadcast
      ```
+
+     Sepolia now charges far more for contract creation than forge's local EVM estimates (the node
+     asks about 10.8M gas for `CourtRecord`, forge estimates 1.5M), hence the multiplier.
 
    - Put the deployed address in `cre/bull-v-bear/config.staging.json` as `courtAddress`.
    - Run the simulation with broadcasting:
@@ -211,6 +214,20 @@ cd cre/bull-v-bear && bunx cre-compile main.ts /tmp/bull-v-bear.wasm
    The clerk then reads the docket from Sepolia and serves the transcripts the workflow lodged. If
    the clerk is reachable at `recordsUrl` while you simulate, you can verify each transcript in the
    browser.
+
+### Host the courtroom on Render
+
+One Node service runs the clerk and serves the built courtroom. `render.yaml` describes it:
+
+1. On [render.com](https://render.com), choose **New > Blueprint** and pick this repository.
+2. Paste an OpenAI-compatible API key for `LLM_API_KEY` when asked (the blueprint uses Groq's
+   `openai/gpt-oss-120b`; change `LLM_BASE_URL` and `LLM_MODEL` for another provider).
+3. Deploy. The site reads the docket from `CourtRecord` on Sepolia, where the CRE workflow files
+   rulings. It holds no filing key, so trials run on the site are sealed and verifiable in the
+   browser but are not filed on-chain.
+
+The free plan sleeps when idle (about a minute to wake) and forgets the site's own transcripts on
+restart; the on-chain docket is unaffected.
 
 For a deployed workflow, construct `CourtRecord` with the production `KeystoneForwarder`
 (`0xF8344CFd5c43616a4366C34E3EEE75af79a74482` on Sepolia), or switch it with

@@ -163,7 +163,7 @@ export function useTrial(onAdjourned?: () => void) {
       };
       es.onerror = () => {
         if (source.current === es) {
-          dispatch({ type: "error", message: "Lost connection to the clerk. Is the server running on :8787?" });
+          dispatch({ type: "error", message: "Lost connection to the clerk. Check that the server is running, then call the case again." });
           stop();
         }
       };

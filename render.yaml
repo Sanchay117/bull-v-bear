@@ -1,0 +1,28 @@
+# Render blueprint: one Node service runs the clerk (API + SSE trials) and serves the built courtroom.
+# New > Blueprint on render.com, pick this repo, and paste your LLM key when asked.
+services:
+  - type: web
+    name: bull-v-bear
+    runtime: node
+    plan: free
+    buildCommand: npm ci --include=dev && npm run build
+    startCommand: npm start --workspace server
+    healthCheckPath: /api/status
+    envVars:
+      - key: NODE_VERSION
+        value: "24"
+      # Counsel and bench: any OpenAI-compatible API. Groq is fast and has a free tier.
+      - key: COUNSEL
+        value: llm
+      - key: LLM_BASE_URL
+        value: https://api.groq.com/openai/v1
+      - key: LLM_MODEL
+        value: openai/gpt-oss-120b
+      - key: LLM_API_KEY
+        sync: false
+      # Read the docket from Sepolia, where the Chainlink CRE workflow files rulings. The site
+      # has no filing key: its own trials are sealed and verifiable, but only CRE files on-chain.
+      - key: CHAIN_MODE
+        value: sepolia
+      - key: COURT_ADDRESS
+        value: "0xbcA0a8c279B1dfDD5cC6640dA7eA22CeaeAE26B3"

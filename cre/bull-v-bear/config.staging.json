@@ -8,7 +8,7 @@
   "judgeEffort": "medium",
   "llmTimeout": "90s",
   "chainSelectorName": "ethereum-testnet-sepolia",
-  "courtAddress": "0x0000000000000000000000000000000000000000",
-  "gasLimit": "1000000",
+  "courtAddress": "0xbcA0a8c279B1dfDD5cC6640dA7eA22CeaeAE26B3",
+  "gasLimit": "8000000",
   "recordsUrl": "http://localhost:8787/api/records"
 }
