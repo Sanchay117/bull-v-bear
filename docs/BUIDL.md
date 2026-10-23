@@ -1,6 +1,6 @@
 # DoraHacks BUIDL draft
 
-Paste into the BUIDL form on Legal Hack 2026. Fill the two links once the repo and video are up.
+Paste into the BUIDL form on Legal Hack 2026.
 
 **Name:** Bull v. Bear: The Court of Market Opinion
 
@@ -9,8 +9,8 @@ files the signed record on-chain.
 
 **Links**
 
-- Repository: `<github url>`
-- Demo video: `<youtube url>`
+- Repository: https://github.com/Sanchay117/bull-v-bear
+- Demo video: https://youtu.be/GeEpKHzueTk
 
 **Bounties:** Chainlink: Best workflow with CRE · RYO-CHAN: Autonomous Agents
 
@@ -29,7 +29,7 @@ Regenerate with `cd video && npm run stills`.
 > files the hashed transcript on-chain, where anyone can verify it.
 >
 > Built for Legal Hack 2026 (Chainlink: Best workflow with CRE · Autonomous Agents).
-> Code: `<github url>`
+> Code: https://github.com/Sanchay117/bull-v-bear
 >
 > Practice positions only. No funds move. Not financial advice.
 

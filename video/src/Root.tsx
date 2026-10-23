@@ -13,7 +13,7 @@ export function Root() {
         height={1080}
         fps={FPS}
         durationInFrames={FPS * 180}
-        defaultProps={{ captions: true, music: true, repo: "" } satisfies FilmProps}
+        defaultProps={{ captions: true, music: true, repo: "github.com/Sanchay117/bull-v-bear" } satisfies FilmProps}
         calculateMetadata={async ({ props }) => {
           const plan = await makePlan();
           return { durationInFrames: plan.total, props: { ...props, plan } };
