@@ -49,6 +49,7 @@ the opinion, and verification fails.
 
 **Live**
 
+- Courtroom: https://bull-v-bear.onrender.com (free plan: the first visit may take a minute to wake)
 - Demo video: https://youtu.be/GeEpKHzueTk
 - `CourtRecord` on Sepolia: [`0xbcA0a8c279B1dfDD5cC6640dA7eA22CeaeAE26B3`](https://sepolia.etherscan.io/address/0xbcA0a8c279B1dfDD5cC6640dA7eA22CeaeAE26B3)
 - A ruling filed by the CRE workflow (`cre workflow simulate --broadcast`):

@@ -10,6 +10,7 @@ files the signed record on-chain.
 **Links**
 
 - Repository: https://github.com/Sanchay117/bull-v-bear
+- Live courtroom: https://bull-v-bear.onrender.com (free hosting: the first visit may take a minute to wake)
 - Demo video: https://youtu.be/GeEpKHzueTk
 - CourtRecord on Sepolia: https://sepolia.etherscan.io/address/0xbcA0a8c279B1dfDD5cC6640dA7eA22CeaeAE26B3
 - A ruling filed by the CRE workflow: https://sepolia.etherscan.io/tx/0x0072038aaae1daaa2db873ee6c0a4750b4b6d4b480d54067c5b806964b9c27e2

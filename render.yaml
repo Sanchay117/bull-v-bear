@@ -20,6 +20,10 @@ services:
         value: openai/gpt-oss-120b
       - key: LLM_API_KEY
         sync: false
+      # CoinGecko rate-limits keyless calls per IP, and Render's IPs are shared: a free Demo API
+      # key (coingecko.com/en/api) gives discovery its own quota.
+      - key: COINGECKO_API_KEY
+        sync: false
       # Read the docket from Sepolia, where the Chainlink CRE workflow files rulings. The site
       # has no filing key: its own trials are sealed and verifiable, but only CRE files on-chain.
       - key: CHAIN_MODE

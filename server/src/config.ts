@@ -28,6 +28,12 @@ export const config = {
     model: process.env.LLM_MODEL ?? "deepseek-chat",
   },
 
+  /**
+   * Optional CoinGecko Demo API key. Keyless calls are rate-limited per IP, and hosts like Render
+   * share IPs; a free demo key gets its own quota.
+   */
+  coingeckoKey: process.env.COINGECKO_API_KEY,
+
   chain: {
     mode: chainMode,
     rpcUrl: process.env.RPC_URL ?? (chainMode === "local" ? "http://127.0.0.1:8545" : "https://ethereum-sepolia-rpc.publicnode.com"),
