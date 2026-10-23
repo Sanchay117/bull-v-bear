@@ -61,7 +61,7 @@ export function Paper({ night = false, children, style }: { night?: boolean; chi
   );
 }
 
-/** "I. Discovery" — roman numeral, title, and a rule that draws across. */
+/** "I. Discovery": roman numeral, title, and a rule that draws across. */
 export function SectionHead({ roman, title, at = 0, night = false, note }: { roman: string; title: string; at?: number; night?: boolean; note?: string }) {
   const frame = useCurrentFrame();
   const t = ramp(frame, at, 22);

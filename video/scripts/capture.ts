@@ -146,7 +146,7 @@ async function press(page: Page, selector: string) {
 async function waitFor(page: Page, selector: string, ms = 120_000) {
   await page.waitForSelector(selector, { timeout: ms });
   const failed = await page.evaluate(() => /Mistrial\./.test(document.body.innerText));
-  if (failed) throw new Error("Mistrial — the trial failed; see the clerk's logs.");
+  if (failed) throw new Error("Mistrial: the trial failed. See the clerk's logs.");
 }
 
 try {

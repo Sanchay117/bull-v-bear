@@ -18,7 +18,7 @@ export function Opinion({ ruling, caption, judge }: { ruling: JudgeRuling; capti
       <div className="doc-sheet">
         <div className="doc-stamp">
           <Stamp tone={tone} stampKey={ruling.holding} sub={ruling.verdict === "DISMISSED" ? "No position ordered" : `Conviction ${ruling.conviction}`}>
-            {ruling.verdict === "LONG" ? "Long — So Ordered" : ruling.verdict === "SHORT" ? "Short — So Ordered" : "Dismissed"}
+            {ruling.verdict === "LONG" ? "Long · So Ordered" : ruling.verdict === "SHORT" ? "Short · So Ordered" : "Dismissed"}
           </Stamp>
         </div>
         <p className="doc-kicker">{caption} · {judge}, presiding</p>

@@ -1,4 +1,4 @@
-# Bull v. Bear — The Court of Market Opinion
+# Bull v. Bear: The Court of Market Opinion
 
 > AI counsel argue the market from evidence. An AI judge rules. Fixed sentencing guidelines size the
 > practice trade. A Chainlink CRE workflow files the signed record on-chain, where anyone can check
@@ -231,7 +231,7 @@ cd video && npm install
 
 | Step | Command | Needs |
 | --- | --- | --- |
-| Sound effects and music bed (synthesized) | `node scripts/sfx.ts` | — |
+| Sound effects and music bed (synthesized) | `node scripts/sfx.ts` | nothing |
 | Narration, one take per scene, word-timed captions | `node scripts/voice.ts` | `DEEPGRAM_KEY` in `server/.env` |
 | Film a live trial in the courtroom | `node scripts/capture.ts` | `npm run dev` and anvil running |
 | Record the CRE CLI simulation | `node scripts/simulate.ts` | `cre login` |

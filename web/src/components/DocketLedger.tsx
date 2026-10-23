@@ -37,7 +37,7 @@ export function DocketLedger({ docket, onOpen, activeHash }: { docket?: Docket; 
           <EquityCurve rulings={rulings} />
           <div className="ledger-stats">
             <span>
-              Practice equity <b>{docket ? `${(docket.equityIndex * 100).toFixed(2)}%` : "—"}</b>
+              Practice equity <b>{docket ? `${(docket.equityIndex * 100).toFixed(2)}%` : "n/a"}</b>
             </span>
             <span>
               Matters <b>{docket?.total ?? 0}</b>
@@ -89,10 +89,10 @@ export function DocketLedger({ docket, onOpen, activeHash }: { docket?: Docket; 
                       </Stamp>
                     </td>
                     <td className="mono">{r.conviction}</td>
-                    <td className="mono">{r.sizeBps ? `${(r.sizeBps / 100).toFixed(1)}%` : "—"}</td>
+                    <td className="mono">{r.sizeBps ? `${(r.sizeBps / 100).toFixed(1)}%` : "n/a"}</td>
                     <td className="mono">{fmtUsd(r.entryPrice)}</td>
                     <td className={`mono dmg ${r.bankrollImpactBps > 0 ? "up" : r.bankrollImpactBps < 0 ? "down" : ""}`}>
-                      {!r.sizeBps ? "—" : r.settled ? `${r.bankrollImpactBps >= 0 ? "+" : ""}${(r.bankrollImpactBps / 100).toFixed(2)}%` : "open"}
+                      {!r.sizeBps ? "n/a" : r.settled ? `${r.bankrollImpactBps >= 0 ? "+" : ""}${(r.bankrollImpactBps / 100).toFixed(2)}%` : "open"}
                     </td>
                     <td className="ledger-holding">{r.holding}</td>
                   </tr>

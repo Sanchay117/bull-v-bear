@@ -1,8 +1,8 @@
-# DoraHacks BUIDL — draft
+# DoraHacks BUIDL draft
 
 Paste into the BUIDL form on Legal Hack 2026. Fill the two links once the repo and video are up.
 
-**Name:** Bull v. Bear — The Court of Market Opinion
+**Name:** Bull v. Bear: The Court of Market Opinion
 
 **Tagline:** AI counsel argue the market from evidence, an AI judge rules, and a Chainlink CRE workflow
 files the signed record on-chain.
@@ -12,14 +12,14 @@ files the signed record on-chain.
 - Repository: `<github url>`
 - Demo video: `<youtube url>`
 
-**Bounties:** Chainlink — Best workflow with CRE · RYO-CHAN — Autonomous Agents
+**Bounties:** Chainlink: Best workflow with CRE · RYO-CHAN: Autonomous Agents
 
 **Images:** logo `video/out/logo.png` (800 × 800), cover `video/out/thumbnail.png` (1280 × 720).
 Regenerate with `cd video && npm run stills`.
 
 ### YouTube upload
 
-**Title:** Bull v. Bear — AI agents argue every trade, a Chainlink CRE workflow files the verdict on-chain
+**Title:** Bull v. Bear: AI agents argue every trade, a Chainlink CRE workflow files the verdict on-chain
 
 **Description:**
 

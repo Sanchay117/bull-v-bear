@@ -92,13 +92,13 @@ export function makeCounsel(): Counsel {
 export function describeError(err: unknown): string {
   if (err instanceof CompatError) {
     if (err.status === 401 || err.status === 403) return `The provider rejected LLM_API_KEY (${err.status}). ${err.message}`;
-    if (err.status === 429) return `${err.message} — the rate limit held for 45 seconds; wait a minute and call the case again.`;
-    if (err.status === 503) return `${err.message} — still overloaded after 45 seconds; call the case again shortly, or set LLM_MODEL to a less busy model.`;
+    if (err.status === 429) return `${err.message}. The rate limit held for 45 seconds, so wait a minute and call the case again.`;
+    if (err.status === 503) return `${err.message}. Still overloaded after 45 seconds, so call the case again shortly, or set LLM_MODEL to a less busy model.`;
     return err.message;
   }
-  if (err instanceof Error && err.name === "TimeoutError") return "Counsel took too long to answer (3 minutes) — call the case again.";
+  if (err instanceof Error && err.name === "TimeoutError") return "Counsel took too long to answer (3 minutes). Call the case again.";
   if (err instanceof Anthropic.AuthenticationError) return "Claude rejected the API key (401). Check ANTHROPIC_API_KEY.";
-  if (err instanceof Anthropic.RateLimitError) return "Claude rate limit reached — wait a moment and call the case again.";
+  if (err instanceof Anthropic.RateLimitError) return "Claude rate limit reached. Wait a moment and call the case again.";
   if (err instanceof Anthropic.APIError) return `Claude API error ${err.status ?? ""}: ${err.message}`;
   return err instanceof Error ? err.message : String(err);
 }

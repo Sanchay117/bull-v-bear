@@ -1,7 +1,7 @@
 {
   "name": "bull-v-bear",
   "private": true,
-  "description": "Bull v. Bear — the Court of Market Opinion. AI counsel argue, an AI judge rules, Chainlink CRE files the record.",
+  "description": "Bull v. Bear, the Court of Market Opinion: AI counsel argue, an AI judge rules, Chainlink CRE files the record.",
   "workspaces": [
     "core",
     "server",

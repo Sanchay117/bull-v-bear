@@ -130,7 +130,7 @@ const server = createServer(async (req, res) => {
 
 const chain = await initChain();
 server.listen(config.port, () => {
-  console.log(`\n  ⚖  BULL v. BEAR — the Court of Market Opinion is in session`);
+  console.log(`\n  ⚖  BULL v. BEAR: the Court of Market Opinion is in session`);
   console.log(`     clerk      http://localhost:${config.port}`);
   console.log(
     `     counsel    ${counsel.info.mode === "demo" ? "demo counsel (set ANTHROPIC_API_KEY or LLM_API_KEY for live counsel)" : `${counselName(counsel.info)} (${counsel.info.model})`}`,

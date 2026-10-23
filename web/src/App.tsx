@@ -46,7 +46,7 @@ function Caption({ state, caseNumber }: { state: TrialState; caseNumber?: number
             <b>THE BEAR,</b>
           </p>
           <p className="indent">Respondent.</p>
-          <p className="caption-re">{state.caption ?? "In re —"}</p>
+          <p className="caption-re">{state.caption ?? "In re …"}</p>
         </div>
         <div className="caption-parens" aria-hidden="true">
           {")\n)\n)\n)\n)\n)\n)"}

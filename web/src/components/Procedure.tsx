@@ -29,7 +29,7 @@ export function AllRise({ judge }: { judge: string }) {
       <div className="all-rise-inner">
         <p className="ar-small">Hear ye, hear ye</p>
         <p className="ar-big">All Rise</p>
-        <p className="ar-small">The Court of Market Opinion is now in session — {judge} presiding</p>
+        <p className="ar-small">The Court of Market Opinion is now in session, {judge} presiding</p>
       </div>
     </div>
   );

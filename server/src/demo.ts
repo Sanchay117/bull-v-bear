@@ -1,6 +1,6 @@
 // Demo counsel: a scripted, deterministic stand-in used when no Claude credentials are set.
-// It argues from the same exhibits with the same citation rules, so the whole pipeline —
-// sentencing, hashing, on-chain filing, verification — runs end to end without an API key.
+// It argues from the same exhibits with the same citation rules, so the whole pipeline
+// (sentencing, hashing, on-chain filing, verification) runs end to end without an API key.
 
 import {
   fmtUsd,

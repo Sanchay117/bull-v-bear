@@ -78,11 +78,11 @@ export function Masthead({
           <div className="ticker-track" style={{ animationDuration: `${Math.max(30, ticker.length * 9)}s` }}>
             {(ticker.length ? [...ticker, ...ticker] : []).map((r, i) => (
               <span key={i} className={`ticker-item v-${r.verdict.toLowerCase()}`}>
-                <b>No. {String(r.caseNumber).padStart(4, "0")}</b> In re {r.asset} — <em>{r.verdict}</em> ({r.conviction}) — {r.holding}
+                <b>No. {String(r.caseNumber).padStart(4, "0")}</b> In re {r.asset} · <em>{r.verdict}</em> ({r.conviction}) · {r.holding}
                 <span className="ticker-sep">✦</span>
               </span>
             ))}
-            {ticker.length === 0 && <span className="ticker-item">The docket is empty. The Court awaits its first matter. ✦ Practice positions only — not investment advice. ✦</span>}
+            {ticker.length === 0 && <span className="ticker-item">The docket is empty. The Court awaits its first matter. ✦ Practice positions only. Not investment advice. ✦</span>}
           </div>
         </div>
       </div>

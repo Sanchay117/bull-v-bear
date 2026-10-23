@@ -11,9 +11,9 @@ type Check =
   | { kind: "mismatch"; computed: string; onChain: string; tampered: boolean }
   | { kind: "error"; message: string };
 
-const short = (h?: string, n = 10) => (h ? `${h.slice(0, n)}…${h.slice(-6)}` : "—");
+const short = (h?: string, n = 10) => (h ? `${h.slice(0, n)}…${h.slice(-6)}` : "pending");
 
-/** Alters one word of the opinion — the smallest possible forgery. */
+/** Alters one word of the opinion: the smallest possible forgery. */
 function forge(t: Transcript): Transcript {
   const copy = structuredClone(t);
   const words = copy.ruling.opinion.split(" ");
@@ -56,11 +56,11 @@ export function Certificate({ filed, transcript, chain }: { filed: FiledEvent; t
         </div>
         <div className="cert-body">
           <p className="cert-text">
-            I hereby certify that the foregoing transcript — exhibits, arguments, opinion and sentencing worksheet — bears the
+            I hereby certify that the foregoing transcript (exhibits, arguments, opinion and sentencing worksheet) bears the
             keccak256 digest below, and that{" "}
             {filed.onChain ? (
               <>
-                it was entered into the public record as <b>Case No. {String(filed.caseNumber ?? "—").padStart(4, "0")}</b>
+                it was entered into the public record as <b>Case No. {String(filed.caseNumber ?? "pending").padStart(4, "0")}</b>
                 {filed.blockNumber ? (
                   <>
                     {" "}

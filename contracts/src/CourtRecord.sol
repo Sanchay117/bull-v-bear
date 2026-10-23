@@ -3,15 +3,15 @@ pragma solidity ^0.8.24;
 
 import {ReceiverTemplate} from "./ReceiverTemplate.sol";
 
-/// @title CourtRecord — the public docket of the Court of Market Opinion
+/// @title CourtRecord: the public docket of the Court of Market Opinion
 /// @notice Every trial of "Bull v. Bear" is decided off-chain by AI counsel and an AI judge inside a
 ///         Chainlink CRE workflow. The DON then files the ruling here through the Keystone forwarder.
 ///         Each ruling carries a keccak256 hash of the full canonical transcript (exhibits, arguments,
 ///         opinion, sentencing math) so anyone can verify the published reasoning was never altered.
 ///
 ///         Positions are PRACTICE positions only: no funds move. When a new ruling arrives for the same
-///         asset, the previous open position is settled at the new mark price (protective orders —
-///         stop and target — are assumed honored), and the court's practice equity index is updated.
+///         asset, the previous open position is settled at the new mark price (the stop and target
+///         protective orders are assumed honored), and the court's practice equity index is updated.
 contract CourtRecord is ReceiverTemplate {
   enum Verdict {
     DISMISSED,

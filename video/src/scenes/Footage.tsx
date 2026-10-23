@@ -34,7 +34,7 @@ function Browser({ start, zoom = 1, origin = "50% 50%", children }: { start: num
           <span key={c} style={{ width: 13, height: 13, borderRadius: 7, background: c }} />
         ))}
         <div style={{ marginLeft: 18, flex: 1, maxWidth: 560, height: 26, borderRadius: 13, background: "#f8f2e4", display: "flex", alignItems: "center", padding: "0 14px", fontFamily: fonts.mono, fontSize: 15, color: ink.soft }}>
-          localhost:5173 · Bull v. Bear — The Court of Market Opinion
+          localhost:5173 · Bull v. Bear: The Court of Market Opinion
         </div>
       </div>
       <div style={{ position: "relative", width: FRAME.w, height: VIDEO_H, overflow: "hidden" }}>
@@ -50,7 +50,7 @@ function Browser({ start, zoom = 1, origin = "50% 50%", children }: { start: num
 function Missing({ shot }: { shot: Shot }) {
   return (
     <Paper>
-      <div style={{ position: "absolute", inset: 0, display: "grid", placeItems: "center", fontFamily: fonts.display, fontSize: 48 }}>Footage for “{shot.id}” not captured yet — run npm run capture</div>
+      <div style={{ position: "absolute", inset: 0, display: "grid", placeItems: "center", fontFamily: fonts.display, fontSize: 48 }}>Footage for “{shot.id}” not captured yet. Run npm run capture</div>
     </Paper>
   );
 }

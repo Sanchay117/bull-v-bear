@@ -64,7 +64,7 @@ How you decide:
 
 export function judgePrompt(e: Evidence, args: Argument[]): string {
   const transcript = args
-    .map((a) => `${a.side === "BULL" ? "COUNSEL FOR THE BULL" : "COUNSEL FOR THE BEAR"} — ${a.round.toUpperCase()}\n${a.text}`)
+    .map((a) => `${a.side === "BULL" ? "COUNSEL FOR THE BULL" : "COUNSEL FOR THE BEAR"}, ${a.round.toUpperCase()}\n${a.text}`)
     .join("\n\n");
   return `Case: In re ${e.asset.symbol}/USD. Evidence as of ${e.asOf}.
 

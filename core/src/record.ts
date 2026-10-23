@@ -4,7 +4,7 @@ import { encodeAbiParameters, keccak256, parseAbiParameters, stringToHex, toByte
 import { priceDecimals, round } from "./evidence.ts";
 import { VERDICT_CODE, type Exhibit, type Transcript } from "./types.ts";
 
-/** JSON with recursively sorted keys and no whitespace — the form that gets hashed. */
+/** JSON with recursively sorted keys and no whitespace: the form that gets hashed. */
 export function canonicalize(value: unknown): string {
   if (value === null || typeof value !== "object") {
     if (typeof value === "number" && !Number.isFinite(value)) return "null";

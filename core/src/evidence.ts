@@ -1,5 +1,5 @@
 // Discovery: turn raw market data into numbered exhibits that both counsel must argue from.
-// Pure functions only — the CRE workflow fetches the JSON with its HTTP capability, the clerk
+// Pure functions only: the CRE workflow fetches the JSON with its HTTP capability, the clerk
 // server fetches it with fetch(), and both hand the bodies to the same parsers.
 
 import type {
@@ -246,7 +246,7 @@ export function buildEvidence(
   for (const h of headlines.slice(0, 4)) {
     add({
       kind: "headline",
-      title: `Report — ${h.source}`,
+      title: `Report: ${h.source}`,
       statement: `${h.source} reported: "${h.title}"`,
       data: { source: h.source, title: h.title, url: h.url ?? "" },
     });

@@ -98,7 +98,7 @@ export async function makePlan(): Promise<Plan> {
 }
 
 /**
- * Frame (relative to the scene) at which the narrator says `word` — the `nth` occurrence of a
+ * Frame (relative to the scene) at which the narrator says `word`: the `nth` occurrence of a
  * word starting with it. Scenes use these cues to land each visual on its line.
  */
 export function cue(shot: Shot, word: string, nth = 0, fallback = 0): number {

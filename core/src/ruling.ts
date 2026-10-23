@@ -24,7 +24,7 @@ export function normalizeRuling(raw: unknown, exhibitIds: string[]): JudgeRuling
     .map((f): Finding | null => {
       if (!f || typeof f !== "object") return null;
       const x = f as Record<string, unknown>;
-      // Accepts "B", "Ex. B" or "Exhibit B" — the letter is always last.
+      // Accepts "B", "Ex. B" or "Exhibit B"; the letter is always last.
       const exhibit = String(x.exhibit ?? "").toUpperCase().match(/([A-Z])[^A-Z]*$/)?.[1] ?? "";
       if (!exhibitIds.includes(exhibit)) return null;
       const favors = String(x.favors ?? "NEUTRAL").toUpperCase();

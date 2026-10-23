@@ -162,7 +162,7 @@ export function Ruling({ shot }: SceneProps) {
       <div style={{ position: "absolute", left: 1232, top: 190, width: 580 }}>
         <div style={{ height: 150, display: "flex", alignItems: "center", justifyContent: "center" }}>
           <Stamp at={tVerdict} size={50} angle={-6} sub={`Conviction ${ruling.conviction}`} style={{ whiteSpace: "nowrap" }}>
-            {ruling.verdict === "DISMISSED" ? "Dismissed" : `${ruling.verdict === "LONG" ? "Long" : "Short"} — So Ordered`}
+            {ruling.verdict === "DISMISSED" ? "Dismissed" : `${ruling.verdict === "LONG" ? "Long" : "Short"} · So Ordered`}
           </Stamp>
         </div>
         <div style={{ marginTop: 20, padding: "22px 26px", background: ink.paper2, boxShadow: "0 18px 40px -22px rgba(70,45,10,0.55)", opacity: opinion, transform: `translateY(${(1 - opinion) * 20}px)` }}>

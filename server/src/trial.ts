@@ -131,8 +131,8 @@ export async function runTrial(
       }
     } else {
       filed.note = chain.online
-        ? "This clerk is not the court's forwarder — rulings on this chain are filed by the Chainlink CRE workflow."
-        : "No chain connected — the record was sealed off-chain only.";
+        ? "This clerk is not the court's forwarder: rulings on this chain are filed by the Chainlink CRE workflow."
+        : "No chain connected, so the record was sealed off-chain only.";
     }
     saveTranscript({
       transcript,
