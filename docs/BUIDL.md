@@ -11,6 +11,8 @@ files the signed record on-chain.
 
 - Repository: https://github.com/Sanchay117/bull-v-bear
 - Demo video: https://youtu.be/GeEpKHzueTk
+- CourtRecord on Sepolia: https://sepolia.etherscan.io/address/0xbcA0a8c279B1dfDD5cC6640dA7eA22CeaeAE26B3
+- A ruling filed by the CRE workflow: https://sepolia.etherscan.io/tx/0x0072038aaae1daaa2db873ee6c0a4750b4b6d4b480d54067c5b806964b9c27e2
 
 **Bounties:** Chainlink: Best workflow with CRE · RYO-CHAN: Autonomous Agents
 
@@ -79,7 +81,8 @@ Practice positions only. No funds move.
 The workflow integrates a blockchain with external APIs and LLM agents, with consensus on every
 off-chain answer. It is tested in the CRE SDK test runtime, compiles to WASM, and runs end to end
 in the CRE CLI simulator (`cre workflow simulate`): live discovery, five model calls, the ruling,
-sentencing and a signed report.
+sentencing and a signed report. With `--broadcast`, the simulator's forwarder delivered that report
+to `CourtRecord` on Sepolia, and the ruling is on the public docket (links above).
 
 ## Autonomous agents
 

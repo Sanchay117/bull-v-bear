@@ -47,6 +47,13 @@ the opinion, and verification fails.
 
 > Practice positions only. No funds move, and nothing here is investment advice.
 
+**Live**
+
+- Demo video: https://youtu.be/GeEpKHzueTk
+- `CourtRecord` on Sepolia: [`0xbcA0a8c279B1dfDD5cC6640dA7eA22CeaeAE26B3`](https://sepolia.etherscan.io/address/0xbcA0a8c279B1dfDD5cC6640dA7eA22CeaeAE26B3)
+- A ruling filed by the CRE workflow (`cre workflow simulate --broadcast`):
+  [`0x0072038a…27e2`](https://sepolia.etherscan.io/tx/0x0072038aaae1daaa2db873ee6c0a4750b4b6d4b480d54067c5b806964b9c27e2)
+
 ---
 
 ## Architecture
