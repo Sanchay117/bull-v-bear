@@ -185,6 +185,9 @@ cd cre/bull-v-bear && bunx cre-compile main.ts /tmp/bull-v-bear.wasm
    npm run cre:simulate
    ```
 
+   One trial uses about 8,000 tokens in under 20 seconds. On Groq's free tier (8,000 tokens per
+   minute), leave a minute between runs; a run that starts too soon stops with a 429.
+
 5. **On-chain filing on Sepolia.**
    - Deploy `CourtRecord` with the simulation forwarder:
 
@@ -246,9 +249,10 @@ motion cues land on the words the narrator says.
 
 **Chainlink: Best workflow with CRE.** The CRE workflow is the orchestration layer. It connects a
 blockchain (Sepolia `CourtRecord`, via a signed report through the Keystone forwarder) to external
-APIs (CoinGecko, alternative.me) and an LLM (Claude), with consensus on every off-chain answer.
-The full trial runs in a CRE test runtime and compiles to WASM. A CLI simulation is one
-`cre login` away.
+APIs (CoinGecko, alternative.me) and an LLM (Claude, or any OpenAI-compatible model; the demo runs
+on Groq), with consensus on every off-chain answer. The full trial is tested in the CRE test
+runtime, compiles to WASM, and runs end to end in the CRE CLI simulator: live discovery, five model
+calls, the ruling, sentencing and a signed report.
 
 **RYO-CHAN: Autonomous Agents.** Agents interpret live market evidence and record practice trades
 on a public ledger:

@@ -16,12 +16,14 @@ if (process.argv.includes("--broadcast")) args.push("--broadcast");
 
 const bin = process.env.CRE_BIN ?? join(homedir(), ".cre", "bin", "cre");
 const run = spawnSync(bin, args, { cwd: creDir, encoding: "utf8", maxBuffer: 32 * 1024 * 1024 });
-const raw = `${run.stdout ?? ""}${run.stderr ?? ""}`;
-// Strip colours and cursor codes; keep what a person would read.
+// The CLI prints its setup steps on stderr before the run on stdout; show them in that order.
+const raw = `${run.stderr ?? ""}${run.stdout ?? ""}`;
+// Strip colours and cursor codes and the CLI's update notice; keep what a person would read.
 const lines = raw
   .replace(/\x1b\[[0-9;?]*[A-Za-z]/g, "")
   .split(/\r?\n/)
   .map((l) => l.replace(/\s+$/, ""))
+  .filter((l) => !/Update available|`cre update`/.test(l))
   .filter((l, i, all) => l || (all[i - 1] ?? "") !== "");
 
 process.stdout.write(raw);
