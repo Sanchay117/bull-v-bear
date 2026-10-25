@@ -135,9 +135,10 @@ and press **Call the Court to Order**.
     `LLM_BASE_URL` and `LLM_MODEL`. Reasoning text (`reasoning_content`, or inline
     `<think>`/`<thought>`) goes to the sealed notes. The judge uses JSON mode with the ruling schema
     in the prompt. Overloaded (503) and rate-limited (429) calls are retried for about 45 seconds,
-    and an empty answer is asked again once. Tested live on Groq's free tier with
-    `openai/gpt-oss-120b`, where a full trial takes under 20 seconds, and with Gemma 4 31B on
-    the Gemini API, where a trial takes about 5 minutes.
+    and an empty answer is asked again once. `LLM_REASONING_EFFORT` is passed on as
+    `reasoning_effort` for reasoning models that accept it. Tested live on Groq's free tier with
+    `openai/gpt-oss-120b` at `low`, where a full trial takes about 5 seconds, and with Gemma 4 31B
+    on the Gemini API, where a trial takes about 5 minutes.
   - **Neither:** the court runs **demo counsel**, deterministic arguments built from the same
     exhibits, so the whole procedure can be shown offline.
 
@@ -204,16 +205,18 @@ cd cre/bull-v-bear && bunx cre-compile main.ts /tmp/bull-v-bear.wasm
 2. Run `cd cre/bull-v-bear && bun install`.
 3. `cp cre/.env.example cre/.env` and set `LLM_API_KEY_ENV` (plus `CRE_ETH_PRIVATE_KEY` for
    step 5; `COINGECKO_API_KEY_ENV` may stay empty). For a non-Anthropic model, set
-   `"provider": "openai"`, `baseUrl` and `model` in `config.staging.json`. `project.yaml` already
-   lists RPCs for Sepolia and for Ethereum mainnet, where the feeds are read.
+   `"provider": "openai"`, `baseUrl` and `model` in `config.staging.json`; `sendReasoningEffort`
+   passes `counselEffort` and `judgeEffort` on as `reasoning_effort`, for reasoning models that
+   accept it (both are `low` in the staging config). `project.yaml` already lists RPCs for
+   Sepolia and for Ethereum mainnet, where the feeds are read.
 4. Dry-run simulation (no transaction):
 
    ```bash
    npm run cre:simulate
    ```
 
-   One trial uses about 8,000 tokens in under 20 seconds. On Groq's free tier (8,000 tokens per
-   minute), leave a minute between runs; a run that starts too soon stops with a 429.
+   At low reasoning effort one trial takes under 10 seconds and fits in Groq's free tier (8,000
+   tokens per minute). Leave a minute between runs; a run that starts too soon stops with a 429.
 
 5. **On-chain filing on Sepolia.**
    - Deploy `CourtRecord` with the simulation forwarder:
@@ -248,7 +251,8 @@ cd cre/bull-v-bear && bunx cre-compile main.ts /tmp/bull-v-bear.wasm
 
 1. It starts a clerk at the workflow's `recordsUrl` whose data dir is `docket/`.
 2. It runs `cre workflow simulate --broadcast`. A trial that fails before filing is retried twice,
-   75 seconds apart, since Groq's free tier allows about one trial a minute. A trial that reached
+   75 seconds apart, since Groq's free tier allows about one trial a minute and a 429 clears
+   within that window. A trial that reached
    `CourtRecord` is never retried.
 3. It keeps the CLI log in `docket/runs/` and the transcript in `docket/transcripts/`, then rewrites
    `docket/index.json`.

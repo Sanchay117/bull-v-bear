@@ -314,12 +314,23 @@ export function formatRecord(exhibits: Exhibit[]): string {
   return exhibits.map((e) => `[Ex. ${e.id}] ${e.title}: ${e.statement}`).join("\n");
 }
 
-/** Extracts exhibit ids cited as [Ex. A], [Ex. A, C] or [Exhibit B]. */
+const LETTERS_LIST = String.raw`([A-Z](?:\s*(?:,|and|&)\s*[A-Z])*)`;
+const CITATION = new RegExp(String.raw`[[(](?:Ex\.?|Exhibit)\s*${LETTERS_LIST}[\])]|\bExhibits?\s+${LETTERS_LIST}\b`, "g");
+
+/**
+ * A citation as counsel write it: [Ex. A], [Ex. A, C], [Exhibit B], the same in parentheses, or a
+ * bare "Exhibit B" / "Exhibits B and D" in prose, which some models use despite the rules.
+ */
+export const citationPattern = () => new RegExp(CITATION);
+
+/** The letters one citationPattern() match cites, e.g. ["A", "C"]. */
+export const citedLetters = (m: RegExpMatchArray): string[] => (m[1] ?? m[2]).split(/\s*(?:,|and|&)\s*/);
+
+/** Extracts the exhibit ids cited in counsel's text. */
 export function extractCitations(text: string, validIds: string[]): string[] {
   const found = new Set<string>();
-  const re = /\[(?:Ex\.?|Exhibit)\s*([A-Z](?:\s*(?:,|and|&)\s*[A-Z])*)\]/g;
-  for (const m of text.matchAll(re)) {
-    for (const id of m[1].split(/\s*(?:,|and|&)\s*/)) {
+  for (const m of text.matchAll(citationPattern())) {
+    for (const id of citedLetters(m)) {
       if (validIds.includes(id)) found.add(id);
     }
   }

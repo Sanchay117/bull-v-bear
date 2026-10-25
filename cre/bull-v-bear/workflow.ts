@@ -75,9 +75,13 @@ export const configSchema = z.object({
   provider: z.enum(["anthropic", "openai"]).default("anthropic"),
   baseUrl: z.string().optional(),
   model: z.string(),
-  /** Claude only: output effort for counsel and the bench. */
+  /**
+   * Effort for counsel and the bench: Claude's output effort, or for an OpenAI-compatible provider
+   * its reasoning_effort when sendReasoningEffort is set (gpt-oss, Qwen 3 and o-series models take it).
+   */
   counselEffort: effort,
   judgeEffort: effort,
+  sendReasoningEffort: z.boolean().default(false),
   /** Per-call HTTP timeout for the LLM, as a protobuf Duration string, e.g. "60s". */
   llmTimeout: z.string(),
   chainSelectorName: z.string(),
@@ -133,6 +137,7 @@ interface LlmCall {
   schema?: Record<string, unknown>;
   /** OpenAI-compatible provider only. */
   baseUrl?: string;
+  sendReasoningEffort?: boolean;
 }
 
 interface LlmAnswer {
@@ -213,6 +218,7 @@ const askCompat = (sr: HTTPSendRequester, apiKey: string, call: LlmCall): string
               { role: "system", content: call.system },
               { role: "user", content: call.schema ? `${call.prompt}\n\n${judgeJsonInstruction()}` : call.prompt },
             ],
+            ...(call.sendReasoningEffort ? { reasoning_effort: call.effort } : {}),
             ...(jsonMode ? { response_format: { type: "json_object" } } : {}),
           }),
         ),
@@ -357,7 +363,7 @@ export const convene = (runtime: Runtime<Config>): string => {
   const apiKey = runtime.getSecret({ id: "LLM_API_KEY" }).result().value;
   const compat = cfg.provider === "openai";
   if (compat && !cfg.baseUrl) throw new Error('provider "openai" needs baseUrl in the workflow config');
-  const ask = (call: Omit<LlmCall, "model" | "timeout" | "baseUrl">): LlmAnswer =>
+  const ask = (call: Omit<LlmCall, "model" | "timeout" | "baseUrl" | "sendReasoningEffort">): LlmAnswer =>
     JSON.parse(
       http
         .sendRequest(runtime, compat ? askCompat : askClaude, consensus)(apiKey, {
@@ -365,6 +371,7 @@ export const convene = (runtime: Runtime<Config>): string => {
           model: cfg.model,
           timeout: cfg.llmTimeout,
           baseUrl: cfg.baseUrl?.replace(/\/+$/, ""),
+          sendReasoningEffort: cfg.sendReasoningEffort,
         })
         .result(),
     ) as LlmAnswer;

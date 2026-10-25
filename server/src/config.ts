@@ -26,6 +26,8 @@ export const config = {
     baseUrl: (process.env.LLM_BASE_URL ?? "https://api.deepseek.com/v1").replace(/\/+$/, ""),
     apiKey: process.env.LLM_API_KEY,
     model: process.env.LLM_MODEL ?? "deepseek-chat",
+    /** Sent as reasoning_effort (low|medium|high) when set; gpt-oss, Qwen 3 and o-series models take it. */
+    reasoningEffort: process.env.LLM_REASONING_EFFORT,
   },
 
   /**

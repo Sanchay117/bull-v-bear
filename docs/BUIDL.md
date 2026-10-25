@@ -125,6 +125,6 @@ TypeScript throughout:
 - **Server:** Node, streaming the trial over SSE.
 - **Contracts:** Solidity and Foundry (`CourtRecord`, a Keystone receiver).
 - **Workflow:** the Chainlink CRE TypeScript SDK.
-- **Counsel:** Claude, or any OpenAI-compatible model. The demo runs on Groq's gpt-oss-120b, where a
-  full trial takes under 20 seconds.
+- **Counsel:** Claude, or any OpenAI-compatible model. The demo runs on Groq's gpt-oss-120b at low
+  reasoning effort, where a full trial takes under 10 seconds.
 - **Video:** Remotion, with Deepgram narration.

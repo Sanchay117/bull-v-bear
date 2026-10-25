@@ -99,6 +99,7 @@ export class CompatCounsel implements Counsel {
           { role: "system", content: system },
           { role: "user", content: prompt },
         ],
+        ...(config.llm.reasoningEffort ? { reasoning_effort: config.llm.reasoningEffort } : {}),
         ...(json ? { response_format: { type: "json_object" } } : {}),
       }),
     );

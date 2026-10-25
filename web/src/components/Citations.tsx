@@ -1,11 +1,10 @@
 import { createContext, useContext, type ReactNode } from "react";
+import { citationPattern, citedLetters } from "@court/core";
 
 export const ExhibitFocus = createContext<{ focus: string | null; setFocus: (id: string | null) => void }>({
   focus: null,
   setFocus: () => {},
 });
-
-const CITE = /\[(?:Ex\.?|Exhibit)\s*([A-Z](?:\s*(?:,|and|&)\s*[A-Z])*)\]/g;
 
 function CiteChip({ id }: { id: string }) {
   const { focus, setFocus } = useContext(ExhibitFocus);
@@ -29,10 +28,10 @@ function CiteChip({ id }: { id: string }) {
 export function WithCitations({ text }: { text: string }) {
   const out: ReactNode[] = [];
   let last = 0;
-  for (const m of text.matchAll(CITE)) {
+  for (const m of text.matchAll(citationPattern())) {
     const at = m.index ?? 0;
     if (at > last) out.push(text.slice(last, at));
-    const ids = m[1].split(/\s*(?:,|and|&)\s*/);
+    const ids = citedLetters(m);
     out.push(
       <span className="cite-group" key={`${at}`}>
         <span className="cite-ex">Ex.</span>

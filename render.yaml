@@ -18,6 +18,9 @@ services:
         value: https://api.groq.com/openai/v1
       - key: LLM_MODEL
         value: openai/gpt-oss-120b
+      # Low reasoning keeps a trial inside Groq's free 8K tokens a minute, shared with the CRE docket.
+      - key: LLM_REASONING_EFFORT
+        value: low
       - key: LLM_API_KEY
         sync: false
       # CoinGecko rate-limits keyless calls per IP, and Render's IPs are shared: a free Demo API

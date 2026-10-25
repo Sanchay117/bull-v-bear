@@ -7,8 +7,9 @@
 // Runs in .github/workflows/docket.yml every three hours, and locally after `cre login` with cre/.env.
 // 1. Starts a clerk whose data dir is docket/, at the recordsUrl in the workflow config, so the
 //    lodged transcript is written to docket/transcripts/<hash>.json.
-// 2. Runs the simulation. Groq's free tier allows 8K tokens a minute, about one trial, so a failed
-//    trial is retried twice, 75 s apart. A trial that reached CourtRecord is never retried.
+// 2. Runs the simulation. Groq's free tier allows 8K tokens a minute, about one low-effort
+//    trial, so a failed trial is retried twice, 75 s apart. A trial that reached CourtRecord is
+//    never retried.
 // 3. Keeps the CLI log in docket/runs/, rewrites docket/index.json, and reports a one-line summary.
 
 import { spawn } from "node:child_process";

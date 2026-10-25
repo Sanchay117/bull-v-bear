@@ -27,6 +27,7 @@ const baseConfig = {
   llmTimeout: "90s",
   chainSelectorName: "ethereum-testnet-sepolia",
   feedChainSelectorName: "ethereum-mainnet",
+  sendReasoningEffort: false,
   courtAddress: COURT,
   gasLimit: "1000000",
   recordsUrl: "http://localhost:8787/api/records",
@@ -191,7 +192,13 @@ describe("Bull v. Bear workflow", () => {
   });
 
   test("OpenAI-compatible provider: JSON mode falls back, inline thinking stays off the record", () => {
-    const config = { ...baseConfig, provider: "openai" as const, baseUrl: "https://llm.example/v1/", model: "deepseek-v4-flash" };
+    const config = {
+      ...baseConfig,
+      provider: "openai" as const,
+      baseUrl: "https://llm.example/v1/",
+      model: "deepseek-v4-flash",
+      sendReasoningEffort: true,
+    };
     const run = trial(config, ({ url, body }) => {
       expect(url).toBe("https://llm.example/v1/chat/completions");
       if (body.response_format) return { statusCode: 400, body: JSON.stringify({ error: { message: "response_format unsupported" } }) };
@@ -208,6 +215,8 @@ describe("Bull v. Bear workflow", () => {
     // Four arguments, then the bench twice: JSON mode rejected, retried with the schema in the prompt.
     expect(run.llmRequests).toHaveLength(6);
     for (const { headers } of run.llmRequests) expect(headers.authorization).toBe("Bearer sk-test");
+    // Counsel and the bench each think at their configured effort.
+    expect(run.llmRequests.map((r) => r.body.reasoning_effort)).toEqual(["low", "low", "low", "low", "medium", "medium"]);
     const [judgeJson, judgePlain] = run.llmRequests.slice(4).map((r) => r.body);
     expect(judgeJson.response_format).toEqual({ type: "json_object" });
     expect(judgePlain.response_format).toBeUndefined();

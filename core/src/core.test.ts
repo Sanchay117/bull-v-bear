@@ -133,6 +133,15 @@ test("citations are extracted from counsel's text", () => {
     "C",
     "D",
   ]);
+  // Some models cite in parentheses or in prose despite the rules.
+  assert.deepEqual(extractCitations("Room to run (Ex. B), and liquidity is deep (Ex. A, D).", ids), ["A", "B", "D"]);
+  assert.deepEqual(extractCitations("Exhibit B undermines it, as Exhibits C and D show. Exhibit A, Clearly not.", ids), [
+    "A",
+    "B",
+    "C",
+    "D",
+  ]);
+  assert.deepEqual(extractCitations("An exhibit of strength, and the Exhibition Hall.", ids), []);
 });
 
 test("ruling normalization clamps and drops bad findings", () => {
