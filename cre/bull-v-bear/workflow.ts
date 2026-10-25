@@ -1,19 +1,22 @@
 // Bull v. Bear, convened inside a Chainlink DON.
 //
-// Cron trigger → discovery (CoinGecko + Fear & Greed over the HTTP capability, identical consensus)
-// → two openings, two rebuttals and a ruling from the LLM (Claude, or any OpenAI-compatible API;
-// HTTP capability, identical consensus) → sentencing guidelines → signed report →
-// CourtRecord.onReport via the Keystone forwarder.
+// Cron trigger → docket number (CourtRecord.totalCases on Sepolia, EVM read) picks the asset →
+// discovery (CoinGecko + Fear & Greed over the HTTP capability, identical consensus; the asset's
+// Chainlink Data Feed on Ethereum mainnet, EVM read) → two openings, two rebuttals and a ruling from
+// the LLM (Claude, or any OpenAI-compatible API; HTTP capability, identical consensus) → sentencing
+// guidelines at the Chainlink mark → signed report → CourtRecord.onReport via the Keystone forwarder.
 //
 // The procedure, prompts, exhibits, sentencing math and report encoding are imported from
 // ../../core, the same module the clerk server runs, so a ruling filed here hashes and renders
 // exactly like one filed from the courtroom UI.
 
 import {
+  LAST_FINALIZED_BLOCK_NUMBER,
   TxStatus,
   bytesToHex,
   consensusIdenticalAggregation,
   cre,
+  encodeCallMsg,
   getNetwork,
   hexToBase64,
   ok,
@@ -22,12 +25,13 @@ import {
   type HTTPSendRequester,
   type Runtime,
 } from "@chainlink/cre-sdk";
-import { stringToHex } from "viem";
+import { decodeFunctionResult, encodeFunctionData, stringToHex, zeroAddress, type Hex } from "viem";
 import { z } from "zod";
 import {
   COURT_VERSION,
   DEFAULT_ORDERS,
   FEAR_GREED_URL,
+  FEED_ABI,
   JUDGE_SYSTEM,
   RULING_SCHEMA,
   assetBySymbol,
@@ -35,6 +39,7 @@ import {
   buildFiling,
   coingeckoMarketsUrl,
   counselSystem,
+  courtRecordAbi,
   extractCitations,
   extractJson,
   judgeJsonInstruction,
@@ -43,11 +48,14 @@ import {
   openingPrompt,
   parseCoinGeckoMarket,
   parseFearGreed,
+  parseFeedRound,
   rebuttalPrompt,
   sentence as sentenceFor,
   type Argument,
+  type AssetSpec,
   type Evidence,
   type MarketSnapshot,
+  type OracleSnapshot,
   type Round,
   type SentimentSnapshot,
   type Side,
@@ -61,7 +69,7 @@ const effort = z.enum(["low", "medium", "high"]);
 export const configSchema = z.object({
   /** Six-field cron (with seconds). */
   schedule: z.string(),
-  /** Docket rotation: the asset tried is assets[hourOfEpoch % assets.length]. */
+  /** Docket rotation: case number N tries assets[N % assets.length]. */
   assets: z.array(z.string()).min(1),
   /** anthropic: Claude Messages API · openai: any OpenAI-compatible chat completions API at baseUrl. */
   provider: z.enum(["anthropic", "openai"]).default("anthropic"),
@@ -73,6 +81,8 @@ export const configSchema = z.object({
   /** Per-call HTTP timeout for the LLM, as a protobuf Duration string, e.g. "60s". */
   llmTimeout: z.string(),
   chainSelectorName: z.string(),
+  /** Where the Chainlink Data Feeds behind the oracle exhibit are read. */
+  feedChainSelectorName: z.string().default("ethereum-mainnet"),
   courtAddress: z.string().regex(/^0x[0-9a-fA-F]{40}$/),
   gasLimit: z.string(),
   /** Optional clerk endpoint that receives the full transcript (POST /api/records). */
@@ -95,10 +105,10 @@ type Config = z.infer<typeof configSchema>;
 /** Encodes a UTF-8 string as the base64 body the HTTP capability expects. */
 const body64 = (s: string) => hexToBase64(stringToHex(s));
 
-const fetchMarket = (sr: HTTPSendRequester, url: string): string => {
-  const resp = sr
-    .sendRequest({ url, method: "GET", headers: { accept: "application/json" }, cacheSettings: { store: true, maxAge: "60s" } })
-    .result();
+const fetchMarket = (sr: HTTPSendRequester, url: string, demoKey: string): string => {
+  // CoinGecko throttles keyless calls per IP; a free demo key gets its own quota.
+  const headers: Record<string, string> = { accept: "application/json", ...(demoKey ? { "x-cg-demo-api-key": demoKey } : {}) };
+  const resp = sr.sendRequest({ url, method: "GET", headers, cacheSettings: { store: true, maxAge: "60s" } }).result();
   if (!ok(resp)) throw new Error(`CoinGecko answered ${resp.statusCode}`);
   // Parse on the node so the consensus observation is the compact snapshot, not the raw page.
   return JSON.stringify(parseCoinGeckoMarket(JSON.parse(text(resp))));
@@ -252,6 +262,43 @@ const postRecord = (sr: HTTPSendRequester, url: string, transcriptJson: string):
   return String(resp.statusCode);
 };
 
+// ─── EVM reads (at the last finalized block, so every node reads the same state) ───
+
+type EvmClient = InstanceType<typeof cre.capabilities.EVMClient>;
+
+const evmClient = (chainSelectorName: string): EvmClient => {
+  const network = getNetwork({ chainFamily: "evm", chainSelectorName });
+  if (!network) throw new Error(`Unknown chain ${chainSelectorName}`);
+  return new cre.capabilities.EVMClient(network.chainSelector.selector);
+};
+
+const callView = (runtime: Runtime<Config>, evm: EvmClient, to: string, data: Hex): Hex => {
+  const reply = evm
+    .callContract(runtime, {
+      call: encodeCallMsg({ from: zeroAddress, to: to as Hex, data }),
+      blockNumber: LAST_FINALIZED_BLOCK_NUMBER,
+    })
+    .result();
+  return bytesToHex(reply.data);
+};
+
+/** The number the next case will be filed under. */
+const nextCaseNumber = (runtime: Runtime<Config>, court: EvmClient): number => {
+  const data = callView(runtime, court, runtime.config.courtAddress, encodeFunctionData({ abi: courtRecordAbi, functionName: "totalCases" }));
+  return Number(decodeFunctionResult({ abi: courtRecordAbi, functionName: "totalCases", data }));
+};
+
+/** The asset's Chainlink Data Feed: decimals() and latestRoundData(). */
+const readFeed = (runtime: Runtime<Config>, asset: AssetSpec): OracleSnapshot | null => {
+  if (!asset.chainlinkFeed) return null;
+  const feeds = evmClient(runtime.config.feedChainSelectorName);
+  const call = (functionName: "decimals" | "latestRoundData") =>
+    callView(runtime, feeds, asset.chainlinkFeed!, encodeFunctionData({ abi: FEED_ABI, functionName }));
+  const decimals = decodeFunctionResult({ abi: FEED_ABI, functionName: "decimals", data: call("decimals") });
+  const latest = decodeFunctionResult({ abi: FEED_ABI, functionName: "latestRoundData", data: call("latestRoundData") });
+  return parseFeedRound(asset, decimals, latest);
+};
+
 // ─── The trial ──────────────────────────────────────────────
 
 const clip = (s: string, n = 160) => (s.length > n ? `${s.slice(0, n)}…` : s);
@@ -261,23 +308,50 @@ export const convene = (runtime: Runtime<Config>): string => {
   const orders = cfg.orders ?? DEFAULT_ORDERS;
   const now = runtime.now();
   const openedAt = now.toISOString();
-  const asset = assetBySymbol(cfg.assets[Math.floor(now.getTime() / 3_600_000) % cfg.assets.length]);
+  const court = evmClient(cfg.chainSelectorName);
+
+  // The docket rotates by case number, so every asset gets its turn whatever the schedule.
+  let slot: number;
+  try {
+    slot = nextCaseNumber(runtime, court);
+    runtime.log(`Docket: case No. ${slot} is next`);
+  } catch (err) {
+    slot = Math.floor(now.getTime() / 3_600_000);
+    runtime.log(`Docket unreadable, rotating by the hour: ${clip(String(err))}`);
+  }
+  const asset = assetBySymbol(cfg.assets[slot % cfg.assets.length]);
   const caption = `In re ${asset.symbol}/USD`;
   runtime.log(`⚖ Court is in session: ${caption} (${openedAt})`);
 
   const http = new cre.capabilities.HTTPClient();
   const consensus = consensusIdenticalAggregation<string>();
+  const secret = (id: string) => {
+    try {
+      return runtime.getSecret({ id }).result().value;
+    } catch {
+      return "";
+    }
+  };
 
   // Discovery
   const market = JSON.parse(
-    http.sendRequest(runtime, fetchMarket, consensus)(coingeckoMarketsUrl(asset)).result(),
+    http.sendRequest(runtime, fetchMarket, consensus)(coingeckoMarketsUrl(asset), secret("COINGECKO_API_KEY")).result(),
   ) as MarketSnapshot;
   const sentiment = JSON.parse(
     http.sendRequest(runtime, fetchSentiment, consensus)(FEAR_GREED_URL).result(),
   ) as SentimentSnapshot | null;
-  const evidence: Evidence = buildEvidence(asset, market, sentiment);
+  let oracle: OracleSnapshot | null = null;
+  try {
+    oracle = readFeed(runtime, asset);
+  } catch (err) {
+    runtime.log(`Chainlink feed unreadable, marking at spot: ${clip(String(err))}`);
+  }
+  const evidence: Evidence = buildEvidence(asset, market, sentiment, { oracle });
   const ids = evidence.exhibits.map((x) => x.id);
-  runtime.log(`Discovery closed: ${ids.length} exhibits, spot ${market.price}, as of ${evidence.asOf}`);
+  runtime.log(
+    `Discovery closed: ${ids.length} exhibits, spot ${market.price}` +
+      `${oracle ? `, Chainlink ${oracle.pair} ${oracle.price} (round ${oracle.roundId})` : ""}, as of ${evidence.asOf}`,
+  );
 
   // Argument
   const apiKey = runtime.getSecret({ id: "LLM_API_KEY" }).result().value;
@@ -345,12 +419,8 @@ export const convene = (runtime: Runtime<Config>): string => {
   const filing = buildFiling(transcript);
   runtime.log(`Transcript ${filing.transcriptHash} · evidence ${filing.evidenceHash}`);
 
-  const network = getNetwork({ chainFamily: "evm", chainSelectorName: cfg.chainSelectorName, isTestnet: true });
-  if (!network) throw new Error(`Unknown chain ${cfg.chainSelectorName}`);
-  const evm = new cre.capabilities.EVMClient(network.chainSelector.selector);
-
   const report = runtime.report(prepareReportRequest(filing.report)).result();
-  const write = evm
+  const write = court
     .writeReport(runtime, { receiver: cfg.courtAddress, report, gasConfig: { gasLimit: cfg.gasLimit } })
     .result();
   if (write.txStatus !== TxStatus.SUCCESS) {

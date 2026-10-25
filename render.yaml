@@ -30,3 +30,7 @@ services:
         value: sepolia
       - key: COURT_ADDRESS
         value: "0xbcA0a8c279B1dfDD5cC6640dA7eA22CeaeAE26B3"
+      # Transcripts the scheduled CRE runs commit after this build (docket/ is skipped by Render's
+      # auto-deploy). Free instances lose their disk when they sleep, so the docket lives in git.
+      - key: DOCKET_URL
+        value: https://raw.githubusercontent.com/Sanchay117/bull-v-bear/main/docket

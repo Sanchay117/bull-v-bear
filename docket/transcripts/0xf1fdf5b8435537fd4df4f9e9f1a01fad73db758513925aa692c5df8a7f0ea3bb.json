@@ -1,0 +1,296 @@
+{
+  "transcript": {
+    "court": "bull-v-bear/1",
+    "caption": "In re BTC/USD",
+    "asset": "BTC",
+    "openedAt": "2026-10-23T05:46:10.099Z",
+    "evidenceAsOf": "2026-10-23T05:45:46.000Z",
+    "exhibits": [
+      {
+        "id": "A",
+        "kind": "price",
+        "title": "Spot Price",
+        "statement": "Bitcoin (BTC) traded at $81,699.00 as of 2026-10-23 05:45:46 UTC, -0.40% over one hour and -1.24% over twenty-four hours.",
+        "data": {
+          "price": 81699,
+          "change1hPct": -0.4,
+          "change24hPct": -1.24
+        }
+      },
+      {
+        "id": "B",
+        "kind": "range",
+        "title": "24-Hour Trading Range",
+        "statement": "Over twenty-four hours the price ranged from $80,989.00 to $82,799.00; spot sits at 39% of that range.",
+        "data": {
+          "low24h": 80989,
+          "high24h": 82799,
+          "rangePosition24h": 0.392
+        }
+      },
+      {
+        "id": "C",
+        "kind": "trend",
+        "title": "Seven-Day Trend",
+        "statement": "Price is -0.66% over seven days. The 24-hour average ($81,645.51) is below the 72-hour average ($82,573.26). Spot is 3.63% below the seven-day high of $84,777.79 and 1.09% above the seven-day low of $80,814.25.",
+        "data": {
+          "change7dPct": -0.66,
+          "sma24": 81645.51,
+          "sma72": 82573.26,
+          "high7d": 84777.79,
+          "low7d": 80814.25,
+          "sparkline": [
+            82087.79,
+            82094.31,
+            82160.76,
+            82152.21,
+            81975.01,
+            81894.94,
+            81379.48,
+            81041.41,
+            81639.73,
+            81701.86,
+            81477.06,
+            81384.86,
+            81445.75,
+            81528.19,
+            81618.82,
+            81551.08,
+            81418.26,
+            81484.22,
+            81169.26,
+            81430.77,
+            81569.77,
+            81283.79,
+            81467.87,
+            81745.95,
+            81720.31,
+            81646.52,
+            81665.35,
+            82008.98,
+            81892.41,
+            81019.79,
+            81002.14,
+            81123.63,
+            80895.39,
+            81702.45,
+            82246.31,
+            82635.67,
+            82710.03,
+            82780.88,
+            82758.25,
+            82361.84,
+            82517.63,
+            82201.79,
+            81920.67,
+            81896.04,
+            81950.14,
+            81983.94,
+            81651.17,
+            81712.62,
+            82015.44,
+            81744.47,
+            81448.16,
+            81476.55,
+            81538.71,
+            83215.8,
+            82706.88,
+            82469.07,
+            82763.63,
+            83028.69,
+            82967.84,
+            82726.94,
+            82729.64,
+            82703.5,
+            83154.38,
+            83311.21,
+            83410.63,
+            84543.46,
+            84493.04,
+            84350.34,
+            84626.73,
+            84408.33,
+            84143.25,
+            82859.56,
+            82842.34,
+            82423.21,
+            81776.65,
+            81965.02,
+            81625.17,
+            81810.36,
+            81170.81,
+            81292.23,
+            81178.34,
+            81255.4,
+            81373.69,
+            81868.74,
+            81796.37
+          ]
+        }
+      },
+      {
+        "id": "D",
+        "kind": "volatility",
+        "title": "Volatility & Momentum",
+        "statement": "Realized volatility computed from hourly closes is 1.46% per day. The 14-hour relative strength index reads 47.8, conventionally neutral.",
+        "data": {
+          "dailyVolPct": 1.46,
+          "rsi14h": 47.8
+        }
+      },
+      {
+        "id": "E",
+        "kind": "liquidity",
+        "title": "Liquidity",
+        "statement": "Twenty-four-hour trading volume was $30.4 billion, equal to 1.85% of the $1.64 trillion market capitalization.",
+        "data": {
+          "volume24h": 30396096112,
+          "marketCap": 1642318639638,
+          "turnoverPct": 1.85
+        }
+      },
+      {
+        "id": "F",
+        "kind": "sentiment",
+        "title": "Market Sentiment",
+        "statement": "The Crypto Fear & Greed Index reads 50 (\"Neutral\"), versus 63 7 days earlier.",
+        "data": {
+          "value": 50,
+          "label": "Neutral",
+          "history": [
+            63,
+            55,
+            53,
+            59,
+            55,
+            63,
+            68,
+            50
+          ]
+        }
+      }
+    ],
+    "arguments": [
+      {
+        "side": "BULL",
+        "round": "opening",
+        "text": "May it please the Court. \n1. The spot price of BTC is currently $81,699, modestly down 0.40% in the last hour and 1.24% in 24 hours, indicating a small pullback that creates immediate upside potential for a long position [Ex. A]. \n2. The 24‑hour range shows the price sitting at the lower 39% of that band, a classic entry zone, while volatility remains modest at 1.46% per day, limiting downside risk [Ex. B, D]. \n3. Trading volume remains robust at $30.4 billion, supporting liquidity, and sentiment has softened to a neutral 50, suggesting buyers are poised to reassert control as fear eases [Ex. E, F]. \nThe Bull rests.",
+        "citations": [
+          "A",
+          "B",
+          "D",
+          "E",
+          "F"
+        ]
+      },
+      {
+        "side": "BEAR",
+        "round": "opening",
+        "text": "May it please the Court.  \n1. The spot price has slipped 1.24% in the last 24 hours and 0.66% over seven days, now sitting near the low end of its 24‑hour range [Ex. A, B, C].  \n2. Realized volatility is modest at 1.46% per day and the 14‑hour RSI at 47.8 signals waning momentum, conditions that historically favour a short bias [Ex. D].  \n3. Market sentiment has cooled from a “Greed” reading of 63 to a neutral 50, while robust 24‑hour volume of $30.4 bn ensures ample liquidity for a short trade [Ex. F, E].  \nThe Bear rests.",
+        "citations": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E",
+          "F"
+        ]
+      },
+      {
+        "side": "BULL",
+        "round": "rebuttal",
+        "text": "Your Honor, the Bear leans on volatility and sentiment, yet both are insufficient to justify a short. First, the 14‑hour RSI of 47.8 is squarely neutral, not bearish, undermining any momentum claim [Ex. D]. Second, the Fear & Greed Index at 50 signals equilibrium, far from the pessimism required for a short, and the market is trading 39% into its 24‑hour range, indicating price remains well above the low bound rather than a breakdown [Ex. B, F]. Consequently, the evidence does not support a bearish bias. Nothing further.",
+        "citations": [
+          "B",
+          "D",
+          "F"
+        ]
+      },
+      {
+        "side": "BEAR",
+        "round": "rebuttal",
+        "text": "Your Honor, the Bull’s first point collapses under the seven‑day trend: BTC is down 0.66% weekly, the 24‑hour average sits below the 72‑hour average, and spot is 3.63% beneath the seven‑day high, indicating bearish pressure [Ex. C]. The second point misreads risk: a 14‑hour RSI of 47.8 signals no oversold condition, and a neutral Fear & Greed index of 50 shows no bullish sentiment to ignite a bounce [Ex. D, F]. Moreover, the “lower 39% of range” is merely a statistical fact, not a proven entry signal, and the modest 1.46% volatility reflects a market lacking decisive direction [Ex. B, D]. Nothing further.",
+        "citations": [
+          "B",
+          "C",
+          "D",
+          "F"
+        ]
+      }
+    ],
+    "ruling": {
+      "holding": "The Court finds no sufficient evidence to justify a practice position.",
+      "verdict": "DISMISSED",
+      "conviction": 48,
+      "bull_score": 4,
+      "bear_score": 4,
+      "findings": [
+        {
+          "exhibit": "A",
+          "finding": "Spot price down 1.24% over 24 hours, showing slight bearish pressure",
+          "favors": "BEAR",
+          "weight": 2
+        },
+        {
+          "exhibit": "B",
+          "finding": "Price at 39% of 24‑hour range, near low‑zone entry point",
+          "favors": "BULL",
+          "weight": 2
+        },
+        {
+          "exhibit": "C",
+          "finding": "Seven‑day trend negative 0.66% and 24‑hour average below 72‑hour average",
+          "favors": "BEAR",
+          "weight": 3
+        },
+        {
+          "exhibit": "D",
+          "finding": "RSI 47.8 and volatility 1.46% per day indicate neutral momentum",
+          "favors": "NEUTRAL",
+          "weight": 1
+        },
+        {
+          "exhibit": "F",
+          "finding": "Fear & Greed Index fell to neutral 50 from 63, reducing bullish sentiment",
+          "favors": "BEAR",
+          "weight": 2
+        }
+      ],
+      "opinion": "The Court notes that the spot price slipped 1.24% over 24 hours, indicating slight bearish pressure ([Ex. A]). However, the price sits at 39% of its 24‑hour range, a level often viewed as a low‑zone entry for longs ([Ex. B]), and the RSI of 47.8 remains neutral, offering no clear momentum ([Ex. D]). The seven‑day trend is down 0.66% and the 24‑hour average is below the 72‑hour average, supporting a short bias ([Ex. C]). Sentiment has moved from greed to a neutral 50, but remains non‑bullish ([Ex. F]). With modest volatility and ample liquidity, neither side presents a decisive edge; the evidence is balanced and therefore the Court dismisses the practice position.",
+      "dissent": "Given the seven‑day decline, the 24‑hour average below the 72‑hour average, and the drop in sentiment from 63 to 50, the Bear’s short case remains stronger; a short practice position is warranted."
+    },
+    "sentence": {
+      "action": "NO_POSITION",
+      "reason": "The case was dismissed; no practice position is ordered.",
+      "entryPrice": 81699,
+      "stopPrice": 0,
+      "targetPrice": 0,
+      "sizeBps": 0,
+      "stopDistancePct": 0,
+      "steps": [
+        {
+          "label": "§1(a) Verdict",
+          "formula": "from the bench",
+          "value": "DISMISSED"
+        }
+      ],
+      "guidelines": "Sentencing Guidelines for Practice Positions §1 (2026)"
+    },
+    "standingOrders": {
+      "riskPerTradeBps": 100,
+      "maxPositionBps": 3000,
+      "minConviction": 55,
+      "rewardRiskRatio": 2,
+      "stopVolMultiple": 1.25
+    },
+    "counsel": {
+      "mode": "llm",
+      "model": "openai/gpt-oss-120b",
+      "venue": "cre"
+    }
+  },
+  "transcriptHash": "0xf1fdf5b8435537fd4df4f9e9f1a01fad73db758513925aa692c5df8a7f0ea3bb",
+  "filing": {
+    "venue": "cre"
+  }
+}

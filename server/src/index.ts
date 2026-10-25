@@ -95,14 +95,13 @@ const server = createServer(async (req, res) => {
     if (req.method === "GET" && path === "/api/trial") return serveTrial(req, res, url.searchParams);
 
     if (req.method === "GET" && path === "/api/docket") {
-      const docket = await readDocket(60);
-      const have = listTranscriptHashes();
+      const [docket, have] = await Promise.all([readDocket(60), listTranscriptHashes()]);
       return json(res, 200, { ...docket, rulings: docket.rulings.map((r) => ({ ...r, hasTranscript: have.has(r.transcriptHash) })) });
     }
 
     const m = path.match(/^\/api\/transcripts\/(0x[0-9a-f]{64})$/);
     if (req.method === "GET" && m) {
-      const filed = loadTranscript(m[1]);
+      const filed = await loadTranscript(m[1]);
       if (!filed) return json(res, 404, { error: "No transcript with that hash is on file" });
       const onChain = await rulingByTranscript(m[1] as `0x${string}`).catch(() => null);
       return json(res, 200, { ...filed, onChain });

@@ -34,6 +34,17 @@ export const config = {
    */
   coingeckoKey: process.env.COINGECKO_API_KEY,
 
+  /** Ethereum mainnet, where the Chainlink Data Feeds behind the oracle exhibit live (read only). */
+  feedRpcUrl: process.env.FEED_RPC_URL ?? "https://ethereum-rpc.publicnode.com",
+
+  /**
+   * The public docket: transcripts the scheduled CRE runs commit to the repo (docket/transcripts).
+   * The copy shipped with this build is read from disk; newer ones from DOCKET_URL, e.g.
+   * https://raw.githubusercontent.com/<owner>/<repo>/main/docket
+   */
+  docketDir: process.env.DOCKET_DIR ?? join(here, "..", "..", "docket"),
+  docketUrl: process.env.DOCKET_URL?.replace(/\/+$/, ""),
+
   chain: {
     mode: chainMode,
     rpcUrl: process.env.RPC_URL ?? (chainMode === "local" ? "http://127.0.0.1:8545" : "https://ethereum-sepolia-rpc.publicnode.com"),

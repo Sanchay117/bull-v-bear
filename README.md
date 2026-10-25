@@ -8,8 +8,9 @@ Most trading agents are a black box that turns data into a buy button. Bull v. B
 trade decision as a **trial**, so the reasoning trail is the product:
 
 1. **Discovery.** Live market data (CoinGecko price, range, 7-day hourly closes, volume; the
-   Crypto Fear & Greed Index) is entered into the record as lettered **exhibits A–F**. Each exhibit
-   has a plain-language statement and the numbers behind it.
+   Crypto Fear & Greed Index; the asset's **Chainlink Data Feed** read from Ethereum mainnet) is
+   entered into the record as lettered **exhibits A–G**. Each exhibit has a plain-language statement
+   and the numbers behind it.
 2. **Argument.** *Counsel for the Bull* and *Counsel for the Bear* (Claude) each deliver an
    opening and a rebuttal. Every factual claim must cite an exhibit, like `[Ex. C]`, and must show
    cause and effect: the evidence, then the mechanism, then the expected price consequence.
@@ -23,11 +24,15 @@ trade decision as a **trial**, so the reasoning trail is the product:
    - size = risk ÷ stop distance, capped
    - target = reward:risk × stop distance
 
-   Every step is printed with its formula. No AI is involved in sizing.
+   Every step is printed with its formula. No AI is involved in sizing. Positions are entered at
+   the **Chainlink mark**, so the court never scores itself against the API its counsel argued from.
 5. **Filing.** The whole transcript is canonicalized and hashed with keccak256. The hash and the
    order (asset, verdict, conviction, size, entry/stop/target) go on-chain to `CourtRecord`. The
-   next ruling for the same asset **settles** the open position at the new mark, honoring a stop or
-   target that was crossed. The docket keeps a public win/loss record and an equity curve.
+   next ruling for the same asset **settles** the open position at the new Chainlink mark, honoring
+   a stop or target that was crossed. The docket keeps a public win/loss record and an equity curve.
+6. **The autonomous docket.** Every three hours the court convenes on its own: a GitHub Action runs
+   the CRE workflow, which picks the next asset from the on-chain case count, tries it and files the
+   ruling on Sepolia. The transcript is committed to [`docket/`](docket/).
 
 The courtroom UI shows all of it live:
 
@@ -52,32 +57,38 @@ the opinion, and verification fails.
 - Courtroom: https://bull-v-bear.onrender.com (free plan: the first visit may take a minute to wake)
 - Demo video: https://youtu.be/GeEpKHzueTk
 - `CourtRecord` on Sepolia: [`0xbcA0a8c279B1dfDD5cC6640dA7eA22CeaeAE26B3`](https://sepolia.etherscan.io/address/0xbcA0a8c279B1dfDD5cC6640dA7eA22CeaeAE26B3)
-- A ruling filed by the CRE workflow (`cre workflow simulate --broadcast`):
-  [`0x0072038a…27e2`](https://sepolia.etherscan.io/tx/0x0072038aaae1daaa2db873ee6c0a4750b4b6d4b480d54067c5b806964b9c27e2)
+- Rulings filed by the CRE workflow (`cre workflow simulate --broadcast`): case 0
+  [`0x0072038a…27e2`](https://sepolia.etherscan.io/tx/0x0072038aaae1daaa2db873ee6c0a4750b4b6d4b480d54067c5b806964b9c27e2),
+  case 1, the first marked at the Chainlink feed,
+  [`0xbcf7837c…d406`](https://sepolia.etherscan.io/tx/0xbcf7837c318a489c8a6bdba3d2dbfa9902ecead9c55e6028594d73e6d0bfd406)
+- The autonomous docket: [`docket/`](docket/) (every transcript and CLI log) and the
+  [Docket workflow](.github/workflows/docket.yml) that convenes the court every three hours
 
 ---
 
 ## Architecture
 
 ```
-                         ┌──────────────── core/ (shared, pure TypeScript) ────────────────┐
+                         ┌──────────────── core/ (shared, pure TypeScript) ─────────────────┐
                          │ evidence → exhibits · prompts (rules of court) · ruling schema   │
                          │ sentencing guidelines · canonical JSON + keccak · report ABI     │
-                         └───────────────┬───────────────────────────────┬─────────────────┘
+                         └───────────────┬───────────────────────────────┬──────────────────┘
                                          │                               │
      Live courtroom (interactive)        │                               │   Autonomous docket (Chainlink CRE)
  ┌──────────────┐   SSE   ┌──────────────┴──────┐                ┌───────┴──────────────────────────┐
  │  web/ React  │◀───────▶│ server/ the Clerk   │                │ cre/bull-v-bear  (WASM in a DON) │
- │  courtroom   │         │ Claude SDK stream   │                │ Cron → HTTP: CoinGecko, F&G      │
- └──────────────┘         │ market fetch, store │◀── transcript ─│ HTTP: Claude ×5 (consensus)      │
+ │  courtroom   │         │ Claude SDK stream   │                │ Cron → EVM: next case no.        │
+ └──────────────┘         │ market fetch, store │                │ HTTP: CoinGecko, F&G             │
+                          │ Chainlink feed read │                │ EVM: Chainlink feed (mainnet)    │
+                          │                     │◀── transcript ─│ HTTP: Claude ×5 (consensus)      │
                           └──────────┬──────────┘   POST /api/   │ sentencing → runtime.report()    │
                                      │ local: files      records │ EVMClient.writeReport()          │
                                      ▼ directly                  └───────────────┬──────────────────┘
-                          ┌────────────────────────────────────┐                 │ signed report
+                          ┌─────────────────────────────────────┐                │ signed report
                           │ contracts/ CourtRecord.sol          │◀── Keystone ───┘
                           │ onReport → enter ruling, settle     │    Forwarder
                           │ prior position, equity, docket      │
-                          └────────────────────────────────────┘
+                          └─────────────────────────────────────┘
 ```
 
 The clerk and the CRE workflow import the **same** `core` module. The prompts, exhibit wording,
@@ -91,6 +102,8 @@ hashes, verifies and renders exactly like one made in the courtroom.
 | `server/` | The Clerk: runs trials, streams them over SSE, uses Claude (or demo counsel), files to a local chain, stores transcripts |
 | `web/` | The courtroom (React + Vite) |
 | `cre/bull-v-bear/` | The Chainlink CRE workflow, with a unit test that runs a full trial in the CRE test runtime |
+| `docket/` | The public docket: every CRE-filed transcript and its CLI log, committed by the scheduled runs |
+| `scripts/docket.mjs`, `.github/workflows/docket.yml` | The autonomous docket: convene, file on Sepolia, commit the record |
 | `video/` | The demo film (Remotion): motion graphics built from a real trial, footage of the live courtroom, Deepgram narration |
 
 ---
@@ -142,17 +155,20 @@ npm test
 
 | Step | CRE capability |
 | --- | --- |
-| Trial on a schedule; the asset rotates hourly | `CronCapability` trigger |
+| Trial on a schedule | `CronCapability` trigger |
+| Pick the asset: case number N tries `assets[N % 4]`, whatever the schedule | `EVMClient.callContract`: `CourtRecord.totalCases()` on Sepolia, last finalized block |
 | Discovery: CoinGecko markets + Fear & Greed | `HTTPClient` with identical consensus and response caching |
+| The court's mark: the asset's Chainlink Data Feed, entered as an exhibit | `EVMClient.callContract` on Ethereum mainnet: `decimals()`, `latestRoundData()`, last finalized block |
 | Two openings, two rebuttals, the ruling (Claude Messages API with JSON-schema output, or any OpenAI-compatible API with `"provider": "openai"` and `baseUrl`) | `HTTPClient` with identical consensus (one node calls, others read the cached response) |
-| LLM key | `runtime.getSecret("LLM_API_KEY")` |
+| LLM key, optional CoinGecko demo key | `runtime.getSecret("LLM_API_KEY")`, `runtime.getSecret("COINGECKO_API_KEY")` |
 | Sentencing, canonical transcript hash, ABI report | `core` (deterministic, in WASM) |
 | Sign the report | `runtime.report()` (ECDSA, keccak256) |
 | File to Sepolia | `EVMClient.writeReport()` → Keystone forwarder → `CourtRecord.onReport` |
 | Publish the transcript behind the hash | `HTTPClient` POST to the clerk's `/api/records` (optional) |
 
-Eight HTTP calls per run (the limit is 15). Logs stay under 1 kB per line. Consensus observations
-are compact parsed snapshots and texts rather than raw pages.
+Each run makes eight HTTP calls (the limit is 15) and three EVM reads across two chains. Logs stay
+under 1 kB per line. Consensus observations are compact parsed snapshots and texts rather than raw
+pages. If a chain read fails, the court rotates by the hour and marks at spot instead.
 
 ### Prove it without an account
 
@@ -161,8 +177,10 @@ npm run test:cre
 ```
 
 This runs the full trial inside the SDK's test runtime with mocked HTTP and EVM capabilities, once
-with Claude and once with an OpenAI-compatible provider. It checks:
+with Claude, once with an OpenAI-compatible provider, and once with both chain reads down. It checks:
 
+- the docket read that picks the asset and the Chainlink feed read that becomes Exhibit G and the
+  mark (and the hourly rotation and spot mark when they fail)
 - the LLM requests (headers, model, adaptive thinking and JSON schema for Claude; JSON mode with a
   plain retry for OpenAI-compatible providers)
 - the citations extracted from each argument
@@ -185,8 +203,9 @@ cd cre/bull-v-bear && bunx cre-compile main.ts /tmp/bull-v-bear.wasm
 
 2. Run `cd cre/bull-v-bear && bun install`.
 3. `cp cre/.env.example cre/.env` and set `LLM_API_KEY_ENV` (plus `CRE_ETH_PRIVATE_KEY` for
-   step 5). For a non-Anthropic model, set `"provider": "openai"`, `baseUrl` and `model` in
-   `config.staging.json`.
+   step 5; `COINGECKO_API_KEY_ENV` may stay empty). For a non-Anthropic model, set
+   `"provider": "openai"`, `baseUrl` and `model` in `config.staging.json`. `project.yaml` already
+   lists RPCs for Sepolia and for Ethereum mainnet, where the feeds are read.
 4. Dry-run simulation (no transaction):
 
    ```bash
@@ -223,6 +242,30 @@ cd cre/bull-v-bear && bunx cre-compile main.ts /tmp/bull-v-bear.wasm
    the clerk is reachable at `recordsUrl` while you simulate, you can verify each transcript in the
    browser.
 
+### The autonomous docket
+
+`node scripts/docket.mjs` convenes the court once and files the ruling:
+
+1. It starts a clerk at the workflow's `recordsUrl` whose data dir is `docket/`.
+2. It runs `cre workflow simulate --broadcast`. A trial that fails before filing is retried twice,
+   75 seconds apart, since Groq's free tier allows about one trial a minute. A trial that reached
+   `CourtRecord` is never retried.
+3. It keeps the CLI log in `docket/runs/` and the transcript in `docket/transcripts/`, then rewrites
+   `docket/index.json`.
+
+`--dry-run` simulates without broadcasting and leaves `docket/` alone.
+
+[`.github/workflows/docket.yml`](.github/workflows/docket.yml) runs it every three hours and commits
+the record. It needs these repository secrets:
+
+- `CRE_API_KEY`: from app.chain.link, Account Settings. The CLI uses it in place of `cre login`.
+- `CRE_ETH_PRIVATE_KEY`: a funded Sepolia key. One filing costs about 1.5M gas.
+- `LLM_API_KEY`: the workflow's LLM key.
+- `COINGECKO_API_KEY` (optional): runner IPs are shared, so a demo key avoids rate limits.
+
+The docket commits carry `[skip render]`, so they don't redeploy the site. The site reads newer
+transcripts from `DOCKET_URL` instead.
+
 ### Host the courtroom on Render
 
 One Node service runs the clerk and serves the built courtroom. `render.yaml` describes it:
@@ -235,7 +278,9 @@ One Node service runs the clerk and serves the built courtroom. `render.yaml` de
    browser but are not filed on-chain.
 
 The free plan sleeps when idle (about a minute to wake) and forgets the site's own transcripts on
-restart; the on-chain docket is unaffected.
+restart. The CRE-filed docket is unaffected: its transcripts live in `docket/` in git, shipped with
+each build and fetched from `DOCKET_URL` (this repository's raw `docket/` folder) when newer, and
+each one is re-hashed before it is served.
 
 For a deployed workflow, construct `CourtRecord` with the production `KeystoneForwarder`
 (`0xF8344CFd5c43616a4366C34E3EEE75af79a74482` on Sepolia), or switch it with
@@ -272,12 +317,19 @@ motion cues land on the words the narrator says.
 
 ## How this maps to the bounties
 
-**Chainlink: Best workflow with CRE.** The CRE workflow is the orchestration layer. It connects a
-blockchain (Sepolia `CourtRecord`, via a signed report through the Keystone forwarder) to external
-APIs (CoinGecko, alternative.me) and an LLM (Claude, or any OpenAI-compatible model; the demo runs
-on Groq), with consensus on every off-chain answer. The full trial is tested in the CRE test
-runtime, compiles to WASM, and runs end to end in the CRE CLI simulator: live discovery, five model
-calls, the ruling, sentencing and a signed report.
+**Chainlink: Best workflow with CRE.** The CRE workflow is the orchestration layer; nothing else
+coordinates the steps. It works across two blockchains:
+
+- reads the docket from `CourtRecord` on Sepolia
+- reads the asset's Chainlink Data Feed on Ethereum mainnet, which becomes the mark positions are
+  entered and settled at
+- files a signed report through the Keystone forwarder
+
+It connects them to external APIs (CoinGecko, alternative.me) and to five LLM agent calls (Claude,
+or any OpenAI-compatible model; the demo runs on Groq), with consensus on every off-chain answer.
+The full trial is tested in the CRE test runtime, compiles to WASM, and runs end to end in the CRE
+CLI simulator. A GitHub Action runs it with `--broadcast` every three hours, and every run's CLI log
+is in `docket/runs/`.
 
 **RYO-CHAN: Autonomous Agents.** Agents interpret live market evidence and record practice trades
 on a public ledger:
@@ -287,7 +339,9 @@ on a public ledger:
   findings tie each exhibit to a side and a weight.
 - **Repeatable reasoning trail**: the exhibits, arguments, ruling and sentencing worksheet are one
   canonical transcript whose hash is on-chain. Anyone can re-verify it in the browser, and the next
-  ruling settles the last trade, so the agent keeps a scored track record.
+  ruling settles the last trade at the Chainlink mark, so the agent keeps a scored track record.
+- **Autonomous**: the court convenes itself every three hours, rotating through ETH, BTC, SOL and
+  LINK, and every case is on the public docket.
 
 ---
 
@@ -301,7 +355,7 @@ on a public ledger:
  bytes32 transcriptHash, bytes32 evidenceHash, string holding)
 ```
 
-Prices use 8 decimals; verdict is `0 DISMISSED · 1 LONG · 2 SHORT`. Each ruling settles the asset's
-previous open position at the new entry price (a stop or target that was crossed in between is
-honored), updates `equityIndex` and the win/loss count, and emits `RulingEntered` and
-`PositionSettled`.
+Prices use 8 decimals; verdict is `0 DISMISSED · 1 LONG · 2 SHORT`. The entry price is the
+Chainlink mark (spot if the feed could not be read). Each ruling settles the asset's previous open
+position at the new entry price (a stop or target that was crossed in between is honored), updates
+`equityIndex` and the win/loss count, and emits `RulingEntered` and `PositionSettled`.

@@ -1,17 +1,20 @@
 // Runs the whole trial inside the CRE test runtime: mocked HTTP (CoinGecko, Fear & Greed,
-// the LLM, the clerk) and a mocked EVM write. Checks the requests the LLM receives and that the
-// signed report decodes to the hash of the transcript lodged with the clerk.
+// the LLM, the clerk), mocked EVM reads (the docket on Sepolia, the Chainlink feed on mainnet)
+// and a mocked EVM write. Checks the requests the LLM receives and that the signed report decodes
+// to the hash of the transcript lodged with the clerk.
 
 import { describe, expect } from "bun:test";
 import { TxStatus } from "@chainlink/cre-sdk";
-import { EvmMock, HttpActionsMock, newTestRuntime, test } from "@chainlink/cre-sdk/test";
-import { bytesToHex, decodeAbiParameters, type Hex } from "viem";
-import { REPORT_PARAMS, transcriptHash, type Transcript } from "../../core/src/index.ts";
+import { EvmMock, HttpActionsMock, addContractMock, newTestRuntime, test } from "@chainlink/cre-sdk/test";
+import { decodeAbiParameters, type Hex, bytesToHex } from "viem";
+import { FEED_ABI, REPORT_PARAMS, assetBySymbol, courtRecordAbi, transcriptHash, type Transcript } from "../../core/src/index.ts";
 import { convene, initWorkflow } from "./workflow";
 
 const SEPOLIA = 16015286601757825753n;
+const MAINNET = 5009297550715157269n;
 const COURT = "0x7109709ECfa91a80626fF3989D68f67F5b1DD12D";
-const NOW = Date.UTC(2026, 9, 20, 14, 0, 0); // hour 14 → assets[14 % 4] = SOL
+const NOW = Date.UTC(2026, 9, 20, 14, 0, 0); // hour 14: the fallback rotation also lands on assets[2] = SOL
+const SOL_FEED = assetBySymbol("SOL").chainlinkFeed!;
 
 const baseConfig = {
   schedule: "0 0 */2 * * *",
@@ -23,6 +26,7 @@ const baseConfig = {
   judgeEffort: "medium" as const,
   llmTimeout: "90s",
   chainSelectorName: "ethereum-testnet-sepolia",
+  feedChainSelectorName: "ethereum-mainnet",
   courtAddress: COURT,
   gasLimit: "1000000",
   recordsUrl: "http://localhost:8787/api/records",
@@ -82,7 +86,7 @@ type LlmRequest = { url: string; headers: Record<string, string>; body: Record<s
 type LlmReply = { statusCode: number; body: string };
 
 /** Mocks every capability, convenes the court once, and returns what came out of it. */
-function trial(config: typeof baseConfig, llm: (req: LlmRequest) => LlmReply) {
+function trial(config: typeof baseConfig, llm: (req: LlmRequest) => LlmReply, { chainReads = true } = {}) {
   const http = HttpActionsMock.testInstance();
   const llmRequests: LlmRequest[] = [];
   let lodged = "";
@@ -90,6 +94,7 @@ function trial(config: typeof baseConfig, llm: (req: LlmRequest) => LlmReply) {
   http.sendRequest = (req) => {
     if (req.url.startsWith("https://api.coingecko.com/")) {
       expect(req.url).toContain("ids=solana");
+      expect(req.headers["x-cg-demo-api-key"]).toBe("cg-test");
       return { statusCode: 200, body: b64(JSON.stringify(coingecko)) };
     }
     if (req.url.startsWith("https://api.alternative.me/")) return { statusCode: 200, body: b64(JSON.stringify(fearGreed)) };
@@ -103,15 +108,22 @@ function trial(config: typeof baseConfig, llm: (req: LlmRequest) => LlmReply) {
     return { statusCode: reply.statusCode, body: b64(reply.body) };
   };
 
-  const evm = EvmMock.testInstance(SEPOLIA);
+  const court = addContractMock(EvmMock.testInstance(SEPOLIA), { address: COURT, abi: courtRecordAbi });
   let rawReport: Uint8Array | undefined;
-  evm.writeReport = (input) => {
+  court.writeReport = (input) => {
     expect(bytesToHex(input.receiver).toLowerCase()).toBe(COURT.toLowerCase());
-    rawReport = input.report?.rawReport;
+    rawReport = input.report.rawReport;
     return { txStatus: TxStatus.SUCCESS, txHash: new Uint8Array(32).fill(0xab) };
   };
+  if (chainReads) {
+    // Six cases on the docket: case No. 6 tries assets[6 % 4] = SOL.
+    court.totalCases = () => 6n;
+    const feed = addContractMock(EvmMock.testInstance(MAINNET), { address: SOL_FEED, abi: FEED_ABI });
+    feed.decimals = () => 8;
+    feed.latestRoundData = () => [7000n, 17_110_000_000n, 1n, BigInt(Date.UTC(2026, 9, 20, 13, 30) / 1000), 7000n];
+  }
 
-  const secrets = new Map([["main", new Map([["LLM_API_KEY", "sk-test"]])]]);
+  const secrets = new Map([["main", new Map([["LLM_API_KEY", "sk-test"], ["COINGECKO_API_KEY", "cg-test"]])]]);
   const runtime = newTestRuntime(secrets, { timeProvider: () => NOW });
   (runtime as any).config = config;
 
@@ -121,7 +133,7 @@ function trial(config: typeof baseConfig, llm: (req: LlmRequest) => LlmReply) {
 }
 
 /** The ruling, the transcript and the signed report must all agree. */
-function expectConsistentFiling({ result, transcript, rawReport }: ReturnType<typeof trial>) {
+function expectConsistentFiling({ result, transcript, rawReport }: ReturnType<typeof trial>, mark = 17_110_000_000n) {
   expect(result.caption).toBe("In re SOL/USD");
   expect(result.verdict).toBe("LONG");
   expect(result.conviction).toBe(68);
@@ -139,7 +151,7 @@ function expectConsistentFiling({ result, transcript, rawReport }: ReturnType<ty
   expect(verdict).toBe(1);
   expect(conviction).toBe(68);
   expect(sizeBps).toBe(result.sizeBps);
-  expect(entry).toBe(17_125_000_000n);
+  expect(entry).toBe(mark);
   expect(trialTime).toBe(BigInt(NOW / 1000));
   expect(tHash).toBe(transcriptHash(transcript));
   expect(tHash).toBe(result.transcriptHash);
@@ -157,6 +169,12 @@ describe("Bull v. Bear workflow", () => {
     });
     expectConsistentFiling(run);
     expect(run.transcript.counsel).toEqual({ mode: "claude", model: "claude-opus-5-5", venue: "cre" });
+
+    // The Chainlink feed is Exhibit G and the court's mark.
+    const g = run.transcript.exhibits[6];
+    expect(g).toMatchObject({ id: "G", kind: "oracle", data: { price: 171.1, roundId: "7000", feed: SOL_FEED } });
+    expect(g.statement).toContain("SOL/USD Data Feed on Ethereum mainnet last reported $171.10, 29 minutes before the spot quote");
+    expect(run.transcript.sentence.steps[0]).toEqual({ label: "Mark price", formula: "Chainlink SOL/USD Data Feed [Ex. G]", value: "$171.10" });
 
     // Claude was asked five times with the court's exact procedure.
     expect(run.llmRequests).toHaveLength(5);
@@ -194,6 +212,23 @@ describe("Bull v. Bear workflow", () => {
     expect(judgeJson.response_format).toEqual({ type: "json_object" });
     expect(judgePlain.response_format).toBeUndefined();
     expect(judgePlain.messages[1].content).toContain("matching this JSON Schema");
+  });
+
+  test("chain reads down: rotates by the hour and marks at spot", () => {
+    const run = trial(
+      baseConfig,
+      ({ body }) => {
+        const text = body.output_config.format ? JSON.stringify(RULING) : speechFor(body.system, body.messages[0].content);
+        return {
+          statusCode: 200,
+          body: JSON.stringify({ model: "claude-opus-5-5", stop_reason: "end_turn", content: [{ type: "text", text }] }),
+        };
+      },
+      { chainReads: false },
+    );
+    expectConsistentFiling(run, 17_125_000_000n);
+    expect(run.transcript.exhibits.map((x) => x.kind)).not.toContain("oracle");
+    expect(run.transcript.sentence.steps[0].formula).toBe("spot price [Ex. A]");
   });
 
   test("subscribes one cron handler", () => {

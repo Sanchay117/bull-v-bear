@@ -111,6 +111,19 @@ function Visual({ ex }: { ex: Exhibit }) {
           label={`${n(d.value)}`}
         />
       );
+    case "oracle": {
+      const dev = n(d.deviationPct);
+      return (
+        <div className="ex-price">
+          <div className="ex-price-figure">{fmtUsd(n(d.price))}</div>
+          <div className="ex-pill flat">
+            {dev >= 0 ? "+" : "−"}
+            {Math.abs(dev).toFixed(2)}% <small>vs spot</small>
+          </div>
+          <div className="ex-oracle-src">Chainlink · {String(d.network)} · the court's mark</div>
+        </div>
+      );
+    }
     case "liquidity": {
       const t = n(d.turnoverPct);
       return (

@@ -1,7 +1,8 @@
 // The vocabulary of the Court. Everything here is plain data so it can be hashed,
 // stored, streamed to the browser, and bundled into the CRE workflow's WASM.
 
-export const COURT_VERSION = "bull-v-bear/1";
+// 2: Chainlink Data Feed exhibit; positions are entered and settled at the Chainlink mark.
+export const COURT_VERSION = "bull-v-bear/2";
 export const GUIDELINES_VERSION = "Sentencing Guidelines for Practice Positions §1 (2026)";
 
 export type Side = "BULL" | "BEAR";
@@ -15,13 +16,15 @@ export interface AssetSpec {
   symbol: string;
   name: string;
   coingeckoId: string;
+  /** The Chainlink SYMBOL/USD Data Feed on Ethereum mainnet: the court's mark price. */
+  chainlinkFeed?: `0x${string}`;
 }
 
 export const ASSETS: AssetSpec[] = [
-  { symbol: "ETH", name: "Ether", coingeckoId: "ethereum" },
-  { symbol: "BTC", name: "Bitcoin", coingeckoId: "bitcoin" },
-  { symbol: "SOL", name: "Solana", coingeckoId: "solana" },
-  { symbol: "LINK", name: "Chainlink", coingeckoId: "chainlink" },
+  { symbol: "ETH", name: "Ether", coingeckoId: "ethereum", chainlinkFeed: "0x5f4eC3Df9cbd43714FE2740f5E3616155c5b8419" },
+  { symbol: "BTC", name: "Bitcoin", coingeckoId: "bitcoin", chainlinkFeed: "0xF4030086522a5bEEa4988F8cA5B36dbC97BeE88c" },
+  { symbol: "SOL", name: "Solana", coingeckoId: "solana", chainlinkFeed: "0x4ffC43a60e009B551865A93d232E33Fce9f01507" },
+  { symbol: "LINK", name: "Chainlink", coingeckoId: "chainlink", chainlinkFeed: "0x2c1d072e956AFFC0D435Cb7AC38EF18d24d9127c" },
   { symbol: "DOGE", name: "Dogecoin", coingeckoId: "dogecoin" },
 ];
 
@@ -58,6 +61,17 @@ export interface Headline {
   url?: string;
 }
 
+/** One round of a Chainlink Data Feed, read from the chain. */
+export interface OracleSnapshot {
+  /** e.g. "SOL/USD" */
+  pair: string;
+  network: string;
+  feed: string;
+  price: number;
+  updatedAt: string;
+  roundId: string;
+}
+
 export interface DerivedMetrics {
   dailyVolPct: number;
   rsi14h: number;
@@ -71,7 +85,7 @@ export interface DerivedMetrics {
   turnoverPct: number;
 }
 
-export type ExhibitKind = "price" | "range" | "trend" | "volatility" | "liquidity" | "sentiment" | "headline";
+export type ExhibitKind = "price" | "range" | "trend" | "volatility" | "liquidity" | "sentiment" | "oracle" | "headline";
 
 export interface Exhibit {
   id: string;
@@ -88,6 +102,7 @@ export interface Evidence {
   asOf: string;
   market: MarketSnapshot;
   sentiment: SentimentSnapshot | null;
+  oracle: OracleSnapshot | null;
   headlines: Headline[];
   metrics: DerivedMetrics;
   exhibits: Exhibit[];

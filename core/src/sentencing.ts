@@ -2,15 +2,23 @@
 // these fixed, transparent rules turn that into an exact practice position. No model output
 // touches the arithmetic, so every number on the order can be re-derived by hand.
 
-import { priceDecimals, round } from "./evidence.ts";
+import { fmtUsd, priceDecimals, round } from "./evidence.ts";
 import { GUIDELINES_VERSION, type Evidence, type JudgeRuling, type Sentence, type StandingOrders } from "./types.ts";
 
 const clamp = (x: number, lo: number, hi: number) => Math.min(hi, Math.max(lo, x));
 
 export function sentence(ruling: JudgeRuling, e: Evidence, orders: StandingOrders): Sentence {
-  const entry = e.market.price;
+  // The mark is the Chainlink feed when it is in the record, so the court never scores its own
+  // positions against the API its counsel argued from. CourtRecord settles the prior position at it.
+  const oracleEx = e.oracle ? e.exhibits.find((x) => x.kind === "oracle") : undefined;
+  const entry = e.oracle && oracleEx ? e.oracle.price : e.market.price;
   const dp = priceDecimals(entry);
   const steps: Sentence["steps"] = [];
+  steps.push({
+    label: "Mark price",
+    formula: oracleEx ? `Chainlink ${e.oracle!.pair} Data Feed [Ex. ${oracleEx.id}]` : `spot price [Ex. ${e.exhibits[0]?.id ?? "A"}]`,
+    value: fmtUsd(entry),
+  });
   const none = (reason: string): Sentence => ({
     action: "NO_POSITION",
     reason,

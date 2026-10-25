@@ -1,7 +1,9 @@
 // Discovery: turn raw market data into numbered exhibits that both counsel must argue from.
-// Pure functions only: the CRE workflow fetches the JSON with its HTTP capability, the clerk
-// server fetches it with fetch(), and both hand the bodies to the same parsers.
+// Pure functions only: the CRE workflow fetches the JSON with its HTTP capability (and reads the
+// Chainlink feed with its EVM capability), the clerk server uses fetch() and viem, and both hand
+// the results to the same parsers.
 
+import { parseAbi } from "viem";
 import type {
   AssetSpec,
   DerivedMetrics,
@@ -9,6 +11,7 @@ import type {
   Exhibit,
   Headline,
   MarketSnapshot,
+  OracleSnapshot,
   SentimentSnapshot,
 } from "./types.ts";
 
@@ -52,6 +55,33 @@ export function parseCoinGeckoMarket(body: unknown): MarketSnapshot {
     marketCap: optNum(r.market_cap),
     sparkline,
     asOf: typeof r.last_updated === "string" ? r.last_updated : new Date(0).toISOString(),
+  };
+}
+
+/** The two AggregatorV3Interface reads behind the oracle exhibit. */
+export const FEED_ABI = parseAbi([
+  "function decimals() view returns (uint8)",
+  "function latestRoundData() view returns (uint80 roundId, int256 answer, uint256 startedAt, uint256 updatedAt, uint80 answeredInRound)",
+]);
+
+export const FEED_NETWORK = "Ethereum mainnet";
+
+/** Turns a decoded latestRoundData() into the oracle snapshot, or null for an unusable round. */
+export function parseFeedRound(
+  asset: AssetSpec,
+  decimals: number,
+  latest: readonly [bigint, bigint, bigint, bigint, bigint],
+): OracleSnapshot | null {
+  const [roundId, answer, , updatedAt] = latest;
+  if (!asset.chainlinkFeed || answer <= 0n || updatedAt === 0n) return null;
+  const price = Number(answer) / 10 ** decimals;
+  return {
+    pair: `${asset.symbol}/USD`,
+    network: FEED_NETWORK,
+    feed: asset.chainlinkFeed,
+    price: round(price, priceDecimals(price)),
+    updatedAt: new Date(Number(updatedAt) * 1000).toISOString(),
+    roundId: roundId.toString(),
   };
 }
 
@@ -158,7 +188,7 @@ export function buildEvidence(
   asset: AssetSpec,
   market: MarketSnapshot,
   sentiment: SentimentSnapshot | null,
-  headlines: Headline[] = [],
+  { oracle = null, headlines = [] }: { oracle?: OracleSnapshot | null; headlines?: Headline[] } = {},
 ): Evidence {
   const metrics = deriveMetrics(market);
   const dp = priceDecimals(market.price);
@@ -243,6 +273,30 @@ export function buildEvidence(
     });
   }
 
+  if (oracle) {
+    const deviationPct = round(((oracle.price - price) / price) * 100, 2);
+    const lagMinutes = Math.round((Date.parse(market.asOf) - Date.parse(oracle.updatedAt)) / 60_000);
+    const lag = Math.abs(lagMinutes);
+    const span = lag >= 120 ? `${round(lag / 60, 1)} hours` : `${lag} minute${lag === 1 ? "" : "s"}`;
+    add({
+      kind: "oracle",
+      title: "Chainlink Price Feed",
+      statement:
+        `The Chainlink ${oracle.pair} Data Feed on ${oracle.network} last reported ${fmtUsd(oracle.price)}, ` +
+        `${span} ${lagMinutes >= 0 ? "before" : "after"} the spot quote and ${signed(deviationPct)} against the ` +
+        `spot price in Exhibit ${exhibits[0].id}. Practice positions are entered and settled at this mark.`,
+      data: {
+        price: oracle.price,
+        deviationPct,
+        lagMinutes,
+        updatedAt: oracle.updatedAt,
+        roundId: oracle.roundId,
+        feed: oracle.feed,
+        network: oracle.network,
+      },
+    });
+  }
+
   for (const h of headlines.slice(0, 4)) {
     add({
       kind: "headline",
@@ -252,7 +306,7 @@ export function buildEvidence(
     });
   }
 
-  return { asset, asOf: market.asOf, market: { ...market, price }, sentiment, headlines, metrics, exhibits };
+  return { asset, asOf: market.asOf, market: { ...market, price }, sentiment, oracle, headlines, metrics, exhibits };
 }
 
 /** Exhibits formatted the way counsel and the judge receive them. */

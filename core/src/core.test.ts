@@ -14,6 +14,7 @@ import {
   normalizeRuling,
   parseCoinGeckoMarket,
   parseFearGreed,
+  parseFeedRound,
   sentence,
   toUsd8,
   transcriptHash,
@@ -72,6 +73,39 @@ test("exhibits are lettered, deterministic and cite real numbers", () => {
   assert.match(e1.exhibits[0].statement, /\$3,142\.17/);
   assert.match(e1.exhibits[5].statement, /reads 61 \("Greed"\), versus 48 2 days earlier/);
   assert.ok(e1.metrics.dailyVolPct > 0);
+});
+
+// latestRoundData() as the ETH/USD feed answers it: 3,138.55 USD at 8 decimals, 11:42:10 UTC.
+const ethRound = [110680464442257320000n, 313855000000n, 1792496530n, BigInt(Date.UTC(2026, 9, 20, 11, 42, 10) / 1000), 110680464442257320000n] as const;
+
+test("the Chainlink feed is entered as an exhibit and becomes the mark", () => {
+  const oracle = parseFeedRound(ETH, 8, ethRound);
+  assert.deepEqual(oracle, {
+    pair: "ETH/USD",
+    network: "Ethereum mainnet",
+    feed: ETH.chainlinkFeed,
+    price: 3138.55,
+    updatedAt: "2026-10-20T11:42:10.000Z",
+    roundId: "110680464442257320000",
+  });
+  const e = buildEvidence(ETH, sampleMarket(), sentiment, { oracle });
+  const g = e.exhibits[6];
+  assert.equal(g.id, "G");
+  assert.equal(g.kind, "oracle");
+  assert.equal(
+    g.statement,
+    "The Chainlink ETH/USD Data Feed on Ethereum mainnet last reported $3,138.55, 18 minutes before the spot quote " +
+      "and -0.12% against the spot price in Exhibit A. Practice positions are entered and settled at this mark.",
+  );
+
+  const s = sentence(ruling(), e, DEFAULT_ORDERS);
+  assert.equal(s.entryPrice, 3138.55);
+  assert.deepEqual(s.steps[0], { label: "Mark price", formula: "Chainlink ETH/USD Data Feed [Ex. G]", value: "$3,138.55" });
+  // Without a feed the court marks at spot, as before.
+  assert.equal(sentence(ruling(), buildEvidence(ETH, sampleMarket(), sentiment), DEFAULT_ORDERS).entryPrice, 3142.17);
+  // A dead round is not evidence.
+  assert.equal(parseFeedRound(ETH, 8, [1n, 0n, 0n, 0n, 1n]), null);
+  assert.equal(parseFeedRound(ASSETS[4], 8, ethRound), null);
 });
 
 test("fmtUsd groups thousands without Intl", () => {

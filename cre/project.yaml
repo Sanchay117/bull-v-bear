@@ -1,13 +1,20 @@
 # CRE project settings for Bull v. Bear.
 # Run CLI commands from this folder, e.g.
 #   cre workflow simulate bull-v-bear --target staging-settings
+#
+# Sepolia holds CourtRecord (read and written); Ethereum mainnet holds the Chainlink Data Feeds the
+# court marks its positions at (read only).
 
 staging-settings:
   rpcs:
     - chain-name: ethereum-testnet-sepolia
       url: https://ethereum-sepolia-rpc.publicnode.com
+    - chain-name: ethereum-mainnet
+      url: https://ethereum-rpc.publicnode.com
 
 production-settings:
   rpcs:
     - chain-name: ethereum-testnet-sepolia
       url: https://ethereum-sepolia-rpc.publicnode.com
+    - chain-name: ethereum-mainnet
+      url: https://ethereum-rpc.publicnode.com

@@ -17,6 +17,8 @@ cre/**/*.wasm
 
 # local court records
 server/data/
+# ...but the public docket's CRE CLI logs are part of the record
+!docket/runs/*.log
 
 # demo film: renders and regenerable media (scripts/voice.ts, capture.ts, sfx.ts)
 video/out/
