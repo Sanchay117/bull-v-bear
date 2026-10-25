@@ -61,9 +61,9 @@ trade decision as a trial, so the reasoning trail is the product.
    order go on-chain to `CourtRecord`. The next ruling for the asset settles the open practice
    position at the new Chainlink mark, so the court keeps a public win-loss record and an equity
    curve. It never scores itself against the API its counsel argued from.
-6. **The autonomous docket.** Every three hours the court convenes on its own. A GitHub Action runs
-   the CRE workflow, which picks the next asset from the on-chain case count, tries it and files the
-   ruling on Sepolia. The transcript and the CRE CLI log are committed to the public docket.
+6. **The autonomous docket.** Every three hours the court convenes on its own. A scheduler runs the
+   CRE workflow in the CRE CLI, which picks the next asset from the on-chain case count, tries it and
+   files the ruling on Sepolia. The transcript and the CRE CLI log are pushed to the public docket.
 
 Anyone can verify a ruling. The browser recomputes the transcript hash and compares it with the
 chain, and changing a single word makes verification fail.
@@ -98,8 +98,8 @@ fail and the court falls back to hourly rotation and a spot mark. It compiles to
 to end in the CRE CLI simulator (`cre workflow simulate`): the docket read, live discovery, the
 Chainlink feed read, five model calls, the ruling, sentencing and a signed report.
 
-A GitHub Action runs `cre workflow simulate --broadcast` every three hours, and the simulator's
-forwarder delivers each report to `CourtRecord` on Sepolia. Every run's CLI log is in the repository
+The docket scheduler runs `cre workflow simulate --broadcast` every three hours, and the
+simulator's forwarder delivers each report to `CourtRecord` on Sepolia. Every run's CLI log is in the repository
 next to the transcript it filed (links above).
 
 ## Autonomous agents

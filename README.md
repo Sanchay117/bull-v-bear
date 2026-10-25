@@ -30,9 +30,9 @@ trade decision as a **trial**, so the reasoning trail is the product:
    order (asset, verdict, conviction, size, entry/stop/target) go on-chain to `CourtRecord`. The
    next ruling for the same asset **settles** the open position at the new Chainlink mark, honoring
    a stop or target that was crossed. The docket keeps a public win/loss record and an equity curve.
-6. **The autonomous docket.** Every three hours the court convenes on its own: a GitHub Action runs
-   the CRE workflow, which picks the next asset from the on-chain case count, tries it and files the
-   ruling on Sepolia. The transcript is committed to [`docket/`](docket/).
+6. **The autonomous docket.** Every three hours the court convenes on its own: a scheduler runs the
+   CRE workflow in the CRE CLI, which picks the next asset from the on-chain case count, tries it
+   and files the ruling on Sepolia. The transcript is pushed to [`docket/`](docket/).
 
 The courtroom UI shows all of it live:
 
@@ -62,7 +62,7 @@ the opinion, and verification fails.
   case 1, the first marked at the Chainlink feed,
   [`0xbcf7837c…d406`](https://sepolia.etherscan.io/tx/0xbcf7837c318a489c8a6bdba3d2dbfa9902ecead9c55e6028594d73e6d0bfd406)
 - The autonomous docket: [`docket/`](docket/) (every transcript and CLI log) and the
-  [Docket workflow](.github/workflows/docket.yml) that convenes the court every three hours
+  [scheduler](scripts/docket.mjs) that convenes the court every three hours
 
 ---
 
@@ -103,7 +103,7 @@ hashes, verifies and renders exactly like one made in the courtroom.
 | `web/` | The courtroom (React + Vite) |
 | `cre/bull-v-bear/` | The Chainlink CRE workflow, with a unit test that runs a full trial in the CRE test runtime |
 | `docket/` | The public docket: every CRE-filed transcript and its CLI log, committed by the scheduled runs |
-| `scripts/docket.mjs`, `.github/workflows/docket.yml` | The autonomous docket: convene, file on Sepolia, commit the record |
+| `scripts/docket.mjs` | The autonomous docket: convene on a schedule, file on Sepolia, push the record |
 | `video/` | The demo film (Remotion): motion graphics built from a real trial, footage of the live courtroom, Deepgram narration |
 
 ---
@@ -259,13 +259,21 @@ cd cre/bull-v-bear && bunx cre-compile main.ts /tmp/bull-v-bear.wasm
 
 `--dry-run` simulates without broadcasting and leaves `docket/` alone.
 
-[`.github/workflows/docket.yml`](.github/workflows/docket.yml) runs it every three hours and commits
-the record. It needs these repository secrets:
+On a schedule, it commits each filing and pushes it:
 
-- `CRE_API_KEY`: from app.chain.link, Account Settings. The CLI uses it in place of `cre login`.
-- `CRE_ETH_PRIVATE_KEY`: a funded Sepolia key. One filing costs about 1.5M gas.
-- `LLM_API_KEY`: the workflow's LLM key.
-- `COINGECKO_API_KEY` (optional): runner IPs are shared, so a demo key avoids rate limits.
+```bash
+caffeinate -i node scripts/docket.mjs --every 3 --until 2026-11-30 --push
+```
+
+It runs on a machine set up as in [Simulate with the CRE CLI](#simulate-with-the-cre-cli): logged
+in with `cre login`, with `cre/.env` in place. One filing costs about 1.5M Sepolia gas. The schedule can't move to CI: the CLI accepts an
+API key only once Chainlink grants deploy access, which is a commercial agreement.
+
+- `--until` is required with `--every`, so the docket closes on its own at the end of that day. It
+  also closes after three sessions in a row file nothing (an expired `cre login`, for example).
+- `--push` commits only `docket/` and pulls with `--autostash` before pushing, so other work in
+  the checkout stays out of the record.
+- `caffeinate -i` keeps the Mac awake. If it sleeps anyway, the next session runs on waking.
 
 The docket commits carry `[skip render]`, so they don't redeploy the site. The site reads newer
 transcripts from `DOCKET_URL` instead.
@@ -332,8 +340,8 @@ coordinates the steps. It works across two blockchains:
 It connects them to external APIs (CoinGecko, alternative.me) and to five LLM agent calls (Claude,
 or any OpenAI-compatible model; the demo runs on Groq), with consensus on every off-chain answer.
 The full trial is tested in the CRE test runtime, compiles to WASM, and runs end to end in the CRE
-CLI simulator. A GitHub Action runs it with `--broadcast` every three hours, and every run's CLI log
-is in `docket/runs/`.
+CLI simulator. The docket scheduler runs it with `--broadcast` every three hours, and every run's
+CLI log is in `docket/runs/`.
 
 **RYO-CHAN: Autonomous Agents.** Agents interpret live market evidence and record practice trades
 on a public ledger:
