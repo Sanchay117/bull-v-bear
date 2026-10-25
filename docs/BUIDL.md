@@ -99,8 +99,10 @@ to end in the CRE CLI simulator (`cre workflow simulate`): the docket read, live
 Chainlink feed read, five model calls, the ruling, sentencing and a signed report.
 
 The docket scheduler runs `cre workflow simulate --broadcast` every three hours, and the
-simulator's forwarder delivers each report to `CourtRecord` on Sepolia. Every run's CLI log is in the repository
-next to the transcript it filed (links above).
+simulator's forwarder delivers each report to `CourtRecord` on Sepolia
+([0xbcA0…6B3](https://sepolia.etherscan.io/address/0xbcA0a8c279B1dfDD5cC6640dA7eA22CeaeAE26B3)).
+Every run's CLI log is in the [public docket](https://github.com/Sanchay117/bull-v-bear/tree/main/docket)
+next to the transcript it filed.
 
 ## Autonomous agents
 
