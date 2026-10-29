@@ -1,0 +1,345 @@
+{
+  "transcript": {
+    "court": "bull-v-bear/2",
+    "caption": "In re ETH/USD",
+    "asset": "ETH",
+    "openedAt": "2026-10-29T11:50:28.346Z",
+    "evidenceAsOf": "2026-10-29T11:49:50.000Z",
+    "exhibits": [
+      {
+        "id": "A",
+        "kind": "price",
+        "title": "Spot Price",
+        "statement": "Ether (ETH) traded at $2,323.29 as of 2026-10-29 11:49:50 UTC, +0.21% over one hour and -1.65% over twenty-four hours.",
+        "data": {
+          "price": 2323.29,
+          "change1hPct": 0.21,
+          "change24hPct": -1.65
+        }
+      },
+      {
+        "id": "B",
+        "kind": "range",
+        "title": "24-Hour Trading Range",
+        "statement": "Over twenty-four hours the price ranged from $2,292.94 to $2,384.72; spot sits at 33% of that range.",
+        "data": {
+          "low24h": 2292.94,
+          "high24h": 2384.72,
+          "rangePosition24h": 0.331
+        }
+      },
+      {
+        "id": "C",
+        "kind": "trend",
+        "title": "Seven-Day Trend",
+        "statement": "Price is -3.36% over seven days. The 24-hour average ($2,334.16) is above the 72-hour average ($2,331.81). Spot is 3.71% below the seven-day high of $2,412.90 and 1.32% above the seven-day low of $2,292.94.",
+        "data": {
+          "change7dPct": -3.36,
+          "sma24": 2334.16,
+          "sma72": 2331.81,
+          "high7d": 2412.9,
+          "low7d": 2292.94,
+          "sparkline": [
+            2403.93,
+            2399.08,
+            2410.99,
+            2376.77,
+            2382.39,
+            2379.73,
+            2382.15,
+            2392.2,
+            2412.9,
+            2391.38,
+            2406.92,
+            2403.92,
+            2394.56,
+            2400.73,
+            2405.82,
+            2404.55,
+            2399.9,
+            2399.8,
+            2362.58,
+            2372.11,
+            2382.11,
+            2380.59,
+            2375.84,
+            2366.97,
+            2367.49,
+            2367.23,
+            2340.72,
+            2316.35,
+            2335.81,
+            2344.94,
+            2343.82,
+            2358.52,
+            2363.84,
+            2365.92,
+            2338.77,
+            2332.83,
+            2323.65,
+            2332.34,
+            2340.88,
+            2353.92,
+            2352.45,
+            2344.84,
+            2339.92,
+            2326.78,
+            2301.77,
+            2319.23,
+            2317.48,
+            2323.21,
+            2325.85,
+            2321.38,
+            2323.18,
+            2318.31,
+            2311.46,
+            2303.42,
+            2310.22,
+            2323.79,
+            2310.62,
+            2309.38,
+            2301.75,
+            2310.09,
+            2312.81,
+            2332.14,
+            2331.97,
+            2348.16,
+            2341.3,
+            2341.49,
+            2347.54,
+            2343.04,
+            2354.47,
+            2352.35,
+            2349.29,
+            2369.28,
+            2365.72,
+            2336.98,
+            2330.26,
+            2333.11,
+            2352.83,
+            2357.9,
+            2357.24,
+            2352.23,
+            2309.03,
+            2319.22,
+            2311.18,
+            2316.87,
+            2318.82
+          ]
+        }
+      },
+      {
+        "id": "D",
+        "kind": "volatility",
+        "title": "Volatility & Momentum",
+        "statement": "Realized volatility computed from hourly closes is 2.07% per day. The 14-hour relative strength index reads 33.4, conventionally neutral.",
+        "data": {
+          "dailyVolPct": 2.07,
+          "rsi14h": 33.4
+        }
+      },
+      {
+        "id": "E",
+        "kind": "liquidity",
+        "title": "Liquidity",
+        "statement": "Twenty-four-hour trading volume was $10.76 billion, equal to 3.79% of the $283.84 billion market capitalization.",
+        "data": {
+          "volume24h": 10756835406,
+          "marketCap": 283843266931,
+          "turnoverPct": 3.79
+        }
+      },
+      {
+        "id": "F",
+        "kind": "sentiment",
+        "title": "Market Sentiment",
+        "statement": "The Crypto Fear & Greed Index reads 51 (\"Neutral\"), versus 68 7 days earlier.",
+        "data": {
+          "value": 51,
+          "label": "Neutral",
+          "history": [
+            68,
+            50,
+            51,
+            54,
+            50,
+            48,
+            51,
+            51
+          ]
+        }
+      },
+      {
+        "id": "G",
+        "kind": "oracle",
+        "title": "Chainlink Price Feed",
+        "statement": "The Chainlink ETH/USD Data Feed on Ethereum mainnet last reported $2,321.34, 43 minutes before the spot quote and -0.08% against the spot price in Exhibit A. Practice positions are entered and settled at this mark.",
+        "data": {
+          "price": 2321.34,
+          "deviationPct": -0.08,
+          "lagMinutes": 43,
+          "updatedAt": "2026-10-29T11:06:23.000Z",
+          "roundId": "129127208515966896430",
+          "feed": "0x5f4eC3Df9cbd43714FE2740f5E3616155c5b8419",
+          "network": "Ethereum mainnet"
+        }
+      }
+    ],
+    "arguments": [
+      {
+        "side": "BULL",
+        "round": "opening",
+        "text": "May it please the Court.  \n\n1. The spot price of ETH sits near the lower third of its 24‑hour range (33% of range) while the 24‑hour average remains above the 72‑hour average, indicating that a modest rebound toward the range midpoint is statistically likely [Ex. B, C].  \n\n2. Realized volatility is modest at 2.07% per day and the RSI is neutral, suggesting no extreme directional pressure; combined with a neutral Fear & Greed Index, the market is primed for a short‑term upward correction rather than a sharp decline [Ex. D, F].  \n\n3. Liquidity remains ample, with $10.76 billion traded in the past day, ensuring that any upward movement can be executed without slippage, and the Chainlink feed, the settlement benchmark, is only $0.08% below the spot, confirming price integrity for a paper long position [Ex. E, G].  \n\nThe Bull rests.",
+        "citations": [
+          "B",
+          "C",
+          "D",
+          "E",
+          "F",
+          "G"
+        ]
+      },
+      {
+        "side": "BEAR",
+        "round": "opening",
+        "text": "May it please the Court.  \n\n1. The spot price sits near the lower third of its 24‑hour range (33% from the low) while the 14‑hour RSI is modestly bearish at 33.4, indicating immediate upside potential if buyers re‑enter, as the price is statistically more likely to revert toward the range midpoint [Ex. B, D].  \n\n2. Seven‑day metrics show a short‑term bounce: the 24‑hour average ($2,334.16) already exceeds the 72‑hour average ($2,331.81), and the price is still 1.32% above the seven‑day low, suggesting a floor has formed and a modest rally can be expected [Ex. C].  \n\n3. Liquidity remains robust with $10.76 billion traded in 24 hours, a depth that can absorb a short position without triggering outsized slippage, while the neutral Fear & Greed Index (51) and a modestly lower Chainlink feed ($2,321.34) provide a stable settlement reference for a short‑term practice trade [Ex. E, F, G].  \n\nThe Bear rests.",
+        "citations": [
+          "B",
+          "C",
+          "D",
+          "E",
+          "F",
+          "G"
+        ]
+      },
+      {
+        "side": "BULL",
+        "round": "rebuttal",
+        "text": "Your Honor, the Bear’s first point collapses under Exhibit B: the price sits at only 33 % of the 24‑hour range, not “near the lower third” but well below the midpoint, leaving ample room for further decline rather than a forced rebound. Exhibit D shows an RSI of 33.4, which is already in oversold territory, suggesting continued downward pressure, not “immediate upside potential.” The Bear’s second point rests on a trivial 0.2 % advantage of the 24‑hour over the 72‑hour average (Exhibit C), a statistically insignificant margin that cannot substantiate a “floor.” Moreover, the 7‑day high remains 3.71 % above spot, indicating stronger resistance above. Nothing further.",
+        "citations": [
+          "B",
+          "C",
+          "D"
+        ]
+      },
+      {
+        "side": "BEAR",
+        "round": "rebuttal",
+        "text": "Your Honor, the Bull’s first premise collapses on the very numbers it cites: the price sits at only 33 % of the 24‑hour range, meaning it is anchored near the lower bound, not poised for a rebound; the 24‑hour average merely nudges above the 72‑hour average by 0.10 %, an inconsequential margin that does not imply upward pressure [Ex. B, C]. The second premise ignores the decisive trend evidence: ETH is down 3.36 % over seven days and still 3.71 % below its weekly high, a bearish backdrop that outweighs “neutral” volatility and RSI readings, which are themselves modest and do not preclude further decline [Ex. D, C]. Nothing further.",
+        "citations": [
+          "B",
+          "C",
+          "D"
+        ]
+      }
+    ],
+    "ruling": {
+      "holding": "The Court finds ETH/USD likely to decline over the next 24 hours.",
+      "verdict": "SHORT",
+      "conviction": 65,
+      "bull_score": 3,
+      "bear_score": 7,
+      "findings": [
+        {
+          "exhibit": "A",
+          "finding": "Spot price is down 1.65% over 24h, indicating recent weakness",
+          "favors": "BEAR",
+          "weight": 2
+        },
+        {
+          "exhibit": "C",
+          "finding": "Seven‑day trend is -3.36% and price is 3.71% below the weekly high",
+          "favors": "BEAR",
+          "weight": 3
+        },
+        {
+          "exhibit": "D",
+          "finding": "RSI at 33.4 suggests oversold conditions but does not outweigh bearish trend",
+          "favors": "BEAR",
+          "weight": 1
+        },
+        {
+          "exhibit": "F",
+          "finding": "Fear & Greed Index slipped to neutral 51 from 68, showing loss of bullish sentiment",
+          "favors": "BEAR",
+          "weight": 1
+        }
+      ],
+      "opinion": "The record shows ETH has slipped 1.65% in the last day and 3.36% over a week, with price still far below its recent high [Ex. A, C]. Although volatility is low and RSI is near oversold, these factors alone cannot counteract the clear bearish momentum and fading sentiment indicated by the Fear & Greed Index [Ex. D, F]. Liquidity is ample, but it merely permits the expected decline to execute without slippage [Ex. E]. Consequently, the balance of evidence supports a short practice position.",
+      "dissent": "The Bull argues that the neutral RSI and modest volume suggest a short‑term bounce, but the prevailing seven‑day decline and deteriorating sentiment outweigh such nuances."
+    },
+    "sentence": {
+      "action": "SHORT",
+      "reason": "The Bear prevailed with conviction 65.",
+      "entryPrice": 2321.34,
+      "stopPrice": 2381.46,
+      "targetPrice": 2201.09,
+      "sizeBps": 857,
+      "stopDistancePct": 2.59,
+      "steps": [
+        {
+          "label": "Mark price",
+          "formula": "Chainlink ETH/USD Data Feed [Ex. G]",
+          "value": "$2,321.34"
+        },
+        {
+          "label": "§1(a) Verdict",
+          "formula": "from the bench",
+          "value": "SHORT"
+        },
+        {
+          "label": "§1(b) Conviction threshold",
+          "formula": "conviction 65 ≥ standing minimum 55",
+          "value": "met"
+        },
+        {
+          "label": "§2 Stop distance",
+          "formula": "clamp(1.25 × daily vol 2.07%, 1%, 12%)",
+          "value": "2.59%"
+        },
+        {
+          "label": "§3 Conviction scale",
+          "formula": "clamp((65 − 55) ÷ (100 − 55), 0.15, 1)",
+          "value": "0.222"
+        },
+        {
+          "label": "§4 Risk budget",
+          "formula": "100 bps × 0.222",
+          "value": "22.2 bps of bankroll"
+        },
+        {
+          "label": "§5 Position size",
+          "formula": "min(cap 3000 bps, 22.2 bps ÷ 2.59%)",
+          "value": "857 bps (8.57% of bankroll)"
+        },
+        {
+          "label": "§6 Protective order (stop)",
+          "formula": "entry + 2.59%",
+          "value": "2381.46"
+        },
+        {
+          "label": "§7 Target",
+          "formula": "entry − 2 × 2.59%",
+          "value": "2201.09"
+        }
+      ],
+      "guidelines": "Sentencing Guidelines for Practice Positions §1 (2026)"
+    },
+    "standingOrders": {
+      "riskPerTradeBps": 100,
+      "maxPositionBps": 3000,
+      "minConviction": 55,
+      "rewardRiskRatio": 2,
+      "stopVolMultiple": 1.25
+    },
+    "counsel": {
+      "mode": "llm",
+      "model": "openai/gpt-oss-120b",
+      "venue": "cre"
+    }
+  },
+  "transcriptHash": "0xe36bdd8629d368ad91a7b026bd5bfd73a47057e0255c1d9fe14d7b41b54d08f3",
+  "filing": {
+    "venue": "cre"
+  }
+}
