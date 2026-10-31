@@ -1,0 +1,346 @@
+{
+  "transcript": {
+    "court": "bull-v-bear/2",
+    "caption": "In re LINK/USD",
+    "asset": "LINK",
+    "openedAt": "2026-10-31T16:16:28.925Z",
+    "evidenceAsOf": "2026-10-31T16:15:53.000Z",
+    "exhibits": [
+      {
+        "id": "A",
+        "kind": "price",
+        "title": "Spot Price",
+        "statement": "Chainlink (LINK) traded at $11.5900 as of 2026-10-31 16:15:53 UTC, +0.64% over one hour and +3.84% over twenty-four hours.",
+        "data": {
+          "price": 11.59,
+          "change1hPct": 0.64,
+          "change24hPct": 3.84
+        }
+      },
+      {
+        "id": "B",
+        "kind": "range",
+        "title": "24-Hour Trading Range",
+        "statement": "Over twenty-four hours the price ranged from $11.0700 to $11.7200; spot sits at 80% of that range.",
+        "data": {
+          "low24h": 11.07,
+          "high24h": 11.72,
+          "rangePosition24h": 0.8
+        }
+      },
+      {
+        "id": "C",
+        "kind": "trend",
+        "title": "Seven-Day Trend",
+        "statement": "Price is +1.00% over seven days. The 24-hour average ($11.4064) is above the 72-hour average ($11.3638). Spot is 3.06% below the seven-day high of $11.9564 and 10.57% above the seven-day low of $10.4820.",
+        "data": {
+          "change7dPct": 1,
+          "sma24": 11.4064,
+          "sma72": 11.3638,
+          "high7d": 11.9564,
+          "low7d": 10.482,
+          "sparkline": [
+            11.3819,
+            11.4151,
+            11.5362,
+            11.5165,
+            11.6129,
+            11.6092,
+            11.5746,
+            11.438,
+            11.3932,
+            11.3202,
+            11.3994,
+            11.3625,
+            11.4202,
+            11.5264,
+            11.4815,
+            11.4083,
+            11.4414,
+            11.3738,
+            11.3168,
+            11.4515,
+            11.3474,
+            11.4664,
+            11.4653,
+            11.3811,
+            11.5208,
+            11.4834,
+            11.3706,
+            11.3276,
+            11.3864,
+            11.3183,
+            11.3227,
+            11.3816,
+            11.3627,
+            11.2825,
+            11.3105,
+            11.3096,
+            11.4476,
+            11.4589,
+            11.4775,
+            11.525,
+            11.5661,
+            11.6416,
+            11.7372,
+            11.6997,
+            11.7689,
+            11.8618,
+            11.7547,
+            11.5361,
+            11.5561,
+            11.558,
+            11.8472,
+            11.865,
+            11.808,
+            11.4399,
+            11.3864,
+            11.5152,
+            11.3587,
+            11.4996,
+            11.6149,
+            11.6407,
+            11.9564,
+            11.7359,
+            11.68,
+            11.0429,
+            10.6003,
+            10.5098,
+            10.9348,
+            11.052,
+            11.036,
+            11.0341,
+            11.0659,
+            10.9912,
+            11.0441,
+            11.173,
+            11.1166,
+            11.2311,
+            11.4462,
+            11.6086,
+            11.4654,
+            11.3962,
+            11.3667,
+            11.4547,
+            11.5024,
+            11.5507,
+            11.487
+          ]
+        }
+      },
+      {
+        "id": "D",
+        "kind": "volatility",
+        "title": "Volatility & Momentum",
+        "statement": "Realized volatility computed from hourly closes is 4.08% per day. The 14-hour relative strength index reads 49.0, conventionally neutral.",
+        "data": {
+          "dailyVolPct": 4.08,
+          "rsi14h": 49
+        }
+      },
+      {
+        "id": "E",
+        "kind": "liquidity",
+        "title": "Liquidity",
+        "statement": "Twenty-four-hour trading volume was $340.85 million, equal to 3.83% of the $8.89 billion market capitalization.",
+        "data": {
+          "volume24h": 340850961,
+          "marketCap": 8888837562,
+          "turnoverPct": 3.83
+        }
+      },
+      {
+        "id": "F",
+        "kind": "sentiment",
+        "title": "Market Sentiment",
+        "statement": "The Crypto Fear & Greed Index reads 30 (\"Fear\"), versus 51 7 days earlier.",
+        "data": {
+          "value": 30,
+          "label": "Fear",
+          "history": [
+            51,
+            54,
+            50,
+            48,
+            51,
+            51,
+            30,
+            30
+          ]
+        }
+      },
+      {
+        "id": "G",
+        "kind": "oracle",
+        "title": "Chainlink Price Feed",
+        "statement": "The Chainlink LINK/USD Data Feed on Ethereum mainnet last reported $11.5303, 58 minutes before the spot quote and -0.52% against the spot price in Exhibit A. Practice positions are entered and settled at this mark.",
+        "data": {
+          "price": 11.5303,
+          "deviationPct": -0.52,
+          "lagMinutes": 58,
+          "updatedAt": "2026-10-31T15:18:11.000Z",
+          "roundId": "129127208515966896140",
+          "feed": "0x2c1d072e956AFFC0D435Cb7AC38EF18d24d9127c",
+          "network": "Ethereum mainnet"
+        }
+      }
+    ],
+    "arguments": [
+      {
+        "side": "BULL",
+        "round": "opening",
+        "text": "May it please the Court.  \n\n1. The spot price of LINK is firmly entrenched near the upper 80% of its 24‑hour range at $11.59, showing a 0.64% hourly gain and a 3.84% rise over the past day, indicating upward pressure that a practice long can capture [Ex. A, B].  \n\n2. Momentum is modest but turning positive: the 24‑hour average ($11.4064) now exceeds the 72‑hour average ($11.3638) and the seven‑day trend is +1.00%, while realized volatility remains low at 4.08% per day, providing a stable environment for a directional bet [Ex. C, D].  \n\n3. Market sentiment is fearful (CFGI 30) and liquidity is ample ($340.85 M, 3.83% of market cap), suggesting price support from risk‑averse participants and sufficient depth for execution at the Chainlink price feed of $11.5303, which is only a 0.52% discount to spot [Ex. E, F, G].  \n\nThe Bull rests.",
+        "citations": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E",
+          "F",
+          "G"
+        ]
+      },
+      {
+        "side": "BEAR",
+        "round": "opening",
+        "text": "May it please the Court.  \n\n1. The spot price is firmly in the upper‑80th percentile of its 24‑hour range, trading at $11.5900, a 0.64% hour‑over‑hour gain and a 3.84% rise over the prior day, indicating bullish pressure that is unlikely to reverse without a substantive catalyst [Ex. A, B].  \n\n2. Momentum metrics confirm the uptrend: the seven‑day average price sits above the 72‑hour average, and realized volatility remains modest at 4.08% per day, while the RSI at 49 is poised to break into bullish territory, supporting a continuation trade [Ex. C, D].  \n\n3. Liquidity is ample with $340.85 million traded in 24 hours, and sentiment, though fearful at a 30 reading, reflects a contrarian buying opportunity; the Chainlink price feed lags spot by only 0.52%, offering a reliable execution benchmark for a short‑term practice position [Ex. E, F, G].  \n\nThe Bear rests.",
+        "citations": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E",
+          "F",
+          "G"
+        ]
+      },
+      {
+        "side": "BULL",
+        "round": "rebuttal",
+        "text": "Your Honor, the Bear’s first point collapses under Exhibit B: the spot sits at only 80 % of the 24‑hour range, meaning 20 % of the band remains above current price, a cushion for downside pressure, not “firmly” bullish. Moreover, Exhibit F shows the Fear & Greed Index at 30, a deep‑fear zone that historically precedes sell‑offs, contradicting the Bear’s claim of a contrarian buying opportunity. The combination of un‑exploited upside range and pervasive market fear undermines any expectation of continued upside. Nothing further.",
+        "citations": [
+          "B",
+          "F"
+        ]
+      },
+      {
+        "side": "BEAR",
+        "round": "rebuttal",
+        "text": "Your Honor, the Bull’s claim of “upward pressure” ignores that spot sits at only 80% of its 24‑hour range, leaving a 20% buffer above before a new high, a modest position not “firmly entrenched” [Ex. B]. Moreover, the alleged “support from risk‑averse participants” is contradicted by the Fear reading of 30 on the Crypto Fear & Greed Index, indicating market aversion, not support, and the neutral RSI of 49.0 shows no bullish momentum [Ex. D, F]. Thus the evidence does not substantiate a directional long. Nothing further.",
+        "citations": [
+          "B",
+          "D",
+          "F"
+        ]
+      }
+    ],
+    "ruling": {
+      "holding": "The Court finds short position justified",
+      "verdict": "SHORT",
+      "conviction": 65,
+      "bull_score": 4,
+      "bear_score": 6,
+      "findings": [
+        {
+          "exhibit": "A",
+          "finding": "Spot price rose 3.84% in 24h but remains only 80% of its daily range",
+          "favors": "BEAR",
+          "weight": 2
+        },
+        {
+          "exhibit": "B",
+          "finding": "Price sits at upper 80% of range, leaving 20% upside buffer",
+          "favors": "BEAR",
+          "weight": 2
+        },
+        {
+          "exhibit": "D",
+          "finding": "RSI at 49 is neutral and volatility low, offering little bullish momentum",
+          "favors": "BEAR",
+          "weight": 1
+        },
+        {
+          "exhibit": "F",
+          "finding": "Crypto Fear & Greed Index at 30 indicates market fear, often preceding sell‑offs",
+          "favors": "BEAR",
+          "weight": 3
+        }
+      ],
+      "opinion": "The exhibits show modest price gains but the asset is still below its daily high, leaving upside limited. Neutral RSI and low volatility provide no clear bullish thrust, while a fear‑dominated sentiment index suggests downside risk. Combined, these factors favor a short practice position over the next 24 hours.",
+      "dissent": "The Bull argues that modest gains and ample liquidity imply support, but the fear index and limited upside buffer outweigh those points, making a short stance more prudent."
+    },
+    "sentence": {
+      "action": "SHORT",
+      "reason": "The Bear prevailed with conviction 65.",
+      "entryPrice": 11.5303,
+      "stopPrice": 12.1183,
+      "targetPrice": 10.3542,
+      "sizeBps": 435,
+      "stopDistancePct": 5.1,
+      "steps": [
+        {
+          "label": "Mark price",
+          "formula": "Chainlink LINK/USD Data Feed [Ex. G]",
+          "value": "$11.5303"
+        },
+        {
+          "label": "§1(a) Verdict",
+          "formula": "from the bench",
+          "value": "SHORT"
+        },
+        {
+          "label": "§1(b) Conviction threshold",
+          "formula": "conviction 65 ≥ standing minimum 55",
+          "value": "met"
+        },
+        {
+          "label": "§2 Stop distance",
+          "formula": "clamp(1.25 × daily vol 4.08%, 1%, 12%)",
+          "value": "5.10%"
+        },
+        {
+          "label": "§3 Conviction scale",
+          "formula": "clamp((65 − 55) ÷ (100 − 55), 0.15, 1)",
+          "value": "0.222"
+        },
+        {
+          "label": "§4 Risk budget",
+          "formula": "100 bps × 0.222",
+          "value": "22.2 bps of bankroll"
+        },
+        {
+          "label": "§5 Position size",
+          "formula": "min(cap 3000 bps, 22.2 bps ÷ 5.10%)",
+          "value": "435 bps (4.35% of bankroll)"
+        },
+        {
+          "label": "§6 Protective order (stop)",
+          "formula": "entry + 5.10%",
+          "value": "12.1183"
+        },
+        {
+          "label": "§7 Target",
+          "formula": "entry − 2 × 5.10%",
+          "value": "10.3542"
+        }
+      ],
+      "guidelines": "Sentencing Guidelines for Practice Positions §1 (2026)"
+    },
+    "standingOrders": {
+      "riskPerTradeBps": 100,
+      "maxPositionBps": 3000,
+      "minConviction": 55,
+      "rewardRiskRatio": 2,
+      "stopVolMultiple": 1.25
+    },
+    "counsel": {
+      "mode": "llm",
+      "model": "openai/gpt-oss-120b",
+      "venue": "cre"
+    }
+  },
+  "transcriptHash": "0xdb7705f73b9cb022457a271386e004e1c8c9d468bf5c0d23a5bb31bfb5808e2d",
+  "filing": {
+    "venue": "cre"
+  }
+}
