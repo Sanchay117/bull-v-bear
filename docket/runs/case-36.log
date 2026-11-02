@@ -1,0 +1,42 @@
+Initializing...
+Loading settings...
+Checking RPC connectivity...
+Compiling workflow...
+✓ Workflow compiled
+✓ Simulation limits enabled
+  HTTP: req=120kb resp=250kb timeout=10s | ConfHTTP: req=125kb resp=500kb timeout=1m30s | Consensus obs=25kb | ChainWrite evm_report=50kb evm_gas=10000000 solana_report=265b solana_cu=300000 | WASM binary=100mb compressed=20mb
+  Binary hash: 2c38d9ebb2a77c8217a3890778d10f84d5e07bf57dbf510b02cb61391b076de8
+  Config hash: 9cb63fc06c39778d7a1b31b374d5bcf8a276548f84dc67361054d758b22655bf
+2026-11-02T17:36:29Z [SIMULATION] Simulator Initialized
+
+2026-11-02T17:36:29Z [SIMULATION] Running trigger trigger=cron-trigger@1.0.0
+2026-11-02T17:36:29Z [USER LOG] Docket: case No. 36 is next
+2026-11-02T17:36:29Z [USER LOG] ⚖ Court is in session: In re ETH/USD (2026-11-02T12:06:29.301Z)
+2026-11-02T17:36:32Z [USER LOG] Discovery closed: 7 exhibits, spot 2283.75, Chainlink ETH/USD 2281.42 (round 129127208515966896574), as of 2026-11-02T12:04:56.000Z
+2026-11-02T17:36:33Z [USER LOG] BULL opening: May it please the Court.  
+
+1. The spot price of ETH is firmly anchored near the mid‑point of its 24‑hour range (56% of the range) and has held steady for the p…
+2026-11-02T17:36:34Z [USER LOG] BEAR opening: May it please the Court.  
+
+1. The market is presently in a narrow, balanced range with spot at 56% of the 24‑hour band, indicating no decisive upward pressure;…
+2026-11-02T17:36:35Z [USER LOG] BULL rebuttal: Your Honor, the Bear’s “narrow range” claim ignores that spot sits at 56 % of the 24‑hour band, placing it above the midpoint and nearer the upper bound, a posi…
+2026-11-02T17:36:36Z [USER LOG] BEAR rebuttal: Your Honor, the Bull’s first claim collapses under Exhibit B: the price sits at the 56 % mark of a narrow $58.62 band, a position well within the range’s lower …
+2026-11-02T17:36:38Z [USER LOG] RULING DISMISSED @ 48: The Court finds the evidence insufficient to justify a practice position.
+2026-11-02T17:36:38Z [USER LOG] No position: The case was dismissed; no practice position is ordered.
+2026-11-02T17:36:38Z [USER LOG] Transcript 0xc55f9f471221fba0b14d726b4c8da04e1a61cd1c4fb9c732e96fd61c224a9af1 · evidence 0x8a2c72074968356bcadcfbb447d8f9f69953c5c20be604f0fa8fc5c3b7a5fd2a
+2026-11-02T17:36:49Z [USER LOG] 📜 Entered into CourtRecord 0xbcA0a8c279B1dfDD5cC6640dA7eA22CeaeAE26B3: tx 0x01322e2d676a1e9e660b8bad758b66dbfa7247bc47f847a2b41e777a7acfdbaa
+2026-11-02T17:36:49Z [USER LOG] Transcript lodged with the clerk (200)
+
+✓ Workflow Simulation Result:
+"{\"caption\":\"In re ETH/USD\",\"verdict\":\"DISMISSED\",\"conviction\":48,\"action\":\"NO_POSITION\",\"sizeBps\":0,\"transcriptHash\":\"0xc55f9f471221fba0b14d726b4c8da04e1a61cd1c4fb9c732e96fd61c224a9af1\",\"txHash\":\"0x01322e2d676a1e9e660b8bad758b66dbfa7247bc47f847a2b41e777a7acfdbaa\"}"
+
+2026-11-02T17:36:49Z [SIMULATION] Execution finished signal received
+2026-11-02T17:36:49Z [SIMULATION] Skipping WorkflowEngineV2
+
+╭──────────────────────────────────────────────────────╮
+│ Simulation complete! Ready to deploy your workflow?  │
+│                                                      │
+│ Run cre account access to request deployment access. │
+╰──────────────────────────────────────────────────────╯
+
+
