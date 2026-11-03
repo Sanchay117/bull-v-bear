@@ -1,0 +1,42 @@
+Initializing...
+Loading settings...
+Checking RPC connectivity...
+Compiling workflow...
+✓ Workflow compiled
+✓ Simulation limits enabled
+  HTTP: req=120kb resp=250kb timeout=10s | ConfHTTP: req=125kb resp=500kb timeout=1m30s | Consensus obs=25kb | ChainWrite evm_report=50kb evm_gas=10000000 solana_report=265b solana_cu=300000 | WASM binary=100mb compressed=20mb
+  Binary hash: 2c38d9ebb2a77c8217a3890778d10f84d5e07bf57dbf510b02cb61391b076de8
+  Config hash: 9cb63fc06c39778d7a1b31b374d5bcf8a276548f84dc67361054d758b22655bf
+2026-11-03T23:34:35Z [SIMULATION] Simulator Initialized
+
+2026-11-03T23:34:35Z [SIMULATION] Running trigger trigger=cron-trigger@1.0.0
+2026-11-03T23:34:35Z [USER LOG] Docket: case No. 43 is next
+2026-11-03T23:34:35Z [USER LOG] ⚖ Court is in session: In re LINK/USD (2026-11-03T18:04:35.122Z)
+2026-11-03T23:34:39Z [USER LOG] Discovery closed: 7 exhibits, spot 11.14, Chainlink LINK/USD 11.0823 (round 129127208515966896262), as of 2026-11-03T18:03:46.000Z
+2026-11-03T23:34:40Z [USER LOG] BULL opening: May it please the Court.  
+
+1. The spot price is firmly anchored near the mid‑point of its 24‑hour range (50% of $11.0000‑$11.2800) and has shown a modest 0.01%…
+2026-11-03T23:34:42Z [USER LOG] BEAR opening: May it please the Court.  
+
+1. The spot price sits squarely in the middle of a tight 24‑hour range ($11.0000‑$11.2800) with no directional bias, as shown by the…
+2026-11-03T23:34:42Z [USER LOG] BULL rebuttal: Your Honor, the Bear’s “mid‑range” claim ignores that the spot sits precisely at the 50 % mark of a narrow band, offering no statistical edge; a mean‑reversion …
+2026-11-03T23:34:43Z [USER LOG] BEAR rebuttal: Your Honor, the Bull’s first claim of “firm anchoring” is a mirage; the spot sits exactly at the 50 % midpoint of a narrow $0.28 band, offering no directional b…
+2026-11-03T23:34:44Z [USER LOG] RULING DISMISSED @ 48: The Court finds the evidence balanced and dismisses a practice position.
+2026-11-03T23:34:44Z [USER LOG] No position: The case was dismissed; no practice position is ordered.
+2026-11-03T23:34:44Z [USER LOG] Transcript 0xdb1863c5f72d7516a370f1731290b9ffd1a4b2e44c87db71c27e8f43f3bc0c05 · evidence 0x94e45ba1e58fdcdcfeaa84ea349d7ffbc1430b3c122193560054b3e7b09c9c4d
+2026-11-03T23:34:49Z [USER LOG] 📜 Entered into CourtRecord 0xbcA0a8c279B1dfDD5cC6640dA7eA22CeaeAE26B3: tx 0xf6cac26eeb69577b169b79b1fc0775d18424016f24eb760bc24e60ece2a7a2bb
+2026-11-03T23:34:49Z [USER LOG] Transcript lodged with the clerk (200)
+
+✓ Workflow Simulation Result:
+"{\"caption\":\"In re LINK/USD\",\"verdict\":\"DISMISSED\",\"conviction\":48,\"action\":\"NO_POSITION\",\"sizeBps\":0,\"transcriptHash\":\"0xdb1863c5f72d7516a370f1731290b9ffd1a4b2e44c87db71c27e8f43f3bc0c05\",\"txHash\":\"0xf6cac26eeb69577b169b79b1fc0775d18424016f24eb760bc24e60ece2a7a2bb\"}"
+
+2026-11-03T23:34:49Z [SIMULATION] Execution finished signal received
+2026-11-03T23:34:49Z [SIMULATION] Skipping WorkflowEngineV2
+
+╭──────────────────────────────────────────────────────╮
+│ Simulation complete! Ready to deploy your workflow?  │
+│                                                      │
+│ Run cre account access to request deployment access. │
+╰──────────────────────────────────────────────────────╯
+
+
