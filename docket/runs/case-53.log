@@ -1,0 +1,42 @@
+Initializing...
+Loading settings...
+Checking RPC connectivity...
+Compiling workflow...
+✓ Workflow compiled
+✓ Simulation limits enabled
+  HTTP: req=120kb resp=250kb timeout=10s | ConfHTTP: req=125kb resp=500kb timeout=1m30s | Consensus obs=25kb | ChainWrite evm_report=50kb evm_gas=10000000 solana_report=265b solana_cu=300000 | WASM binary=100mb compressed=20mb
+  Binary hash: 2c38d9ebb2a77c8217a3890778d10f84d5e07bf57dbf510b02cb61391b076de8
+  Config hash: 9cb63fc06c39778d7a1b31b374d5bcf8a276548f84dc67361054d758b22655bf
+2026-11-07T12:20:31Z [SIMULATION] Simulator Initialized
+
+2026-11-07T12:20:31Z [SIMULATION] Running trigger trigger=cron-trigger@1.0.0
+2026-11-07T12:20:32Z [USER LOG] Docket: case No. 53 is next
+2026-11-07T12:20:32Z [USER LOG] ⚖ Court is in session: In re BTC/USD (2026-11-07T06:50:31.894Z)
+2026-11-07T12:20:34Z [USER LOG] Discovery closed: 7 exhibits, spot 75972, Chainlink BTC/USD 75933.68 (round 129127208515966887113), as of 2026-11-07T06:49:55.000Z
+2026-11-07T12:20:36Z [USER LOG] BULL opening: May it please the Court.  
+
+1. The spot price is firmly anchored near the upper‑mid portion of its 24‑hour range, sitting at 78 % of that band (Ex. B), while ho…
+2026-11-07T12:20:37Z [USER LOG] BEAR opening: May it please the Court.  
+
+1. The spot price is firmly entrenched near the upper‑mid portion of its 24‑hour range, sitting at 78 % of that range, indicating li…
+2026-11-07T12:20:37Z [USER LOG] BULL rebuttal: Your Honor, the Bear’s claim that “78 % of the 24‑hour range caps upside” ignores the fact that the price sits merely 0.42 % above its 24‑hour average, showing …
+2026-11-07T12:20:38Z [USER LOG] BEAR rebuttal: Your Honor, the Bull’s first point collapses under the seven‑day weakness: price sits 5.82 % below its recent high (Ex. C), showing buyers cannot even defend th…
+2026-11-07T12:20:40Z [USER LOG] RULING SHORT @ 70: The Court finds a short practice position on BTC/USD is warranted.
+2026-11-07T12:20:40Z [USER LOG] SHORT 1359 bps @ 75933.68, stop 77794.06, target 72212.93
+2026-11-07T12:20:40Z [USER LOG] Transcript 0x2eb7600ab7661d410c79cb72b722751719a58846cf7bc3f8bd6ff1554bbd9e88 · evidence 0x5474807baa2f847f9cf33fc7108f28f407db8edfabc9b790be03f1a18e22a44e
+2026-11-07T12:20:50Z [USER LOG] 📜 Entered into CourtRecord 0xbcA0a8c279B1dfDD5cC6640dA7eA22CeaeAE26B3: tx 0x92077ab4c8aec6745721e0a7893467a374c4276f77019edf792b742ea5e23c9c
+2026-11-07T12:20:50Z [USER LOG] Transcript lodged with the clerk (200)
+
+✓ Workflow Simulation Result:
+"{\"caption\":\"In re BTC/USD\",\"verdict\":\"SHORT\",\"conviction\":70,\"action\":\"SHORT\",\"sizeBps\":1359,\"transcriptHash\":\"0x2eb7600ab7661d410c79cb72b722751719a58846cf7bc3f8bd6ff1554bbd9e88\",\"txHash\":\"0x92077ab4c8aec6745721e0a7893467a374c4276f77019edf792b742ea5e23c9c\"}"
+
+2026-11-07T12:20:50Z [SIMULATION] Execution finished signal received
+2026-11-07T12:20:50Z [SIMULATION] Skipping WorkflowEngineV2
+
+╭──────────────────────────────────────────────────────╮
+│ Simulation complete! Ready to deploy your workflow?  │
+│                                                      │
+│ Run cre account access to request deployment access. │
+╰──────────────────────────────────────────────────────╯
+
+
