@@ -1,0 +1,335 @@
+{
+  "transcript": {
+    "court": "bull-v-bear/2",
+    "caption": "In re SOL/USD",
+    "asset": "SOL",
+    "openedAt": "2026-11-07T09:51:05.889Z",
+    "evidenceAsOf": "2026-11-07T09:50:41.000Z",
+    "exhibits": [
+      {
+        "id": "A",
+        "kind": "price",
+        "title": "Spot Price",
+        "statement": "Solana (SOL) traded at $89.9600 as of 2026-11-07 09:50:41 UTC, +0.13% over one hour and -0.08% over twenty-four hours.",
+        "data": {
+          "price": 89.96,
+          "change1hPct": 0.13,
+          "change24hPct": -0.08
+        }
+      },
+      {
+        "id": "B",
+        "kind": "range",
+        "title": "24-Hour Trading Range",
+        "statement": "Over twenty-four hours the price ranged from $89.5900 to $91.3300; spot sits at 21% of that range.",
+        "data": {
+          "low24h": 89.59,
+          "high24h": 91.33,
+          "rangePosition24h": 0.213
+        }
+      },
+      {
+        "id": "C",
+        "kind": "trend",
+        "title": "Seven-Day Trend",
+        "statement": "Price is -5.53% over seven days. The 24-hour average ($90.1791) is below the 72-hour average ($92.1761). Spot is 7.05% below the seven-day high of $96.7814 and 1.13% above the seven-day low of $88.9589.",
+        "data": {
+          "change7dPct": -5.53,
+          "sma24": 90.1791,
+          "sma72": 92.1761,
+          "high7d": 96.7814,
+          "low7d": 88.9589,
+          "sparkline": [
+            95.2652,
+            95.5197,
+            95.9823,
+            95.6659,
+            95.8387,
+            95.9458,
+            95.6283,
+            95.4036,
+            95.653,
+            95.3824,
+            95.4352,
+            95.5542,
+            95.8097,
+            95.3376,
+            94.8136,
+            94.9311,
+            94.6785,
+            94.2328,
+            94.2411,
+            93.7197,
+            93.995,
+            94.8981,
+            94.8778,
+            94.3657,
+            94.5757,
+            94.1087,
+            93.9817,
+            94.2626,
+            93.3478,
+            92.0864,
+            91.4366,
+            91.8903,
+            92.2318,
+            91.7103,
+            92.1414,
+            91.4166,
+            91.7876,
+            92.2936,
+            92.9819,
+            93.2831,
+            93.4704,
+            93.3457,
+            93.4622,
+            93.4551,
+            92.3719,
+            90.9628,
+            92.2144,
+            92.8915,
+            93.1728,
+            93.4664,
+            92.5508,
+            95.0193,
+            96.671,
+            95.2119,
+            94.7779,
+            95.9604,
+            95.7299,
+            96.2693,
+            96.0009,
+            96.0873,
+            96.679,
+            96.5146,
+            95.2323,
+            92.791,
+            90.2474,
+            89.5165,
+            89.8949,
+            89.5457,
+            90.1488,
+            90.2293,
+            89.4257,
+            89.5411,
+            89.4824,
+            89.9783,
+            90.1372,
+            90.8797,
+            90.5691,
+            90.1714,
+            89.8268,
+            89.9864,
+            90.1553,
+            90.322,
+            89.9001,
+            90.1608,
+            90.1392
+          ]
+        }
+      },
+      {
+        "id": "D",
+        "kind": "volatility",
+        "title": "Volatility & Momentum",
+        "statement": "Realized volatility computed from hourly closes is 2.84% per day. The 14-hour relative strength index reads 46.0, conventionally neutral.",
+        "data": {
+          "dailyVolPct": 2.84,
+          "rsi14h": 46
+        }
+      },
+      {
+        "id": "E",
+        "kind": "liquidity",
+        "title": "Liquidity",
+        "statement": "Twenty-four-hour trading volume was $1.81 billion, equal to 3.41% of the $53.17 billion market capitalization.",
+        "data": {
+          "volume24h": 1811170243,
+          "marketCap": 53166121335,
+          "turnoverPct": 3.41
+        }
+      },
+      {
+        "id": "F",
+        "kind": "sentiment",
+        "title": "Market Sentiment",
+        "statement": "The Crypto Fear & Greed Index reads 25 (\"Extreme Fear\"), versus 30 7 days earlier.",
+        "data": {
+          "value": 25,
+          "label": "Extreme Fear",
+          "history": [
+            30,
+            34,
+            37,
+            26,
+            34,
+            50,
+            28,
+            25
+          ]
+        }
+      },
+      {
+        "id": "G",
+        "kind": "oracle",
+        "title": "Chainlink Price Feed",
+        "statement": "The Chainlink SOL/USD Data Feed on Ethereum mainnet last reported $91.0100, 19.2 hours before the spot quote and +1.17% against the spot price in Exhibit A. Practice positions are entered and settled at this mark.",
+        "data": {
+          "price": 91.01,
+          "deviationPct": 1.17,
+          "lagMinutes": 1150,
+          "updatedAt": "2026-11-06T14:40:59.000Z",
+          "roundId": "36893488147419106609",
+          "feed": "0x4ffC43a60e009B551865A93d232E33Fce9f01507",
+          "network": "Ethereum mainnet"
+        }
+      }
+    ],
+    "arguments": [
+      {
+        "side": "BULL",
+        "round": "opening",
+        "text": "May it please the Court.  \n\n1. The market is undervalued: Spot SOL trades at $89.96 while the authoritative Chainlink feed—used for settlement—posted $91.01 only 19.2 hours earlier, a 1.17% premium to the current price, indicating a pricing gap ripe for capture [Ex. A, G].  \n\n2. Liquidity is ample and fear is high: A $1.81 billion 24‑hour volume (3.41% of market cap) ensures deep order books, while the Fear & Greed Index sits at 25, “Extreme Fear,” a classic contrarian bullish signal [Ex. E, F].  \n\n3. Momentum is poised to reverse: Seven‑day trend is down 5.53% and the 24‑hour average sits below the 72‑hour average, yet volatility is modest at 2.84% per day, suggesting the price can rebound without extreme risk, and the RSI at 46 is edging toward bullish territory [Ex. C, D].  \n\nThe Bull rests.",
+        "citations": [
+          "A",
+          "C",
+          "D",
+          "E",
+          "F",
+          "G"
+        ]
+      },
+      {
+        "side": "BEAR",
+        "round": "opening",
+        "text": "May it please the Court.  \n\n1. The market is demonstrably undervalued: Spot SOL trades at $89.96, yet the authoritative Chainlink feed posts $91.01, a 1.17% premium, indicating a price dislocation that a short position can capture [Ex. A, Ex. G].  \n\n2. Momentum is negative and weakening: Seven‑day price is down 5.53% with the 24‑hour average below the 72‑hour average, and the RSI at 46 signals waning buying pressure, presaging further decline [Ex. C, Ex. D].  \n\n3. Fear dominates sentiment while liquidity remains ample: The Fear & Greed Index at 25 reflects extreme fear, a classic contrarian short catalyst, and $1.81 B of daily volume assures execution without slippage [Ex. F, Ex. E].  \n\nThe Bear rests.",
+        "citations": []
+      },
+      {
+        "side": "BULL",
+        "round": "rebuttal",
+        "text": "Your Honor, the Bear’s first point rests on a fleeting feed discrepancy; the Chainlink price is 19.2 hours stale and cannot outweigh the live spot at $89.96, a marginal 1.17 % gap that market makers will arbitrage away instantly [Ex. A, Ex. G]. Second, the Bear’s momentum claim ignores the neutral RSI of 46, which does not signal bearish pressure but merely equilibrium, and the 24‑hour range shows price sitting at only 21 % of the interval, indicating limited downside room rather than a slide [Ex. B, Ex. D]. Thus the evidence does not support a short bias. Nothing further.",
+        "citations": []
+      },
+      {
+        "side": "BEAR",
+        "round": "rebuttal",
+        "text": "Your Honor, the Bull’s “undervalued” claim collapses when we consider that the Chainlink feed is stale by 19.2 hours; price gaps of this magnitude routinely close as arbitrage eliminates them, so the feed offers no forward‑looking premium [Ex. G, A]. Moreover, the “fear‑driven bullish” narrative ignores the seven‑day downside and the fact that today’s spot sits 21 % into its 24‑hour range, indicating the price is already near the lower bound of recent trading activity and has limited upside room [Ex. B, C]. Hence the Bull’s bullish premises are both temporally and technically unsound. Nothing further.",
+        "citations": [
+          "A",
+          "B",
+          "C",
+          "G"
+        ]
+      }
+    ],
+    "ruling": {
+      "holding": "The Court finds a modest bullish bias for SOL/USD over the next 24 hours.",
+      "verdict": "LONG",
+      "conviction": 68,
+      "bull_score": 6,
+      "bear_score": 4,
+      "findings": [
+        {
+          "exhibit": "A",
+          "finding": "Spot price is $89.96, modestly below the recent Chainlink feed of $91.01.",
+          "favors": "BULL",
+          "weight": 2
+        },
+        {
+          "exhibit": "F",
+          "finding": "Fear & Greed Index at 25 signals extreme fear, a contrarian bullish cue.",
+          "favors": "BULL",
+          "weight": 2
+        },
+        {
+          "exhibit": "D",
+          "finding": "RSI at 46 is neutral, not confirming bearish pressure, and volatility is low (2.84%).",
+          "favors": "NEUTRAL",
+          "weight": 1
+        },
+        {
+          "exhibit": "B",
+          "finding": "Current price sits at only 21% of the 24‑hour range, limiting immediate downside.",
+          "favors": "BULL",
+          "weight": 2
+        }
+      ],
+      "opinion": "The Chainlink feed premium suggests upward pressure, while extreme fear offers a contrarian bullish signal; low volatility and a neutral RSI reduce downside risk, and the price’s position near the lower third of its daily range leaves limited room for further decline. Collectively these factors support a modest long practice position.",
+      "dissent": "The Bear argues the stale Chainlink premium will be arbitraged away and the 5.5% seven‑day decline signals continued weakness, outweighing any contrarian bullish cues."
+    },
+    "sentence": {
+      "action": "LONG",
+      "reason": "The Bull prevailed with conviction 68.",
+      "entryPrice": 91.01,
+      "stopPrice": 87.7791,
+      "targetPrice": 97.4717,
+      "sizeBps": 814,
+      "stopDistancePct": 3.55,
+      "steps": [
+        {
+          "label": "Mark price",
+          "formula": "Chainlink SOL/USD Data Feed [Ex. G]",
+          "value": "$91.0100"
+        },
+        {
+          "label": "§1(a) Verdict",
+          "formula": "from the bench",
+          "value": "LONG"
+        },
+        {
+          "label": "§1(b) Conviction threshold",
+          "formula": "conviction 68 ≥ standing minimum 55",
+          "value": "met"
+        },
+        {
+          "label": "§2 Stop distance",
+          "formula": "clamp(1.25 × daily vol 2.84%, 1%, 12%)",
+          "value": "3.55%"
+        },
+        {
+          "label": "§3 Conviction scale",
+          "formula": "clamp((68 − 55) ÷ (100 − 55), 0.15, 1)",
+          "value": "0.289"
+        },
+        {
+          "label": "§4 Risk budget",
+          "formula": "100 bps × 0.289",
+          "value": "28.9 bps of bankroll"
+        },
+        {
+          "label": "§5 Position size",
+          "formula": "min(cap 3000 bps, 28.9 bps ÷ 3.55%)",
+          "value": "814 bps (8.14% of bankroll)"
+        },
+        {
+          "label": "§6 Protective order (stop)",
+          "formula": "entry − 3.55%",
+          "value": "87.7791"
+        },
+        {
+          "label": "§7 Target",
+          "formula": "entry + 2 × 3.55%",
+          "value": "97.4717"
+        }
+      ],
+      "guidelines": "Sentencing Guidelines for Practice Positions §1 (2026)"
+    },
+    "standingOrders": {
+      "riskPerTradeBps": 100,
+      "maxPositionBps": 3000,
+      "minConviction": 55,
+      "rewardRiskRatio": 2,
+      "stopVolMultiple": 1.25
+    },
+    "counsel": {
+      "mode": "llm",
+      "model": "openai/gpt-oss-120b",
+      "venue": "cre"
+    }
+  },
+  "transcriptHash": "0x2bce5a78b21206b5614c445b5674a8195b43d77fe757f9f3a550a6936caddc78",
+  "filing": {
+    "venue": "cre"
+  }
+}
