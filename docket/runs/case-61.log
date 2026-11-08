@@ -1,0 +1,44 @@
+Initializing...
+Loading settings...
+Checking RPC connectivity...
+! Some RPCs in settings are not functioning properly, please check: RPC health check failed:                                     
+[ethereum-testnet-sepolia] failed RPC health check: Post "https://ethereum-sepolia-rpc.publicnode.com": context deadline exceeded
+Compiling workflow...
+✓ Workflow compiled
+✓ Simulation limits enabled
+  HTTP: req=120kb resp=250kb timeout=10s | ConfHTTP: req=125kb resp=500kb timeout=1m30s | Consensus obs=25kb | ChainWrite evm_report=50kb evm_gas=10000000 solana_report=265b solana_cu=300000 | WASM binary=100mb compressed=20mb
+  Binary hash: 2c38d9ebb2a77c8217a3890778d10f84d5e07bf57dbf510b02cb61391b076de8
+  Config hash: 9cb63fc06c39778d7a1b31b374d5bcf8a276548f84dc67361054d758b22655bf
+2026-11-08T23:45:04Z [SIMULATION] Simulator Initialized
+
+2026-11-08T23:45:04Z [SIMULATION] Running trigger trigger=cron-trigger@1.0.0
+2026-11-08T23:45:05Z [USER LOG] Docket: case No. 61 is next
+2026-11-08T23:45:05Z [USER LOG] ⚖ Court is in session: In re BTC/USD (2026-11-08T18:15:04.563Z)
+2026-11-08T23:45:12Z [USER LOG] Discovery closed: 7 exhibits, spot 75782, Chainlink BTC/USD 75623.4 (round 129127208515966887148), as of 2026-11-08T18:13:48.000Z
+2026-11-08T23:45:13Z [USER LOG] BULL opening: May it please the Court.  
+
+1. The spot price sits near the lower‑half of a tight 24‑hour range ($75,541‑$76,106) at 43% of that band, indicating sellers have e…
+2026-11-08T23:45:14Z [USER LOG] BEAR opening: May it please the Court.  
+
+1. The price has shown negligible intraday movement, holding steady at $75,782 with a 24‑hour range of only $565 and the spot positi…
+2026-11-08T23:45:15Z [USER LOG] BULL rebuttal: Your Honor, the Bear’s “negligible movement” claim ignores the decisive trend data: BTC is down 3.04% over seven days and the 24‑hour average sits below the 72‑…
+2026-11-08T23:45:15Z [USER LOG] BEAR rebuttal: Your Honor, the Bull’s first point collapses under Exhibit B: the 24‑hour range is narrow and the spot sits at only 43 % of that band, meaning the price is stil…
+2026-11-08T23:45:17Z [USER LOG] RULING SHORT @ 62: The Court finds a short practice position is warranted
+2026-11-08T23:45:17Z [USER LOG] SHORT 639 bps @ 75623.4, stop 77468.61, target 71932.98
+2026-11-08T23:45:17Z [USER LOG] Transcript 0x609acc34817e728f783e8e48a29a7ac58ae5a86857cd4cf67c828123c208b8d2 · evidence 0xedda7d654d86c63da2249ade96177c9d8e113c45134aee765846760ec1de2bd9
+2026-11-08T23:45:38Z [USER LOG] 📜 Entered into CourtRecord 0xbcA0a8c279B1dfDD5cC6640dA7eA22CeaeAE26B3: tx 0xcebcff63da12e500d2e5c71cf9f04066f54ca0ef1ca922528d2b336821b197bd
+2026-11-08T23:45:38Z [USER LOG] Transcript lodged with the clerk (200)
+
+✓ Workflow Simulation Result:
+"{\"caption\":\"In re BTC/USD\",\"verdict\":\"SHORT\",\"conviction\":62,\"action\":\"SHORT\",\"sizeBps\":639,\"transcriptHash\":\"0x609acc34817e728f783e8e48a29a7ac58ae5a86857cd4cf67c828123c208b8d2\",\"txHash\":\"0xcebcff63da12e500d2e5c71cf9f04066f54ca0ef1ca922528d2b336821b197bd\"}"
+
+2026-11-08T23:45:38Z [SIMULATION] Execution finished signal received
+2026-11-08T23:45:38Z [SIMULATION] Skipping WorkflowEngineV2
+
+╭──────────────────────────────────────────────────────╮
+│ Simulation complete! Ready to deploy your workflow?  │
+│                                                      │
+│ Run cre account access to request deployment access. │
+╰──────────────────────────────────────────────────────╯
+
+
