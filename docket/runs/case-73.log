@@ -1,0 +1,42 @@
+Initializing...
+Loading settings...
+Checking RPC connectivity...
+Compiling workflow...
+✓ Workflow compiled
+✓ Simulation limits enabled
+  HTTP: req=120kb resp=250kb timeout=10s | ConfHTTP: req=125kb resp=500kb timeout=1m30s | Consensus obs=25kb | ChainWrite evm_report=50kb evm_gas=10000000 solana_report=265b solana_cu=300000 | WASM binary=100mb compressed=20mb
+  Binary hash: 2c38d9ebb2a77c8217a3890778d10f84d5e07bf57dbf510b02cb61391b076de8
+  Config hash: 9cb63fc06c39778d7a1b31b374d5bcf8a276548f84dc67361054d758b22655bf
+2026-11-13T00:19:53Z [SIMULATION] Simulator Initialized
+
+2026-11-13T00:19:53Z [SIMULATION] Running trigger trigger=cron-trigger@1.0.0
+2026-11-13T00:19:53Z [USER LOG] Docket: case No. 73 is next
+2026-11-13T00:19:53Z [USER LOG] ⚖ Court is in session: In re BTC/USD (2026-11-12T18:49:53.192Z)
+2026-11-13T00:19:56Z [USER LOG] Discovery closed: 7 exhibits, spot 71666, Chainlink BTC/USD 71898.73 (round 129127208515966887274), as of 2026-11-12T18:48:46.000Z
+2026-11-13T00:19:57Z [USER LOG] BULL opening: May it please the Court.  
+
+1. The market is deeply oversold as evidenced by the 14‑hour RSI of 10.1, a level that historically precedes strong price rebounds, …
+2026-11-13T00:19:58Z [USER LOG] BEAR opening: May it please the Court.  
+
+1. The market is deeply oversold: the 14‑hour RSI of 10.1 signals a technical bottom and historically precedes price rebounds, while…
+2026-11-13T00:19:59Z [USER LOG] BULL rebuttal: Your Honor, the Bear’s reliance on the 14‑hour RSI is misplaced; an RSI below 30 merely flags short‑term weakness, not a guaranteed rebound, and the 1.83 % dail…
+2026-11-13T00:20:00Z [USER LOG] BEAR rebuttal: Your Honor, the Bull leans on the RSI and Fear index as bullish harbingers, yet Exhibit D shows realized volatility at 1.83% per day—far above the modest 0.13% …
+2026-11-13T00:20:02Z [USER LOG] RULING DISMISSED @ 48: The Court finds the evidence insufficient to justify a practice position.
+2026-11-13T00:20:02Z [USER LOG] No position: The case was dismissed; no practice position is ordered.
+2026-11-13T00:20:02Z [USER LOG] Transcript 0x571ccd487c05881566faad7f5608dba735e64cc7a1950f33405ea61aa2191841 · evidence 0xde26f6f8cab4b01cd13046d3e625db385e3798c6754c7c33a4a8c67cd09bf7f7
+2026-11-13T00:20:13Z [USER LOG] 📜 Entered into CourtRecord 0xbcA0a8c279B1dfDD5cC6640dA7eA22CeaeAE26B3: tx 0xadf835d4359e97dfd5e713c61292753a3ca39cc50c0a11419cc2fd555e17fabc
+2026-11-13T00:20:13Z [USER LOG] Transcript lodged with the clerk (200)
+
+✓ Workflow Simulation Result:
+"{\"caption\":\"In re BTC/USD\",\"verdict\":\"DISMISSED\",\"conviction\":48,\"action\":\"NO_POSITION\",\"sizeBps\":0,\"transcriptHash\":\"0x571ccd487c05881566faad7f5608dba735e64cc7a1950f33405ea61aa2191841\",\"txHash\":\"0xadf835d4359e97dfd5e713c61292753a3ca39cc50c0a11419cc2fd555e17fabc\"}"
+
+2026-11-13T00:20:13Z [SIMULATION] Execution finished signal received
+2026-11-13T00:20:13Z [SIMULATION] Skipping WorkflowEngineV2
+
+╭──────────────────────────────────────────────────────╮
+│ Simulation complete! Ready to deploy your workflow?  │
+│                                                      │
+│ Run cre account access to request deployment access. │
+╰──────────────────────────────────────────────────────╯
+
+
