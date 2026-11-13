@@ -1,0 +1,42 @@
+Initializing...
+Loading settings...
+Checking RPC connectivity...
+Compiling workflow...
+✓ Workflow compiled
+✓ Simulation limits enabled
+  HTTP: req=120kb resp=250kb timeout=10s | ConfHTTP: req=125kb resp=500kb timeout=1m30s | Consensus obs=25kb | ChainWrite evm_report=50kb evm_gas=10000000 solana_report=265b solana_cu=300000 | WASM binary=100mb compressed=20mb
+  Binary hash: 2c38d9ebb2a77c8217a3890778d10f84d5e07bf57dbf510b02cb61391b076de8
+  Config hash: 9cb63fc06c39778d7a1b31b374d5bcf8a276548f84dc67361054d758b22655bf
+2026-11-13T21:19:49Z [SIMULATION] Simulator Initialized
+
+2026-11-13T21:19:49Z [SIMULATION] Running trigger trigger=cron-trigger@1.0.0
+2026-11-13T21:19:49Z [USER LOG] Docket: case No. 78 is next
+2026-11-13T21:19:49Z [USER LOG] ⚖ Court is in session: In re SOL/USD (2026-11-13T15:49:49.168Z)
+2026-11-13T21:19:57Z [USER LOG] Discovery closed: 7 exhibits, spot 79.46, Chainlink SOL/USD 80.638 (round 36893488147419106625), as of 2026-11-13T15:48:54.000Z
+2026-11-13T21:19:58Z [USER LOG] BULL opening: May it please the Court.  
+
+1. The market is fundamentally oversold: the Fear & Greed Index sits at 20, an “Extreme Fear” level far below the 28 recorded a week…
+2026-11-13T21:19:59Z [USER LOG] BEAR opening: May it please the Court.  
+
+1. The spot price at $79.46 sits 34% above the bottom of its 24‑hour range, indicating the market is still far from the lower bound …
+2026-11-13T21:20:00Z [USER LOG] BULL rebuttal: Your Honor, the Bear’s first point collapses on Exhibit B: the price sits only 34 % of the 24‑hour range, meaning it is already 65 % toward the upper bound, not…
+2026-11-13T21:20:00Z [USER LOG] BEAR rebuttal: Your Honor, the Bull’s reliance on the Fear & Greed Index is misplaced; extreme fear (20) merely reflects heightened risk aversion, not a deterministic reversal…
+2026-11-13T21:20:02Z [USER LOG] RULING SHORT @ 70: The Court finds short practice position justified
+2026-11-13T21:20:02Z [USER LOG] SHORT 845 bps @ 80.638, stop 83.8151, target 74.2837
+2026-11-13T21:20:02Z [USER LOG] Transcript 0xedf1d1e32a1e90e6cfe57da120eb8e078a5d8541238070b0e3c2f7ed0ffa401f · evidence 0xe0b267114e0ce03c49463e3d41b8db6b2729a847ec9abddd02a51afd998da4a3
+2026-11-13T21:20:13Z [USER LOG] 📜 Entered into CourtRecord 0xbcA0a8c279B1dfDD5cC6640dA7eA22CeaeAE26B3: tx 0xd3de18a5bfaf7aab715d5689006cacac64cb83c1284f0fd073241593b56d36cf
+2026-11-13T21:20:13Z [USER LOG] Transcript lodged with the clerk (200)
+
+✓ Workflow Simulation Result:
+"{\"caption\":\"In re SOL/USD\",\"verdict\":\"SHORT\",\"conviction\":70,\"action\":\"SHORT\",\"sizeBps\":845,\"transcriptHash\":\"0xedf1d1e32a1e90e6cfe57da120eb8e078a5d8541238070b0e3c2f7ed0ffa401f\",\"txHash\":\"0xd3de18a5bfaf7aab715d5689006cacac64cb83c1284f0fd073241593b56d36cf\"}"
+
+2026-11-13T21:20:13Z [SIMULATION] Execution finished signal received
+2026-11-13T21:20:13Z [SIMULATION] Skipping WorkflowEngineV2
+
+╭──────────────────────────────────────────────────────╮
+│ Simulation complete! Ready to deploy your workflow?  │
+│                                                      │
+│ Run cre account access to request deployment access. │
+╰──────────────────────────────────────────────────────╯
+
+
