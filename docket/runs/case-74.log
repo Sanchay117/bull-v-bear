@@ -7,31 +7,31 @@ Compiling workflow...
   HTTP: req=120kb resp=250kb timeout=10s | ConfHTTP: req=125kb resp=500kb timeout=1m30s | Consensus obs=25kb | ChainWrite evm_report=50kb evm_gas=10000000 solana_report=265b solana_cu=300000 | WASM binary=100mb compressed=20mb
   Binary hash: 2c38d9ebb2a77c8217a3890778d10f84d5e07bf57dbf510b02cb61391b076de8
   Config hash: 9cb63fc06c39778d7a1b31b374d5bcf8a276548f84dc67361054d758b22655bf
-2026-11-13T12:12:28Z [SIMULATION] Simulator Initialized
+2026-11-13T12:17:56Z [SIMULATION] Simulator Initialized
 
-2026-11-13T12:12:28Z [SIMULATION] Running trigger trigger=cron-trigger@1.0.0
-2026-11-13T12:12:28Z [USER LOG] Docket: case No. 74 is next
-2026-11-13T12:12:28Z [USER LOG] ⚖ Court is in session: In re SOL/USD (2026-11-13T06:42:28.527Z)
-2026-11-13T12:12:31Z [USER LOG] Discovery closed: 7 exhibits, spot 79.91, Chainlink SOL/USD 78.8212 (round 36893488147419106622), as of 2026-11-13T06:41:56.000Z
-2026-11-13T12:12:32Z [USER LOG] BULL opening: May it please the Court.  
+2026-11-13T12:17:56Z [SIMULATION] Running trigger trigger=cron-trigger@1.0.0
+2026-11-13T12:17:56Z [USER LOG] Docket: case No. 74 is next
+2026-11-13T12:17:56Z [USER LOG] ⚖ Court is in session: In re SOL/USD (2026-11-13T06:47:56.741Z)
+2026-11-13T12:17:58Z [USER LOG] Discovery closed: 7 exhibits, spot 79.88, Chainlink SOL/USD 78.8212 (round 36893488147419106622), as of 2026-11-13T06:46:53.000Z
+2026-11-13T12:17:59Z [USER LOG] BULL opening: May it please the Court.  
 
-1. The spot price at $79.91 sits near the lower bound of the 24‑hour range ($78.10‑$83.36) and only 34% up the range, indicating a c…
-2026-11-13T12:12:33Z [USER LOG] BEAR opening: May it please the Court.  
+1. The spot price sits near the lower bound of its 24‑hour range (34% up from the low) and the 24‑hour average ($81.42) remains belo…
+2026-11-13T12:18:00Z [USER LOG] BEAR opening: May it please the Court.  
 
-1. The spot price of SOL is trading at $79.91, well below the 24‑hour range midpoint and 34% into the range, indicating a price floo…
-2026-11-13T12:12:34Z [USER LOG] BULL rebuttal: Your Honor, the Bear’s first claim rests on a misreading of the 24‑hour range: the spot sits at 34 % of the range, not near the lower bound; the price is still …
-2026-11-13T12:12:35Z [USER LOG] BEAR rebuttal: Your Honor, the Bull’s first point rests on a mis‑reading of the range: spot sits at only 34 % of the 24‑hour span, but the price is already 12.07 % below the s…
-2026-11-13T12:12:37Z [USER LOG] RULING SHORT @ 70: The Court finds the evidence supports a short practice position for SOL/USD.
-2026-11-13T12:12:37Z [USER LOG] SHORT 890 bps @ 78.8212, stop 81.7691, target 72.9254
-2026-11-13T12:12:37Z [USER LOG] Transcript 0xf3f9d10ac3a7acf7cea36bced301dc20faa257c267ca350bfde37078a4163845 · evidence 0x649ba04a8e9d8c7451e354faf26e6a9b418bab921fd592bee631817101d5c2c4
-2026-11-13T12:12:49Z [USER LOG] 📜 Entered into CourtRecord 0xbcA0a8c279B1dfDD5cC6640dA7eA22CeaeAE26B3: tx 0xa58a74ecfa99f8e9fa7f804c2dda0129806407a2d1173c92f5f8cb6175d1734d
-2026-11-13T12:12:49Z [USER LOG] Transcript lodged with the clerk (200)
+1. The Spot price of SOL is trading at $79.88, merely 34% up from the low of its 24‑hour range, indicating that the asset has ample …
+2026-11-13T12:18:01Z [USER LOG] BULL rebuttal: Your Honor, the Bear’s first claim of “ample room to rebound” ignores that SOL sits only 12.10% below its seven‑day high and 34% of the 24‑hour range, yet the 2…
+2026-11-13T12:18:02Z [USER LOG] BEAR rebuttal: Your Honor, the Bull’s “price‑floor” claim crumbles under the seven‑day downward bias: SOL is –12.08% over the week and trades 12.10% below its recent high, sho…
+2026-11-13T12:18:03Z [USER LOG] RULING SHORT @ 78: The Court finds SOL/USD is likely to decline over the next 24 hours.
+2026-11-13T12:18:03Z [USER LOG] SHORT 1366 bps @ 78.8212, stop 81.7691, target 72.9254
+2026-11-13T12:18:03Z [USER LOG] Transcript 0xc1fe190cf9c3529517a39a952ff918c26f0b91cedd1ec29a3375c420e5755e2c · evidence 0x834a2800212ec01116a0c5397c62925aa5c2515764fdd8a8762ad8d92167b670
+2026-11-13T12:18:16Z [USER LOG] 📜 Entered into CourtRecord 0xbcA0a8c279B1dfDD5cC6640dA7eA22CeaeAE26B3: tx 0x86c81486b6ab7beb0f74a5432fb539fc5bfe71455fe94c4d1c6113bee7f8e39e
+2026-11-13T12:18:16Z [USER LOG] Transcript lodged with the clerk (200)
 
 ✓ Workflow Simulation Result:
-"{\"caption\":\"In re SOL/USD\",\"verdict\":\"SHORT\",\"conviction\":70,\"action\":\"SHORT\",\"sizeBps\":890,\"transcriptHash\":\"0xf3f9d10ac3a7acf7cea36bced301dc20faa257c267ca350bfde37078a4163845\",\"txHash\":\"0xa58a74ecfa99f8e9fa7f804c2dda0129806407a2d1173c92f5f8cb6175d1734d\"}"
+"{\"caption\":\"In re SOL/USD\",\"verdict\":\"SHORT\",\"conviction\":78,\"action\":\"SHORT\",\"sizeBps\":1366,\"transcriptHash\":\"0xc1fe190cf9c3529517a39a952ff918c26f0b91cedd1ec29a3375c420e5755e2c\",\"txHash\":\"0x86c81486b6ab7beb0f74a5432fb539fc5bfe71455fe94c4d1c6113bee7f8e39e\"}"
 
-2026-11-13T12:12:49Z [SIMULATION] Execution finished signal received
-2026-11-13T12:12:49Z [SIMULATION] Skipping WorkflowEngineV2
+2026-11-13T12:18:16Z [SIMULATION] Execution finished signal received
+2026-11-13T12:18:16Z [SIMULATION] Skipping WorkflowEngineV2
 
 ╭──────────────────────────────────────────────────────╮
 │ Simulation complete! Ready to deploy your workflow?  │
