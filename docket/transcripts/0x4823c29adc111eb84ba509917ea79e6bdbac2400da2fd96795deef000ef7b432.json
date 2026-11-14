@@ -1,0 +1,346 @@
+{
+  "transcript": {
+    "court": "bull-v-bear/2",
+    "caption": "In re SOL/USD",
+    "asset": "SOL",
+    "openedAt": "2026-11-14T15:38:16.332Z",
+    "evidenceAsOf": "2026-11-14T15:37:52.000Z",
+    "exhibits": [
+      {
+        "id": "A",
+        "kind": "price",
+        "title": "Spot Price",
+        "statement": "Solana (SOL) traded at $73.7900 as of 2026-11-14 15:37:52 UTC, -1.98% over one hour and -6.66% over twenty-four hours.",
+        "data": {
+          "price": 73.79,
+          "change1hPct": -1.98,
+          "change24hPct": -6.66
+        }
+      },
+      {
+        "id": "B",
+        "kind": "range",
+        "title": "24-Hour Trading Range",
+        "statement": "Over twenty-four hours the price ranged from $73.8100 to $80.4600; spot sits at 0% of that range.",
+        "data": {
+          "low24h": 73.81,
+          "high24h": 80.46,
+          "rangePosition24h": -0.003
+        }
+      },
+      {
+        "id": "C",
+        "kind": "trend",
+        "title": "Seven-Day Trend",
+        "statement": "Price is -17.74% over seven days. The 24-hour average ($77.0689) is below the 72-hour average ($80.3499). Spot is 17.89% below the seven-day high of $89.8642 and 0.00% above the seven-day low of $73.7900.",
+        "data": {
+          "change7dPct": -17.74,
+          "sma24": 77.0689,
+          "sma72": 80.3499,
+          "high7d": 89.8642,
+          "low7d": 73.79,
+          "sparkline": [
+            89.8642,
+            89.4767,
+            89.7352,
+            88.9727,
+            89.191,
+            89.352,
+            89.0018,
+            88.9786,
+            88.968,
+            89.1977,
+            89.117,
+            89.4596,
+            89.5011,
+            88.9359,
+            89.4626,
+            89.0789,
+            86.2341,
+            87.5512,
+            87.9612,
+            87.3026,
+            86.0097,
+            86.8516,
+            85.8715,
+            86.5661,
+            87.1865,
+            86.9769,
+            86.4569,
+            86.5844,
+            86.7351,
+            86.4229,
+            86.0863,
+            85.9444,
+            86.0134,
+            85.8014,
+            84.4026,
+            84.8593,
+            84.2398,
+            81.8876,
+            82.9008,
+            83.2528,
+            82.8354,
+            83.063,
+            83.1626,
+            82.7419,
+            82.5749,
+            82.8893,
+            83.7833,
+            83.8493,
+            83.9824,
+            84.8204,
+            84.9814,
+            84.9538,
+            83.3606,
+            83.5309,
+            83.3278,
+            83.0156,
+            82.6318,
+            82.895,
+            82.8663,
+            82.1133,
+            81.1066,
+            81.347,
+            81.5227,
+            81.2861,
+            81.3892,
+            81.5116,
+            80.1567,
+            78.3285,
+            80.092,
+            79.7132,
+            80.4181,
+            80.6241,
+            80.6859,
+            79.54,
+            80.0683,
+            79.88,
+            77.6845,
+            77.6584,
+            76.1173,
+            75.5229,
+            75.6607,
+            75.1886,
+            75.6748,
+            75.5597,
+            75.4776
+          ]
+        }
+      },
+      {
+        "id": "D",
+        "kind": "volatility",
+        "title": "Volatility & Momentum",
+        "statement": "Realized volatility computed from hourly closes is 3.37% per day. The 14-hour relative strength index reads 24.1, conventionally oversold.",
+        "data": {
+          "dailyVolPct": 3.37,
+          "rsi14h": 24.1
+        }
+      },
+      {
+        "id": "E",
+        "kind": "liquidity",
+        "title": "Liquidity",
+        "statement": "Twenty-four-hour trading volume was $3.37 billion, equal to 7.73% of the $43.65 billion market capitalization.",
+        "data": {
+          "volume24h": 3374011120,
+          "marketCap": 43651177805,
+          "turnoverPct": 7.73
+        }
+      },
+      {
+        "id": "F",
+        "kind": "sentiment",
+        "title": "Market Sentiment",
+        "statement": "The Crypto Fear & Greed Index reads 13 (\"Extreme Fear\"), versus 25 7 days earlier.",
+        "data": {
+          "value": 13,
+          "label": "Extreme Fear",
+          "history": [
+            25,
+            28,
+            29,
+            32,
+            29,
+            28,
+            20,
+            13
+          ]
+        }
+      },
+      {
+        "id": "G",
+        "kind": "oracle",
+        "title": "Chainlink Price Feed",
+        "statement": "The Chainlink SOL/USD Data Feed on Ethereum mainnet last reported $73.7100, 63 minutes before the spot quote and -0.11% against the spot price in Exhibit A. Practice positions are entered and settled at this mark.",
+        "data": {
+          "price": 73.71,
+          "deviationPct": -0.11,
+          "lagMinutes": 63,
+          "updatedAt": "2026-11-14T14:35:11.000Z",
+          "roundId": "36893488147419106629",
+          "feed": "0x4ffC43a60e009B551865A93d232E33Fce9f01507",
+          "network": "Ethereum mainnet"
+        }
+      }
+    ],
+    "arguments": [
+      {
+        "side": "BULL",
+        "round": "opening",
+        "text": "May it please the Court.  \n\n1. The price of SOL has slipped to $73.79, now sitting at the bottom of its 24‑hour range ($73.81‑$80.46) and 17.89% below its seven‑day high, indicating a clear undervaluation that a long position can capture as buyers re‑enter [Ex. A, B, C].  \n\n2. Technical indicators confirm oversold conditions: the 14‑hour RSI is 24.1, well below the 30 threshold, and realized volatility is modest at 3.37% per day, suggesting a low‑risk rebound opportunity [Ex. D].  \n\n3. Market sentiment is at an extreme fear level (CFGI 13) and trading volume remains robust at $3.37 billion, providing ample liquidity for entry and exit, while the Chainlink feed—our settlement reference—is only $0.11 lower than spot, ensuring price fidelity [Ex. E, F, G].  \n\nThe Bull rests.",
+        "citations": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E",
+          "F",
+          "G"
+        ]
+      },
+      {
+        "side": "BEAR",
+        "round": "opening",
+        "text": "May it please the Court.  \n\n1. The market is demonstrably oversold: the 14‑hour RSI sits at 24.1, a level that historically triggers rebound buying, and the Fear & Greed Index is at an extreme‑fear 13, indicating that sentiment is poised to swing positive [Ex. D, F].  \n\n2. Liquidity remains robust, with $3.37 billion traded in the last 24 hours—7.73% of SOL’s $43.65 billion market cap—ensuring that any short‑term buying pressure can be absorbed without price distortion [Ex. E].  \n\n3. The price feed discrepancy is negligible; Chainlink reports $73.71, only 0.11% below the spot $73.79, confirming that the practice entry price will be accurate and that no hidden arbitrage risk exists [Ex. G].  \n\nThe Bear rests.",
+        "citations": [
+          "D",
+          "E",
+          "F",
+          "G"
+        ]
+      },
+      {
+        "side": "BULL",
+        "round": "rebuttal",
+        "text": "Your Honor, the Bear’s reliance on the RSI as a “rebound trigger” is hollow; oversold readings merely signal weakness, not imminent buying, and the 24‑hour RSI is still below 30, suggesting continued downward pressure rather than reversal [Ex. D]. Moreover, the cited liquidity does not offset the steep declines: SOL is down 6.66% in 24 hours and 17.74% over seven days, with the 24‑hour average already below the 72‑hour average, indicating persistent selling despite $3.37 billion of volume [Ex. A, C, E]. Hence, the market’s trajectory remains bearish. Nothing further.",
+        "citations": [
+          "A",
+          "C",
+          "D",
+          "E"
+        ]
+      },
+      {
+        "side": "BEAR",
+        "round": "rebuttal",
+        "text": "Your Honor, the Bull’s “undervaluation” claim collapses on the facts: SOL now sits at the absolute floor of its 24‑hour range, not merely near it, and the seven‑day high is a distant, historically‑inflated peak; price action has already exhausted the low‑side bounce, as evidenced by the 24‑hour average ($77.07) sitting above the spot and the 72‑hour average ($80.35) still higher, indicating continued weakness [Ex. B, C].  \n\nSecond, the Bull’s reliance on an “oversold” RSI ignores the concurrent extreme‑fear sentiment, which historically precedes further sell‑offs rather than rebounds; the CFGI of 13 signals market capitulation, not a buying opportunity, and the modest 3.37% daily volatility suggests limited upside momentum [Ex. D, F].  \n\nNothing further.",
+        "citations": [
+          "B",
+          "C",
+          "D",
+          "F"
+        ]
+      }
+    ],
+    "ruling": {
+      "holding": "The Court finds SOL/USD to be short over the next 24 hours.",
+      "verdict": "SHORT",
+      "conviction": 70,
+      "bull_score": 4,
+      "bear_score": 6,
+      "findings": [
+        {
+          "exhibit": "A",
+          "finding": "SOL price fell 6.66% in 24 h and 17.74% in 7 d, indicating strong bearish pressure",
+          "favors": "BEAR",
+          "weight": 3
+        },
+        {
+          "exhibit": "C",
+          "finding": "Current spot sits at the 7‑day low and below both 24‑h and 72‑h averages, confirming downward trend",
+          "favors": "BEAR",
+          "weight": 2
+        },
+        {
+          "exhibit": "D",
+          "finding": "RSI 24.1 signals oversold condition but also suggests momentum exhaustion",
+          "favors": "BEAR",
+          "weight": 2
+        },
+        {
+          "exhibit": "F",
+          "finding": "Fear & Greed Index at 13 (Extreme Fear) reflects negative market sentiment",
+          "favors": "BEAR",
+          "weight": 2
+        }
+      ],
+      "opinion": "The exhibits show SOL sharply down over 24 h and 7 d (A, C), trading at the floor of its range and below short‑term averages (C, B). Oversold RSI (D) and extreme‑fear sentiment (F) denote market weakness rather than imminent bounce, especially given modest volatility. Chainlink price aligns with spot (G), removing execution risk. Accordingly, a short practice position is warranted.",
+      "dissent": "The Bull argues that oversold RSI and extreme fear presage a rebound, but the prevailing downtrend and price at its 24‑h floor outweigh that optimistic view."
+    },
+    "sentence": {
+      "action": "SHORT",
+      "reason": "The Bear prevailed with conviction 70.",
+      "entryPrice": 73.71,
+      "stopPrice": 76.8132,
+      "targetPrice": 67.5036,
+      "sizeBps": 791,
+      "stopDistancePct": 4.21,
+      "steps": [
+        {
+          "label": "Mark price",
+          "formula": "Chainlink SOL/USD Data Feed [Ex. G]",
+          "value": "$73.7100"
+        },
+        {
+          "label": "§1(a) Verdict",
+          "formula": "from the bench",
+          "value": "SHORT"
+        },
+        {
+          "label": "§1(b) Conviction threshold",
+          "formula": "conviction 70 ≥ standing minimum 55",
+          "value": "met"
+        },
+        {
+          "label": "§2 Stop distance",
+          "formula": "clamp(1.25 × daily vol 3.37%, 1%, 12%)",
+          "value": "4.21%"
+        },
+        {
+          "label": "§3 Conviction scale",
+          "formula": "clamp((70 − 55) ÷ (100 − 55), 0.15, 1)",
+          "value": "0.333"
+        },
+        {
+          "label": "§4 Risk budget",
+          "formula": "100 bps × 0.333",
+          "value": "33.3 bps of bankroll"
+        },
+        {
+          "label": "§5 Position size",
+          "formula": "min(cap 3000 bps, 33.3 bps ÷ 4.21%)",
+          "value": "791 bps (7.91% of bankroll)"
+        },
+        {
+          "label": "§6 Protective order (stop)",
+          "formula": "entry + 4.21%",
+          "value": "76.8132"
+        },
+        {
+          "label": "§7 Target",
+          "formula": "entry − 2 × 4.21%",
+          "value": "67.5036"
+        }
+      ],
+      "guidelines": "Sentencing Guidelines for Practice Positions §1 (2026)"
+    },
+    "standingOrders": {
+      "riskPerTradeBps": 100,
+      "maxPositionBps": 3000,
+      "minConviction": 55,
+      "rewardRiskRatio": 2,
+      "stopVolMultiple": 1.25
+    },
+    "counsel": {
+      "mode": "llm",
+      "model": "openai/gpt-oss-120b",
+      "venue": "cre"
+    }
+  },
+  "transcriptHash": "0x4823c29adc111eb84ba509917ea79e6bdbac2400da2fd96795deef000ef7b432",
+  "filing": {
+    "venue": "cre"
+  }
+}
