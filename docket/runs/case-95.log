@@ -1,0 +1,42 @@
+Initializing...
+Loading settings...
+Checking RPC connectivity...
+Compiling workflow...
+✓ Workflow compiled
+✓ Simulation limits enabled
+  HTTP: req=120kb resp=250kb timeout=10s | ConfHTTP: req=125kb resp=500kb timeout=1m30s | Consensus obs=25kb | ChainWrite evm_report=50kb evm_gas=10000000 solana_report=265b solana_cu=300000 | WASM binary=100mb compressed=20mb
+  Binary hash: 2c38d9ebb2a77c8217a3890778d10f84d5e07bf57dbf510b02cb61391b076de8
+  Config hash: 9cb63fc06c39778d7a1b31b374d5bcf8a276548f84dc67361054d758b22655bf
+2026-11-17T21:08:17Z [SIMULATION] Simulator Initialized
+
+2026-11-17T21:08:17Z [SIMULATION] Running trigger trigger=cron-trigger@1.0.0
+2026-11-17T21:08:17Z [USER LOG] Docket: case No. 95 is next
+2026-11-17T21:08:17Z [USER LOG] ⚖ Court is in session: In re LINK/USD (2026-11-17T15:38:17.190Z)
+2026-11-17T21:08:19Z [USER LOG] Discovery closed: 7 exhibits, spot 9.18, Chainlink LINK/USD 9.2583 (round 129127208515966897042), as of 2026-11-17T15:37:55.000Z
+2026-11-17T21:08:20Z [USER LOG] BULL opening: May it please the Court.  
+
+1. The spot price sits near the lower end of its 24‑hour range, at 39% of that band, indicating immediate upside potential as buyers…
+2026-11-17T21:08:21Z [USER LOG] BEAR opening: May it please the Court.  
+
+1. The spot price of LINK is anchored near the lower‑third of its 24‑hour range (39% of the range) and sits $0.17 below the Chainlin…
+2026-11-17T21:08:22Z [USER LOG] BULL rebuttal: Your Honor, the Bear’s first claim that LINK is “anchored near the lower‑third of its 24‑hour range” ignores that the spot sits at 39 % of the range, which is s…
+2026-11-17T21:08:23Z [USER LOG] BEAR rebuttal: Your Honor, the Bull’s first point collapses under Exhibit B: the price sits at the low‑end of a narrow $0.28 band, but that band is itself compressed; a 39% po…
+2026-11-17T21:08:24Z [USER LOG] RULING SHORT @ 70: The Court finds that the evidence supports a short practice position in LINK/USD.
+2026-11-17T21:08:24Z [USER LOG] SHORT 639 bps @ 9.2583, stop 9.7407, target 8.2936
+2026-11-17T21:08:24Z [USER LOG] Transcript 0xb8d30f4ea231a39e5e7f7ee21a44618b8c6c9ab5304a9e171daa4f2a9d7de03d · evidence 0x4179047a6e09038d30132a6e4c7caf22325847cca385461e79483472f6dfc1e3
+2026-11-17T21:08:38Z [USER LOG] 📜 Entered into CourtRecord 0xbcA0a8c279B1dfDD5cC6640dA7eA22CeaeAE26B3: tx 0xe9c1974a5c9a21761f35b48a97725eaeae9e811bf78e076c4aee6ab63b164ac3
+2026-11-17T21:08:38Z [USER LOG] Transcript lodged with the clerk (200)
+
+✓ Workflow Simulation Result:
+"{\"caption\":\"In re LINK/USD\",\"verdict\":\"SHORT\",\"conviction\":70,\"action\":\"SHORT\",\"sizeBps\":639,\"transcriptHash\":\"0xb8d30f4ea231a39e5e7f7ee21a44618b8c6c9ab5304a9e171daa4f2a9d7de03d\",\"txHash\":\"0xe9c1974a5c9a21761f35b48a97725eaeae9e811bf78e076c4aee6ab63b164ac3\"}"
+
+2026-11-17T21:08:38Z [SIMULATION] Execution finished signal received
+2026-11-17T21:08:38Z [SIMULATION] Skipping WorkflowEngineV2
+
+╭──────────────────────────────────────────────────────╮
+│ Simulation complete! Ready to deploy your workflow?  │
+│                                                      │
+│ Run cre account access to request deployment access. │
+╰──────────────────────────────────────────────────────╯
+
+
