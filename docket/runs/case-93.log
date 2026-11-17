@@ -1,0 +1,44 @@
+Initializing...
+Loading settings...
+Checking RPC connectivity...
+! Some RPCs in settings are not functioning properly, please check: RPC health check failed:                     
+[ethereum-mainnet] failed RPC health check: Post "https://ethereum-rpc.publicnode.com": context deadline exceeded
+Compiling workflow...
+✓ Workflow compiled
+✓ Simulation limits enabled
+  HTTP: req=120kb resp=250kb timeout=10s | ConfHTTP: req=125kb resp=500kb timeout=1m30s | Consensus obs=25kb | ChainWrite evm_report=50kb evm_gas=10000000 solana_report=265b solana_cu=300000 | WASM binary=100mb compressed=20mb
+  Binary hash: 2c38d9ebb2a77c8217a3890778d10f84d5e07bf57dbf510b02cb61391b076de8
+  Config hash: 9cb63fc06c39778d7a1b31b374d5bcf8a276548f84dc67361054d758b22655bf
+2026-11-17T15:06:50Z [SIMULATION] Simulator Initialized
+
+2026-11-17T15:06:50Z [SIMULATION] Running trigger trigger=cron-trigger@1.0.0
+2026-11-17T15:06:50Z [USER LOG] Docket: case No. 93 is next
+2026-11-17T15:06:50Z [USER LOG] ⚖ Court is in session: In re BTC/USD (2026-11-17T09:36:50.632Z)
+2026-11-17T15:07:02Z [USER LOG] Discovery closed: 7 exhibits, spot 64340, Chainlink BTC/USD 64308.83 (round 129127208515966887480), as of 2026-11-17T09:35:55.000Z
+2026-11-17T15:07:08Z [USER LOG] BULL opening: May it please the Court.  
+
+1. The spot price is trading at $64,340, only 28% up the 24‑hour range and 0.60% down in the last hour, indicating a near‑bottom wit…
+2026-11-17T15:07:09Z [USER LOG] BEAR opening: May it please the Court.  
+
+1. The market is entrenched in extreme fear, as the Fear & Greed Index sits at 12, the lowest in a week, indicating capitulation and…
+2026-11-17T15:07:11Z [USER LOG] BULL rebuttal: Your Honor, the Bear’s reliance on Fear & Greed is overstated; an index of 12 merely signals “extreme fear” but does not guarantee downside, and historically it…
+2026-11-17T15:07:13Z [USER LOG] BEAR rebuttal: Your Honor, the Bull’s first point collapses under the data: a spot at $64,340 is merely 28% up the 24‑hour range, but that range is narrow ($63,879‑$65,502) an…
+2026-11-17T15:07:14Z [USER LOG] RULING SHORT @ 68: The Court finds that short‑term downside pressure outweighs rebound cues, authorizing a practice SHORT position.
+2026-11-17T15:07:14Z [USER LOG] SHORT 769 bps @ 64308.83, stop 66726.84, target 59472.81
+2026-11-17T15:07:14Z [USER LOG] Transcript 0xd00cd7b0a71259589cefeae4e4a14416de63ed51703149ea104b9ae23c10cb8a · evidence 0x54d1f4ca913bd70517fc5acf131b63152e8233bea277dcf586592c73a1524d34
+2026-11-17T15:07:27Z [USER LOG] 📜 Entered into CourtRecord 0xbcA0a8c279B1dfDD5cC6640dA7eA22CeaeAE26B3: tx 0x43e6d680c25afbab3b6dd7badad0acc5c15558ea0042e6874da427a70b6e5504
+2026-11-17T15:07:27Z [USER LOG] Transcript lodged with the clerk (200)
+
+✓ Workflow Simulation Result:
+"{\"caption\":\"In re BTC/USD\",\"verdict\":\"SHORT\",\"conviction\":68,\"action\":\"SHORT\",\"sizeBps\":769,\"transcriptHash\":\"0xd00cd7b0a71259589cefeae4e4a14416de63ed51703149ea104b9ae23c10cb8a\",\"txHash\":\"0x43e6d680c25afbab3b6dd7badad0acc5c15558ea0042e6874da427a70b6e5504\"}"
+
+2026-11-17T15:07:27Z [SIMULATION] Execution finished signal received
+2026-11-17T15:07:27Z [SIMULATION] Skipping WorkflowEngineV2
+
+╭──────────────────────────────────────────────────────╮
+│ Simulation complete! Ready to deploy your workflow?  │
+│                                                      │
+│ Run cre account access to request deployment access. │
+╰──────────────────────────────────────────────────────╯
+
+
